@@ -11,14 +11,14 @@ const HeroSection = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button 
             size="lg" 
-            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold rounded-lg"
+            variant="outline"
+            className="border-2 border-foreground text-foreground hover:bg-foreground/10 px-8 py-6 text-lg font-semibold rounded-lg bg-background"
           >
             Get Started
           </Button>
           <Button 
             size="lg" 
-            variant="outline"
-            className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-6 text-lg font-semibold rounded-lg"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold rounded-lg"
           >
             Learn More
           </Button>

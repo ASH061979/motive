@@ -2,12 +2,12 @@ const features = [
   {
     title: "Expert Guidance",
     description:
-      "Leverage our experience as an AMF registered distributor to navigate your investments.",
+      "Leverage our experience as an AMFI registered distributor to navigate your investments.",
   },
   {
     title: "Client-Centric Approach",
     description:
-      "We prioritize your financial well-being with personalized investment strategies.",
+      "We prioritize your financial well-being with personalialized investment strategies.",
   },
   {
     title: "Trust and Integrity",
@@ -39,7 +39,7 @@ const WhyChooseUs = () => {
 
         <div className="text-center text-foreground/70 text-sm border-t border-border pt-8">
           <p>
-            Mutual Fund Distributor, AMFI registered, Fees and commissions are applicable in distribution of products.
+            Mutual Fund Distributor, AMFI registered. Fees and commissions are aplicable in distribution of products
           </p>
         </div>
       </div>

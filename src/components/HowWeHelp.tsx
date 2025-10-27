@@ -9,17 +9,17 @@ const services = [
   {
     icon: Target,
     title: "Goal Planning",
-    description: "Helping you plan your financial goals with strategic investing.",
+    description: "Helping you plan-for future financial mifesteries with strategic investing",
   },
   {
     icon: BookOpen,
     title: "Financial Education",
-    description: "Empowering you with knowledge to make informed investment decisions.",
+    description: "Empowering you with knowledge to make informed investment decisions",
   },
   {
     icon: Users,
     title: "Client Support",
-    description: "Offering personalized assistance and guidance for your investment journey.",
+    description: "Offering personalized assistance andall due support  for your investment journey.",
   },
 ];
 
