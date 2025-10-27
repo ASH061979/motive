@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/motivwealth-header.jpg";
+import logo from "@/assets/motivwealth-logo.png";
 
 const Navbar = () => {
   const navItems = ["Home", "About", "Services", "Contact"];
