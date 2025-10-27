@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
   return (
-    <section className="py-20 md:py-32" id="home">
+    <section className="py-20 md:py-32 bg-secondary" id="home">
       <div className="container mx-auto px-4 text-center">
         <h1 className="text-4xl md:text-6xl font-bold text-primary mb-8 max-w-4xl mx-auto leading-tight">
           Motivating India to Grow Wealth Wisely
