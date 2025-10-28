@@ -181,9 +181,7 @@ const ContactUs = () => {
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
-                    <Label htmlFor="name">
-                      Name <span className="text-destructive">*</span>
-                    </Label>
+                    <Label htmlFor="name">Name</Label>
                     <Input
                       id="name"
                       type="text"
@@ -197,9 +195,7 @@ const ContactUs = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="email">
-                      Email <span className="text-destructive">*</span>
-                    </Label>
+                    <Label htmlFor="email">Email</Label>
                     <Input
                       id="email"
                       type="email"
@@ -213,9 +209,7 @@ const ContactUs = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="message">
-                      Message <span className="text-destructive">*</span>
-                    </Label>
+                    <Label htmlFor="message">Message</Label>
                     <Textarea
                       id="message"
                       placeholder="Tell us how we can help you..."
@@ -238,10 +232,6 @@ const ContactUs = () => {
                   >
                     {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
-                  
-                  <p className="text-xs text-center text-muted-foreground">
-                    <span className="text-destructive">*</span> Required fields
-                  </p>
                 </form>
               </CardContent>
             </Card>
