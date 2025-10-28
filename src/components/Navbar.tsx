@@ -3,14 +3,15 @@ import logo from "@/assets/motivwealth-full-logo.png";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [user, setUser] = useState<User | null>(null);
   const navItems = [
-    { label: "Home", href: "#home" },
-    { label: "About Us", href: "#about" },
-    { label: "Services", href: "#services" },
-    { label: "Contact Us", href: "#contact" }
+    { label: "Home", href: "/", isRoute: true },
+    { label: "About Us", href: "/about-us", isRoute: true },
+    { label: "Services", href: "#services", isRoute: false },
+    { label: "Contact Us", href: "#contact", isRoute: false }
   ];
 
   useEffect(() => {
@@ -44,12 +45,21 @@ const Navbar = () => {
           <ul className="flex items-center gap-8">
             {navItems.map((item) => (
               <li key={item.label}>
-                <a
-                  href={item.href}
-                  className="text-foreground hover:text-foreground/80 transition-colors font-medium"
-                >
-                  {item.label}
-                </a>
+                {item.isRoute ? (
+                  <Link
+                    to={item.href}
+                    className="text-foreground hover:text-foreground/80 transition-colors font-medium"
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <a
+                    href={item.href}
+                    className="text-foreground hover:text-foreground/80 transition-colors font-medium"
+                  >
+                    {item.label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>
