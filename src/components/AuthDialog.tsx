@@ -40,6 +40,9 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
   const [signUpEmailError, setSignUpEmailError] = useState("");
   const [signUpPasswordError, setSignUpPasswordError] = useState("");
   const [passwordFocused, setPasswordFocused] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+  const [resetEmailError, setResetEmailError] = useState("");
   const { toast } = useToast();
 
   // Calculate password strength (0-100)
@@ -100,6 +103,45 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
       }
       setError("");
       return true;
+    }
+  };
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setResetEmailError("");
+
+    const isEmailValid = validateEmail(resetEmail, setResetEmailError);
+    if (!isEmailValid) {
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(
+        resetEmail.trim().toLowerCase(),
+        {
+          redirectTo: `${window.location.origin}/`,
+        }
+      );
+
+      if (error) throw error;
+
+      toast({
+        title: "Password Reset Email Sent",
+        description: "Please check your email for a password reset link.",
+      });
+      
+      setResetEmail("");
+      setShowForgotPassword(false);
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to send password reset email. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -213,54 +255,113 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
           </TabsList>
           
           <TabsContent value="signin">
-            <form onSubmit={handleSignIn} className="space-y-4 mt-4">
-              <div className="space-y-2">
-                <Label htmlFor="signin-email">Email</Label>
-                <Input
-                  id="signin-email"
-                  type="email"
-                  placeholder="your@email.com"
-                  value={signInEmail}
-                  onChange={(e) => {
-                    setSignInEmail(e.target.value);
-                    setSignInEmailError("");
-                  }}
-                  required
+            {!showForgotPassword ? (
+              <form onSubmit={handleSignIn} className="space-y-4 mt-4">
+                <div className="space-y-2">
+                  <Label htmlFor="signin-email">Email</Label>
+                  <Input
+                    id="signin-email"
+                    type="email"
+                    placeholder="your@email.com"
+                    value={signInEmail}
+                    onChange={(e) => {
+                      setSignInEmail(e.target.value);
+                      setSignInEmailError("");
+                    }}
+                    required
+                    disabled={isLoading}
+                    className={signInEmailError ? "border-destructive" : ""}
+                    maxLength={255}
+                  />
+                  {signInEmailError && (
+                    <p className="text-sm text-destructive">{signInEmailError}</p>
+                  )}
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <Label htmlFor="signin-password">Password</Label>
+                    <Button
+                      type="button"
+                      variant="link"
+                      className="p-0 h-auto text-xs"
+                      onClick={() => setShowForgotPassword(true)}
+                    >
+                      Forgot password?
+                    </Button>
+                  </div>
+                  <Input
+                    id="signin-password"
+                    type="password"
+                    placeholder="••••••••"
+                    value={signInPassword}
+                    onChange={(e) => {
+                      setSignInPassword(e.target.value);
+                      setSignInPasswordError("");
+                    }}
+                    required
+                    disabled={isLoading}
+                    className={signInPasswordError ? "border-destructive" : ""}
+                  />
+                  {signInPasswordError && (
+                    <p className="text-sm text-destructive">{signInPasswordError}</p>
+                  )}
+                </div>
+                <Button
+                  type="submit"
+                  className="w-full"
                   disabled={isLoading}
-                  className={signInEmailError ? "border-destructive" : ""}
-                  maxLength={255}
-                />
-                {signInEmailError && (
-                  <p className="text-sm text-destructive">{signInEmailError}</p>
-                )}
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="signin-password">Password</Label>
-                <Input
-                  id="signin-password"
-                  type="password"
-                  placeholder="••••••••"
-                  value={signInPassword}
-                  onChange={(e) => {
-                    setSignInPassword(e.target.value);
-                    setSignInPasswordError("");
-                  }}
-                  required
-                  disabled={isLoading}
-                  className={signInPasswordError ? "border-destructive" : ""}
-                />
-                {signInPasswordError && (
-                  <p className="text-sm text-destructive">{signInPasswordError}</p>
-                )}
-              </div>
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={isLoading}
-              >
-                {isLoading ? "Signing in..." : "Sign In"}
-              </Button>
-            </form>
+                >
+                  {isLoading ? "Signing in..." : "Sign In"}
+                </Button>
+              </form>
+            ) : (
+              <form onSubmit={handleForgotPassword} className="space-y-4 mt-4">
+                <div className="space-y-2">
+                  <Label htmlFor="reset-email">Email</Label>
+                  <Input
+                    id="reset-email"
+                    type="email"
+                    placeholder="your@email.com"
+                    value={resetEmail}
+                    onChange={(e) => {
+                      setResetEmail(e.target.value);
+                      setResetEmailError("");
+                    }}
+                    required
+                    disabled={isLoading}
+                    className={resetEmailError ? "border-destructive" : ""}
+                    maxLength={255}
+                  />
+                  {resetEmailError && (
+                    <p className="text-sm text-destructive">{resetEmailError}</p>
+                  )}
+                  <p className="text-xs text-muted-foreground">
+                    Enter your email address and we'll send you a link to reset your password.
+                  </p>
+                </div>
+                <div className="space-y-2">
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Sending..." : "Send Reset Link"}
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    className="w-full"
+                    onClick={() => {
+                      setShowForgotPassword(false);
+                      setResetEmail("");
+                      setResetEmailError("");
+                    }}
+                  >
+                    Back to Sign In
+                  </Button>
+                </div>
+              </form>
+            )}
           </TabsContent>
           
           <TabsContent value="signup">
