@@ -20,22 +20,47 @@ const ContactUs = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Basic validation
-    if (!name.trim() || !email.trim() || !message.trim()) {
+    // Trim values
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim();
+    const trimmedMessage = message.trim();
+
+    // Validate all fields are filled
+    if (!trimmedName) {
       toast({
-        title: "Error",
-        description: "Please fill in all fields",
+        title: "Name Required",
+        description: "Please enter your name",
         variant: "destructive",
       });
       setIsSubmitting(false);
       return;
     }
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!trimmedEmail) {
       toast({
-        title: "Error",
+        title: "Email Required",
+        description: "Please enter your email address",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (!trimmedMessage) {
+      toast({
+        title: "Message Required",
+        description: "Please enter your message",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(trimmedEmail)) {
+      toast({
+        title: "Invalid Email",
         description: "Please enter a valid email address",
         variant: "destructive",
       });
@@ -45,23 +70,29 @@ const ContactUs = () => {
 
     try {
       const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: { name, email, message }
+        body: { 
+          name: trimmedName, 
+          email: trimmedEmail, 
+          message: trimmedMessage 
+        }
       });
 
       if (error) throw error;
 
       toast({
-        title: "Message Sent!",
-        description: "We'll get back to you as soon as possible.",
+        title: "Message Sent Successfully!",
+        description: "Thank you for contacting us. We'll get back to you soon.",
       });
+      
+      // Clear form after successful submission
       setName("");
       setEmail("");
       setMessage("");
     } catch (error: any) {
       console.error('Error sending message:', error);
       toast({
-        title: "Error",
-        description: "Failed to send message. Please try again or contact us directly.",
+        title: "Failed to Send Message",
+        description: "Please try again or contact us directly via phone or email.",
         variant: "destructive",
       });
     } finally {
@@ -150,20 +181,25 @@ const ContactUs = () => {
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
-                    <Label htmlFor="name">Name</Label>
+                    <Label htmlFor="name">
+                      Name <span className="text-destructive">*</span>
+                    </Label>
                     <Input
                       id="name"
                       type="text"
-                      placeholder="Your name"
+                      placeholder="Enter your full name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       maxLength={100}
                       required
+                      aria-required="true"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email">
+                      Email <span className="text-destructive">*</span>
+                    </Label>
                     <Input
                       id="email"
                       type="email"
@@ -172,29 +208,40 @@ const ContactUs = () => {
                       onChange={(e) => setEmail(e.target.value)}
                       maxLength={255}
                       required
+                      aria-required="true"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="message">Message</Label>
+                    <Label htmlFor="message">
+                      Message <span className="text-destructive">*</span>
+                    </Label>
                     <Textarea
                       id="message"
-                      placeholder="How can we help you?"
+                      placeholder="Tell us how we can help you..."
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       maxLength={1000}
                       rows={6}
                       required
+                      aria-required="true"
                     />
+                    <p className="text-xs text-muted-foreground">
+                      {message.length}/1000 characters
+                    </p>
                   </div>
 
                   <Button 
                     type="submit" 
                     className="w-full"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || !name.trim() || !email.trim() || !message.trim()}
                   >
                     {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
+                  
+                  <p className="text-xs text-center text-muted-foreground">
+                    <span className="text-destructive">*</span> Required fields
+                  </p>
                 </form>
               </CardContent>
             </Card>
