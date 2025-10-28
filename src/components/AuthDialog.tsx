@@ -39,7 +39,32 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
   const [signInPasswordError, setSignInPasswordError] = useState("");
   const [signUpEmailError, setSignUpEmailError] = useState("");
   const [signUpPasswordError, setSignUpPasswordError] = useState("");
+  const [passwordFocused, setPasswordFocused] = useState(false);
   const { toast } = useToast();
+
+  // Calculate password strength (0-100)
+  const calculatePasswordStrength = (password: string): number => {
+    let strength = 0;
+    if (password.length >= 8) strength += 20;
+    if (password.length >= 12) strength += 10;
+    if (/[A-Z]/.test(password)) strength += 20;
+    if (/[a-z]/.test(password)) strength += 20;
+    if (/[0-9]/.test(password)) strength += 15;
+    if (/[^A-Za-z0-9]/.test(password)) strength += 15;
+    return Math.min(strength, 100);
+  };
+
+  const getStrengthColor = (strength: number): string => {
+    if (strength < 40) return "bg-destructive";
+    if (strength < 70) return "bg-yellow-500";
+    return "bg-green-500";
+  };
+
+  const getStrengthText = (strength: number): string => {
+    if (strength < 40) return "Weak";
+    if (strength < 70) return "Medium";
+    return "Strong";
+  };
 
   // Validate email
   const validateEmail = (email: string, setError: (error: string) => void): boolean => {
@@ -158,7 +183,7 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
 
       toast({
         title: "Account Created!",
-        description: "Your account has been created successfully. You can now sign in.",
+        description: "Please check your email to verify your account before signing in.",
       });
       
       setSignUpEmail("");
@@ -274,6 +299,8 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
                     setSignUpPassword(e.target.value);
                     setSignUpPasswordError("");
                   }}
+                  onFocus={() => setPasswordFocused(true)}
+                  onBlur={() => setPasswordFocused(false)}
                   required
                   disabled={isLoading}
                   className={signUpPasswordError ? "border-destructive" : ""}
@@ -282,16 +309,21 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
                 {signUpPasswordError && (
                   <p className="text-sm text-destructive">{signUpPasswordError}</p>
                 )}
-                <div className="text-xs text-muted-foreground space-y-1">
-                  <p className="font-medium">Password must contain:</p>
-                  <ul className="list-disc list-inside pl-2 space-y-0.5">
-                    <li>At least 8 characters</li>
-                    <li>One uppercase letter (A-Z)</li>
-                    <li>One lowercase letter (a-z)</li>
-                    <li>One number (0-9)</li>
-                    <li>One special character (!@#$%^&*)</li>
-                  </ul>
-                </div>
+                {passwordFocused && signUpPassword && (
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <div className="flex-1 h-2 bg-secondary rounded-full overflow-hidden">
+                        <div
+                          className={`h-full transition-all duration-300 ${getStrengthColor(calculatePasswordStrength(signUpPassword))}`}
+                          style={{ width: `${calculatePasswordStrength(signUpPassword)}%` }}
+                        />
+                      </div>
+                      <span className="text-xs font-medium min-w-[60px]">
+                        {getStrengthText(calculatePasswordStrength(signUpPassword))}
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
               <Button
                 type="submit"
