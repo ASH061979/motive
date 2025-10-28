@@ -14,13 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      email_account_tracking: {
+        Row: {
+          account_count: number
+          created_at: string
+          id: string
+          normalized_email: string
+          updated_at: string
+        }
+        Insert: {
+          account_count?: number
+          created_at?: string
+          id?: string
+          normalized_email: string
+          updated_at?: string
+        }
+        Update: {
+          account_count?: number
+          created_at?: string
+          id?: string
+          normalized_email?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      normalize_email: { Args: { email: string }; Returns: string }
     }
     Enums: {
       [_ in never]: never
