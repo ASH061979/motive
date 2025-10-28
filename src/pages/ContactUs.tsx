@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Phone, Mail } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const ContactUs = () => {
   const [name, setName] = useState("");
@@ -42,8 +43,13 @@ const ContactUs = () => {
       return;
     }
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: { name, email, message }
+      });
+
+      if (error) throw error;
+
       toast({
         title: "Message Sent!",
         description: "We'll get back to you as soon as possible.",
@@ -51,8 +57,16 @@ const ContactUs = () => {
       setName("");
       setEmail("");
       setMessage("");
+    } catch (error: any) {
+      console.error('Error sending message:', error);
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -60,12 +74,9 @@ const ContactUs = () => {
       <Navbar />
       <main className="py-20">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-12">
             Contact Us
           </h1>
-          <p className="text-xl text-foreground/80 mb-12">
-            Ready to take your wealth management to the next level? Contact Meghna Prakash directly or send us a message using the form.
-          </p>
 
           <div className="grid md:grid-cols-2 gap-12">
             {/* Left Side - Contact Information */}
