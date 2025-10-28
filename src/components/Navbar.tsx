@@ -6,7 +6,12 @@ import { User } from "@supabase/supabase-js";
 
 const Navbar = () => {
   const [user, setUser] = useState<User | null>(null);
-  const navItems = ["Home", "About", "Services", "Contact"];
+  const navItems = [
+    { label: "Home", href: "#home" },
+    { label: "About Us", href: "#about" },
+    { label: "Services", href: "#services" },
+    { label: "Contact Us", href: "#contact" }
+  ];
 
   useEffect(() => {
     // Get initial session
@@ -38,12 +43,12 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-8">
           <ul className="flex items-center gap-8">
             {navItems.map((item) => (
-              <li key={item}>
+              <li key={item.label}>
                 <a
-                  href={`#${item.toLowerCase()}`}
+                  href={item.href}
                   className="text-foreground hover:text-foreground/80 transition-colors font-medium"
                 >
-                  {item}
+                  {item.label}
                 </a>
               </li>
             ))}
