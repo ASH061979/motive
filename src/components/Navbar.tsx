@@ -11,7 +11,7 @@ const Navbar = () => {
     { label: "Home", href: "/", isRoute: true },
     { label: "About Us", href: "/about-us", isRoute: true },
     { label: "Services", href: "#services", isRoute: false },
-    { label: "Contact Us", href: "#contact", isRoute: false }
+    { label: "Contact Us", href: "/contact-us", isRoute: true }
   ];
 
   useEffect(() => {
