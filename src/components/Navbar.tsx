@@ -8,7 +8,7 @@ const Navbar = () => {
     <header className="bg-background sticky top-0 z-50 shadow-sm">
       <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <img src={logo} alt="MotivWealth Logo" className="h-72 object-contain" />
+          <img src={logo} alt="MotivWealth Logo" className="h-36 object-contain" />
         </div>
         
         <ul className="hidden md:flex items-center gap-8">
