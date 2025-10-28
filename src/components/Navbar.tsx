@@ -64,9 +64,14 @@ const Navbar = () => {
             ))}
           </ul>
           {user && (
-            <span className="text-foreground font-medium">
-              Welcome {getEmailUsername(user.email || "")}
-            </span>
+            <div className="flex items-center gap-4">
+              <span className="text-foreground font-medium">
+                Welcome {getEmailUsername(user.email || "")}
+              </span>
+              <Button asChild variant="default">
+                <Link to="/my-account">My Account</Link>
+              </Button>
+            </div>
           )}
         </div>
 
