@@ -1,28 +1,24 @@
 import { Card, CardContent } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
+import WhatWeDo from "@/components/WhatWeDo";
 
 const AboutUs = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <main className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-8">
-            About Us
-          </h1>
-
-          <div className="space-y-16">
-            {/* What We Do Section */}
-            <div>
-              <h2 className="text-3xl font-semibold text-primary mb-6">
-                What We Do
-              </h2>
-              <p className="text-foreground/80 leading-relaxed text-lg">
-                MotivWealth is a trusted distributor of mutual funds, dedicated to helping individuals grow their wealth through smart investment solutions. The Mutual Fund Distributor partners with leading asset management companies to offer a wide range of mutual fund options tailored to clients' needs. With a focus on transparency, guidance, and customer satisfaction, the distributor simplifies the investment process by providing expert advice and personalized recommendations. The mission is to empower clients with the knowledge and tools they need to make informed financial decisions, ensuring long-term financial growth and stability.
-              </p>
-            </div>
-
-            {/* The Team Section */}
+      <main>
+        <div className="py-12 bg-background">
+          <div className="container mx-auto px-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-primary mb-8">
+              About Us
+            </h1>
+          </div>
+        </div>
+        
+        <WhatWeDo />
+        
+        <div className="py-12 bg-background">
+          <div className="container mx-auto px-4">
             <div>
               <h2 className="text-3xl font-semibold text-primary mb-6">
                 The Team
