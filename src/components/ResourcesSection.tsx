@@ -17,9 +17,12 @@ const ResourcesSection = () => {
         
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
           {resources.map((resource, index) => (
-            <div key={index} className="text-center">
-              <div className="text-4xl mb-3">{resource.icon}</div>
-              <p className="text-foreground/80 font-medium">
+            <div 
+              key={index} 
+              className="text-center bg-white rounded-lg p-6 shadow-md transition-all duration-300 hover:shadow-[0_0_20px_rgba(251,191,36,0.4)] hover:border hover:border-emerald-600 cursor-pointer"
+            >
+              <div className="text-4xl mb-3 transition-transform duration-300 hover:scale-110">{resource.icon}</div>
+              <p className="text-emerald-600 font-semibold text-sm leading-tight">
                 {resource.title}
               </p>
             </div>
