@@ -1,11 +1,11 @@
 import { FileText, GraduationCap, Calculator, Download, Handshake, Newspaper } from "lucide-react";
 
 const resources = [
-  { icon: FileText, title: "Regulatory", url: "https://www.amfiindia.com" },
-  { icon: GraduationCap, title: "Investor Education", url: "https://www.mutualfundssahihai.com" },
-  { icon: Calculator, title: "Calculators", url: "https://www.mutualfundssahihai.com/en/calculators/sip-calculator" },
+  { icon: FileText, title: "Regulatory", url: "" },
+  { icon: GraduationCap, title: "Investor Education", url: "" },
+  { icon: Calculator, title: "Calculators", url: "" },
   { icon: Download, title: "Downloads", url: "" },
-  { icon: Handshake, title: "Support & Grievances", url: "https://scores.sebi.gov.in" },
+  { icon: Handshake, title: "Support & Grievances", url: "" },
   { icon: Newspaper, title: "Market Insights (optional)", url: "" },
 ];
 
