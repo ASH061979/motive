@@ -45,14 +45,67 @@ serve(async (req) => {
         name: fund.schemeName,
       });
       
-      // Categorize based on keywords in scheme name
+      // Enhanced categorization based on SEBI's official mutual fund categories
       const schemeLower = fund.schemeName.toLowerCase();
-      if (schemeLower.includes('equity')) amc.categories.add('Equity');
-      else if (schemeLower.includes('debt') || schemeLower.includes('bond')) amc.categories.add('Debt');
-      else if (schemeLower.includes('hybrid') || schemeLower.includes('balanced')) amc.categories.add('Hybrid');
-      else if (schemeLower.includes('liquid') || schemeLower.includes('money market')) amc.categories.add('Liquid');
-      else if (schemeLower.includes('gilt')) amc.categories.add('Gilt');
-      else amc.categories.add('Other');
+      
+      // Equity Schemes
+      if (schemeLower.includes('equity') || schemeLower.includes('stock') || schemeLower.includes('bluechip') || 
+          schemeLower.includes('midcap') || schemeLower.includes('mid cap') || schemeLower.includes('smallcap') || 
+          schemeLower.includes('small cap') || schemeLower.includes('large cap') || schemeLower.includes('largecap') ||
+          schemeLower.includes('multicap') || schemeLower.includes('multi cap') || schemeLower.includes('flexi cap') ||
+          schemeLower.includes('elss') || schemeLower.includes('dividend yield') || schemeLower.includes('value fund') ||
+          schemeLower.includes('contra') || schemeLower.includes('focused') || schemeLower.includes('sectoral') || 
+          schemeLower.includes('thematic') || schemeLower.includes('banking fund') || schemeLower.includes('pharma') || 
+          schemeLower.includes('technology') || schemeLower.includes('infrastructure') || schemeLower.includes('fmcg') || 
+          schemeLower.includes('auto')) {
+        amc.categories.add('Equity');
+      }
+      
+      // Debt Schemes
+      if (schemeLower.includes('debt') || schemeLower.includes('bond') || schemeLower.includes('income fund') ||
+          schemeLower.includes('corporate bond') || schemeLower.includes('credit') || schemeLower.includes('duration') ||
+          schemeLower.includes('money market') || schemeLower.includes('short term') || schemeLower.includes('medium term') ||
+          schemeLower.includes('long term') || schemeLower.includes('dynamic bond') || schemeLower.includes('banking & psu') ||
+          schemeLower.includes('banking and psu') || schemeLower.includes('floater')) {
+        amc.categories.add('Debt');
+      }
+      
+      // Hybrid Schemes
+      if (schemeLower.includes('hybrid') || schemeLower.includes('balanced') || schemeLower.includes('monthly income') ||
+          schemeLower.includes('conservative') || schemeLower.includes('aggressive hybrid') || 
+          schemeLower.includes('dynamic asset') || schemeLower.includes('multi asset') || 
+          schemeLower.includes('arbitrage') || schemeLower.includes('equity savings')) {
+        amc.categories.add('Hybrid');
+      }
+      
+      // Liquid/Ultra Short
+      if (schemeLower.includes('liquid') || schemeLower.includes('overnight') || schemeLower.includes('ultra short')) {
+        amc.categories.add('Liquid');
+      }
+      
+      // Gilt
+      if (schemeLower.includes('gilt') || schemeLower.includes('government securities') || schemeLower.includes('g-sec')) {
+        amc.categories.add('Gilt');
+      }
+      
+      // Solution Oriented
+      if (schemeLower.includes('retirement') || schemeLower.includes('children') || schemeLower.includes("child's") ||
+          schemeLower.includes('pension')) {
+        amc.categories.add('Solution Oriented');
+      }
+      
+      // Index/ETF/FoF
+      if (schemeLower.includes('index') || schemeLower.includes('etf') || schemeLower.includes('exchange traded') ||
+          schemeLower.includes('fund of funds') || schemeLower.includes('fof') || schemeLower.includes(' gold') ||
+          schemeLower.includes('silver') || schemeLower.includes('international') || schemeLower.includes('nifty') ||
+          schemeLower.includes('sensex')) {
+        amc.categories.add('Index/ETF');
+      }
+      
+      // Add "Other" if no category matched
+      if (amc.categories.size === 0) {
+        amc.categories.add('Other');
+      }
     });
 
     // Convert to array and add statistics

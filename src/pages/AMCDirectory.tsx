@@ -44,7 +44,7 @@ const AMCDirectory = () => {
     }
   };
 
-  const categories = ["All", "Equity", "Debt", "Hybrid", "Liquid", "Gilt", "Other"];
+  const categories = ["All", "Equity", "Debt", "Hybrid", "Liquid", "Gilt", "Solution Oriented", "Index/ETF", "Other"];
 
   const filteredAMCs = data?.amcs.filter(amc => 
     selectedCategory === "All" || amc.categories.includes(selectedCategory)
