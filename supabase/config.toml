@@ -1,1 +1,4 @@
 project_id = "kaqpyuyciejaiquhxvzj"
+
+[functions.fetch-amc-data]
+verify_jwt = false

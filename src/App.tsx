@@ -8,6 +8,7 @@ import AboutUs from "./pages/AboutUs";
 import Services from "./pages/Services";
 import Resources from "./pages/Resources";
 import ContactUs from "./pages/ContactUs";
+import AMCDirectory from "./pages/AMCDirectory";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/services" element={<Services />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/amc-directory" element={<AMCDirectory />} />
           <Route path="/contact-us" element={<ContactUs />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
