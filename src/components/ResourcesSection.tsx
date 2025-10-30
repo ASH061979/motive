@@ -26,11 +26,9 @@ const calculatorLinks = [
   { title: "SIP Calculator", url: "https://www.mutualfundssahihai.com/en/calculators/sip-calculator" },
   { title: "SWP Calculator", url: "https://www.mutualfundssahihai.com/en/calculators/swp-calculator" },
   { title: "Lumpsum Calculator", url: "https://www.mutualfundssahihai.com/en/calculators/lumpsum-calculator" },
-  { title: "Goal Planning Calculator", url: "#", note: "(Branded for Motivwealth)" },
 ];
 
 const downloadLinks = [
-  { title: "Motivwealth Onboarding Form", url: "#" },
   { title: "Client Risk Profile Form", url: "#" },
   { title: "Mutual Fund Basics Handbook", url: "#" },
   { title: "SIP Factsheet", url: "#" },
@@ -151,7 +149,6 @@ const ResourcesSection = () => {
                 className="block p-4 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary"
               >
                 <p className="text-foreground font-medium">{link.title}</p>
-                {link.note && <p className="text-sm text-muted-foreground mt-1">{link.note}</p>}
               </a>
             ))}
           </div>
