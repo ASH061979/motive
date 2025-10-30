@@ -10,6 +10,7 @@ interface AMC {
   totalFunds: number;
   categories: string[];
   funds: Array<{ code: string; name: string }>;
+  aiInsights?: string;
 }
 
 interface AMCData {
@@ -17,7 +18,6 @@ interface AMCData {
   totalAmcs: number;
   totalFunds: number;
   lastUpdated: string;
-  aiInsights?: string;
 }
 
 const AMCDirectory = () => {
@@ -78,23 +78,6 @@ const AMCDirectory = () => {
             </p>
           )}
         </div>
-
-        {/* AI Insights */}
-        {data?.aiInsights && (
-          <Card className="mb-8 border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-primary" />
-                AI-Powered Market Insights
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-foreground/80 whitespace-pre-line leading-relaxed">
-                {data.aiInsights}
-              </p>
-            </CardContent>
-          </Card>
-        )}
 
         {/* Statistics Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
@@ -185,6 +168,19 @@ const AMCDirectory = () => {
                       ))}
                     </div>
                   </div>
+
+                  {/* AI Insights for this AMC */}
+                  {amc.aiInsights && (
+                    <div className="mt-4 pt-4 border-t border-primary/20">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Sparkles className="h-4 w-4 text-primary" />
+                        <p className="text-sm font-medium">AI Insights</p>
+                      </div>
+                      <p className="text-xs text-muted-foreground whitespace-pre-line leading-relaxed">
+                        {amc.aiInsights}
+                      </p>
+                    </div>
+                  )}
 
                   {expandedAMC === amc.name && (
                     <div className="mt-4 pt-4 border-t border-border">

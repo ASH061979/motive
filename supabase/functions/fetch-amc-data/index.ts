@@ -118,46 +118,71 @@ serve(async (req) => {
 
     console.log(`Processed ${amcs.length} AMCs`);
 
-    // Use Lovable AI to generate insights
+    // Generate AI insights for each AMC
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
-    let aiInsights = null;
-
+    
     if (LOVABLE_API_KEY) {
-      try {
-        console.log('Generating AI insights...');
-        const topAmcs = amcs.slice(0, 10).map(amc => 
-          `${amc.name}: ${amc.totalFunds} funds across ${amc.categories.join(', ')}`
-        ).join('\n');
-
-        const aiResponse = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${LOVABLE_API_KEY}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            model: 'google/gemini-2.5-flash',
-            messages: [
-              {
-                role: 'system',
-                content: 'You are a financial analyst specializing in Indian mutual funds. Provide brief, actionable insights.'
+      console.log('Generating AI insights for each AMC...');
+      
+      // Process top 20 AMCs with AI insights
+      const amcsWithInsights = await Promise.all(
+        amcs.slice(0, 20).map(async (amc) => {
+          try {
+            const aiResponse = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${LOVABLE_API_KEY}`,
+                'Content-Type': 'application/json',
               },
-              {
-                role: 'user',
-                content: `Analyze these top Indian AMCs and provide 3-4 key insights:\n${topAmcs}\n\nTotal AMCs: ${amcs.length}`
-              }
-            ],
-          }),
-        });
+              body: JSON.stringify({
+                model: 'google/gemini-2.5-flash',
+                messages: [
+                  {
+                    role: 'system',
+                    content: 'You are a financial analyst. Provide 2-3 concise bullet points about this AMC. Keep it under 100 words.'
+                  },
+                  {
+                    role: 'user',
+                    content: `Analyze ${amc.name} AMC:\n- Total Funds: ${amc.totalFunds}\n- Categories: ${amc.categories.join(', ')}\n\nProvide brief key statistics and insights.`
+                  }
+                ],
+              }),
+            });
 
-        if (aiResponse.ok) {
-          const aiData = await aiResponse.json();
-          aiInsights = aiData.choices[0].message.content;
-          console.log('AI insights generated successfully');
+            if (aiResponse.ok) {
+              const aiData = await aiResponse.json();
+              return {
+                ...amc,
+                aiInsights: aiData.choices[0].message.content
+              };
+            }
+          } catch (aiError) {
+            console.error(`Error generating insights for ${amc.name}:`, aiError);
+          }
+          
+          return amc;
+        })
+      );
+
+      // Merge insights back with remaining AMCs
+      const finalAmcs = [
+        ...amcsWithInsights,
+        ...amcs.slice(20).map(amc => ({ ...amc, aiInsights: null }))
+      ];
+
+      console.log('AI insights generation completed');
+
+      return new Response(
+        JSON.stringify({
+          amcs: finalAmcs,
+          totalAmcs: amcs.length,
+          totalFunds: funds.length,
+          lastUpdated: new Date().toISOString(),
+        }),
+        {
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         }
-      } catch (aiError) {
-        console.error('Error generating AI insights:', aiError);
-      }
+      );
     }
 
     return new Response(
@@ -166,7 +191,6 @@ serve(async (req) => {
         totalAmcs: amcs.length,
         totalFunds: funds.length,
         lastUpdated: new Date().toISOString(),
-        aiInsights,
       }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
