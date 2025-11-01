@@ -2,3 +2,9 @@ project_id = "kaqpyuyciejaiquhxvzj"
 
 [functions.fetch-amc-data]
 verify_jwt = false
+
+[functions.update-amc-data]
+verify_jwt = false
+
+[functions.fetch-sebi-amcs]
+verify_jwt = false
