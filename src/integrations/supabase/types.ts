@@ -14,6 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
+      amc_fund_performance: {
+        Row: {
+          amc_name: string
+          benchmark: string | null
+          category: string | null
+          created_at: string
+          daily_aum: number | null
+          five_year_return: number | null
+          id: string
+          latest_nav: number | null
+          nav_date: string | null
+          one_year_return: number | null
+          previous_nav: number | null
+          risk_level: string | null
+          scheme_code: string | null
+          scheme_name: string
+          sub_category: string | null
+          ten_year_return: number | null
+          three_year_return: number | null
+          updated_at: string
+        }
+        Insert: {
+          amc_name: string
+          benchmark?: string | null
+          category?: string | null
+          created_at?: string
+          daily_aum?: number | null
+          five_year_return?: number | null
+          id?: string
+          latest_nav?: number | null
+          nav_date?: string | null
+          one_year_return?: number | null
+          previous_nav?: number | null
+          risk_level?: string | null
+          scheme_code?: string | null
+          scheme_name: string
+          sub_category?: string | null
+          ten_year_return?: number | null
+          three_year_return?: number | null
+          updated_at?: string
+        }
+        Update: {
+          amc_name?: string
+          benchmark?: string | null
+          category?: string | null
+          created_at?: string
+          daily_aum?: number | null
+          five_year_return?: number | null
+          id?: string
+          latest_nav?: number | null
+          nav_date?: string | null
+          one_year_return?: number | null
+          previous_nav?: number | null
+          risk_level?: string | null
+          scheme_code?: string | null
+          scheme_name?: string
+          sub_category?: string | null
+          ten_year_return?: number | null
+          three_year_return?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       email_account_tracking: {
         Row: {
           account_count: number
