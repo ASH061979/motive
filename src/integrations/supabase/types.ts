@@ -101,6 +101,80 @@ export type Database = {
         }
         Relationships: []
       }
+      user_assets: {
+        Row: {
+          asset_name: string
+          asset_type: Database["public"]["Enums"]["asset_type"]
+          category: string | null
+          created_at: string
+          current_value: number
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          asset_name: string
+          asset_type: Database["public"]["Enums"]["asset_type"]
+          category?: string | null
+          created_at?: string
+          current_value?: number
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          asset_name?: string
+          asset_type?: Database["public"]["Enums"]["asset_type"]
+          category?: string | null
+          created_at?: string
+          current_value?: number
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_transactions: {
+        Row: {
+          amount: number
+          asset_id: string | null
+          created_at: string
+          id: string
+          scheme_name: string
+          transaction_date: string
+          transaction_type: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          asset_id?: string | null
+          created_at?: string
+          id?: string
+          scheme_name: string
+          transaction_date: string
+          transaction_type: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          asset_id?: string | null
+          created_at?: string
+          id?: string
+          scheme_name?: string
+          transaction_date?: string
+          transaction_type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_transactions_asset_id_fkey"
+            columns: ["asset_id"]
+            isOneToOne: false
+            referencedRelation: "user_assets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -109,7 +183,11 @@ export type Database = {
       normalize_email: { Args: { email: string }; Returns: string }
     }
     Enums: {
-      [_ in never]: never
+      asset_type:
+        | "mutual_funds"
+        | "shares_bonds"
+        | "fixed_deposits"
+        | "other_assets"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -236,6 +314,13 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      asset_type: [
+        "mutual_funds",
+        "shares_bonds",
+        "fixed_deposits",
+        "other_assets",
+      ],
+    },
   },
 } as const

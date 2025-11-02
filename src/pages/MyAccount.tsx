@@ -18,15 +18,40 @@ interface Transaction {
   amount: string;
 }
 
+interface UserAsset {
+  id: string;
+  asset_type: string;
+  asset_name: string;
+  current_value: number;
+  category: string | null;
+}
+
+interface AssetTotal {
+  mutual_funds: number;
+  shares_bonds: number;
+  fixed_deposits: number;
+  other_assets: number;
+}
+
 const MyAccount = () => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [assets, setAssets] = useState<UserAsset[]>([]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [assetTotals, setAssetTotals] = useState<AssetTotal>({
+    mutual_funds: 0,
+    shares_bonds: 0,
+    fixed_deposits: 0,
+    other_assets: 0,
+  });
   const navigate = useNavigate();
 
-  // Placeholder data structure - to be populated with actual data
-  const categoryAllocation: any[] = [];
-
-  const recentTransactions: Transaction[] = [];
+  const categoryAllocation = [
+    { name: "Mutual Funds", value: assetTotals.mutual_funds, color: "hsl(var(--primary))" },
+    { name: "Shares & Bonds", value: assetTotals.shares_bonds, color: "hsl(var(--chart-2))" },
+    { name: "Fixed Deposits", value: assetTotals.fixed_deposits, color: "hsl(var(--chart-3))" },
+    { name: "Other Assets", value: assetTotals.other_assets, color: "hsl(var(--chart-4))" },
+  ].filter(item => item.value > 0);
 
   useEffect(() => {
     // Check authentication
@@ -37,6 +62,7 @@ const MyAccount = () => {
       }
       setUser(session.user);
       setLoading(false);
+      fetchUserData(session.user.id);
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -46,11 +72,65 @@ const MyAccount = () => {
           return;
         }
         setUser(session.user);
+        fetchUserData(session.user.id);
       }
     );
 
     return () => subscription.unsubscribe();
   }, [navigate]);
+
+  const fetchUserData = async (userId: string) => {
+    // Fetch user assets
+    const { data: assetsData, error: assetsError } = await supabase
+      .from("user_assets")
+      .select("*")
+      .eq("user_id", userId);
+
+    if (!assetsError && assetsData) {
+      setAssets(assetsData);
+      
+      // Calculate totals by asset type
+      const totals: AssetTotal = {
+        mutual_funds: 0,
+        shares_bonds: 0,
+        fixed_deposits: 0,
+        other_assets: 0,
+      };
+
+      assetsData.forEach((asset: UserAsset) => {
+        const value = Number(asset.current_value);
+        if (asset.asset_type === "mutual_funds") {
+          totals.mutual_funds += value;
+        } else if (asset.asset_type === "shares_bonds") {
+          totals.shares_bonds += value;
+        } else if (asset.asset_type === "fixed_deposits") {
+          totals.fixed_deposits += value;
+        } else if (asset.asset_type === "other_assets") {
+          totals.other_assets += value;
+        }
+      });
+
+      setAssetTotals(totals);
+    }
+
+    // Fetch recent transactions
+    const { data: transactionsData, error: transactionsError } = await supabase
+      .from("user_transactions")
+      .select("*")
+      .eq("user_id", userId)
+      .order("transaction_date", { ascending: false })
+      .limit(10);
+
+    if (!transactionsError && transactionsData) {
+      const formattedTransactions = transactionsData.map((t: any) => ({
+        date: new Date(t.transaction_date).toLocaleDateString("en-GB"),
+        scheme: t.scheme_name,
+        type: t.transaction_type,
+        amount: t.amount.toLocaleString("en-IN"),
+      }));
+      setTransactions(formattedTransactions);
+    }
+  };
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -141,13 +221,22 @@ const MyAccount = () => {
                     <div className="flex items-start justify-between mb-4">
                       <TrendingUp className="h-8 w-8 text-primary" />
                     </div>
-                    <h3 className="font-semibold mb-2">Mutual Funds</h3>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      Track your mutual fund investments and returns.
-                    </p>
-                    <Button variant="link" className="p-0 h-auto text-primary">
-                      Add Now →
-                    </Button>
+                      <h3 className="font-semibold mb-2">Mutual Funds</h3>
+                      {assetTotals.mutual_funds > 0 ? (
+                        <>
+                          <p className="text-2xl font-bold mb-1">₹ {assetTotals.mutual_funds.toLocaleString("en-IN")}</p>
+                          <p className="text-sm text-muted-foreground">Total Mutual Funds Value</p>
+                        </>
+                      ) : (
+                        <>
+                          <p className="text-sm text-muted-foreground mb-3">
+                            Track your mutual fund investments and returns.
+                          </p>
+                          <Button variant="link" className="p-0 h-auto text-primary">
+                            Add Now →
+                          </Button>
+                        </>
+                      )}
                   </CardContent>
                 </Card>
 
@@ -157,12 +246,21 @@ const MyAccount = () => {
                       <FileText className="h-8 w-8 text-muted-foreground" />
                     </div>
                     <h3 className="font-semibold mb-2">Share & Bond</h3>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      Add your stocks and bonds to build a balanced portfolio.
-                    </p>
-                    <Button variant="link" className="p-0 h-auto text-primary">
-                      Add Now →
-                    </Button>
+                    {assetTotals.shares_bonds > 0 ? (
+                      <>
+                        <p className="text-2xl font-bold mb-1">₹ {assetTotals.shares_bonds.toLocaleString("en-IN")}</p>
+                        <p className="text-sm text-muted-foreground">Total Shares & Bonds Value</p>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-sm text-muted-foreground mb-3">
+                          Add your stocks and bonds to build a balanced portfolio.
+                        </p>
+                        <Button variant="link" className="p-0 h-auto text-primary">
+                          Add Now →
+                        </Button>
+                      </>
+                    )}
                   </CardContent>
                 </Card>
 
@@ -172,12 +270,21 @@ const MyAccount = () => {
                       <Calculator className="h-8 w-8 text-muted-foreground" />
                     </div>
                     <h3 className="font-semibold mb-2">Fixed Deposit</h3>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      Secure, predictable returns with fixed deposit investments.
-                    </p>
-                    <Button variant="link" className="p-0 h-auto text-primary">
-                      Add Now →
-                    </Button>
+                    {assetTotals.fixed_deposits > 0 ? (
+                      <>
+                        <p className="text-2xl font-bold mb-1">₹ {assetTotals.fixed_deposits.toLocaleString("en-IN")}</p>
+                        <p className="text-sm text-muted-foreground">Total Fixed Deposits Value</p>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-sm text-muted-foreground mb-3">
+                          Secure, predictable returns with fixed deposit investments.
+                        </p>
+                        <Button variant="link" className="p-0 h-auto text-primary">
+                          Add Now →
+                        </Button>
+                      </>
+                    )}
                   </CardContent>
                 </Card>
 
@@ -187,12 +294,21 @@ const MyAccount = () => {
                       <Layers className="h-8 w-8 text-muted-foreground" />
                     </div>
                     <h3 className="font-semibold mb-2">Other Assets</h3>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      Manage other investment assets and track their value.
-                    </p>
-                    <Button variant="link" className="p-0 h-auto text-primary">
-                      Add Now →
-                    </Button>
+                    {assetTotals.other_assets > 0 ? (
+                      <>
+                        <p className="text-2xl font-bold mb-1">₹ {assetTotals.other_assets.toLocaleString("en-IN")}</p>
+                        <p className="text-sm text-muted-foreground">Total Other Assets Value</p>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-sm text-muted-foreground mb-3">
+                          Manage other investment assets and track their value.
+                        </p>
+                        <Button variant="link" className="p-0 h-auto text-primary">
+                          Add Now →
+                        </Button>
+                      </>
+                    )}
                   </CardContent>
                 </Card>
               </div>
@@ -269,7 +385,7 @@ const MyAccount = () => {
                         View more →
                       </Button>
                     </div>
-                    {recentTransactions.length > 0 ? (
+                    {transactions.length > 0 ? (
                       <Table>
                         <TableHeader>
                           <TableRow>
@@ -280,7 +396,7 @@ const MyAccount = () => {
                           </TableRow>
                         </TableHeader>
                         <TableBody>
-                          {recentTransactions.map((transaction, index) => (
+                          {transactions.map((transaction, index) => (
                             <TableRow key={index}>
                               <TableCell>{transaction.date}</TableCell>
                               <TableCell>{transaction.scheme}</TableCell>
