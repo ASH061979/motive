@@ -9,6 +9,7 @@ import { Loader2, TrendingUp, FileText, Calculator, Layers, Shield, FolderLock, 
 import { toast } from "sonner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
 
 interface Transaction {
   date: string;
@@ -22,22 +23,15 @@ const MyAccount = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Mock data - replace with actual data from backend
+  // Placeholder data structure - to be populated with actual data
   const categoryAllocation = [
-    { category: "FMS", amount: "92,35,956", share: "75.90%" },
-    { category: "Equity Large Cap", amount: "18,13,667", share: "14.78%" },
-    { category: "Solutions Retirement Debt", amount: "11,97,103", share: "9.77%" },
-    { category: "Debt Credit Risk", amount: "17,991", share: "0.13%" },
+    { name: "Equity", value: 45, color: "hsl(var(--primary))" },
+    { name: "Debt", value: 30, color: "hsl(var(--chart-2))" },
+    { name: "Hybrid", value: 15, color: "hsl(var(--chart-3))" },
+    { name: "Others", value: 10, color: "hsl(var(--chart-4))" },
   ];
 
-  const recentTransactions: Transaction[] = [
-    { date: "26-03-2024", scheme: "ICICI Pru Large Cap Fund Reg-G", type: "SIP", amount: "5,000" },
-    { date: "26-02-2024", scheme: "ICICI Pru Large Cap Fund Reg-G", type: "SIP", amount: "5,000" },
-    { date: "25-01-2024", scheme: "ICICI Pru Large Cap Fund Reg-G", type: "SIP", amount: "5,000" },
-    { date: "26-12-2023", scheme: "ICICI Pru Large Cap Fund Reg-G", type: "SIP", amount: "5,000" },
-    { date: "28-11-2023", scheme: "ICICI Pru Large Cap Fund Reg-G", type: "SIP", amount: "5,000" },
-    { date: "25-10-2023", scheme: "ICICI Pru Large Cap Fund Reg-G", type: "SIP", amount: "5,000" },
-  ];
+  const recentTransactions: Transaction[] = [];
 
   useEffect(() => {
     // Check authentication
@@ -107,30 +101,34 @@ const MyAccount = () => {
           </div>
 
           <div className="space-y-6">
-            {/* Sub Category Allocation */}
+            {/* Asset Allocation Chart */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl">Sub Category Allocation</CardTitle>
+                <CardTitle className="text-xl">Asset Allocation</CardTitle>
               </CardHeader>
               <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Sub Category</TableHead>
-                      <TableHead className="text-right">Amount</TableHead>
-                      <TableHead className="text-right">Share(%)</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {categoryAllocation.map((item) => (
-                      <TableRow key={item.category}>
-                        <TableCell className="font-medium">{item.category}</TableCell>
-                        <TableCell className="text-right">{item.amount}</TableCell>
-                        <TableCell className="text-right">{item.share}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                <div className="h-[300px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={categoryAllocation}
+                        cx="50%"
+                        cy="50%"
+                        labelLine={false}
+                        label={({ name, value }) => `${name}: ${value}%`}
+                        outerRadius={80}
+                        fill="#8884d8"
+                        dataKey="value"
+                      >
+                        {categoryAllocation.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        ))}
+                      </Pie>
+                      <Tooltip />
+                      <Legend />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
               </CardContent>
             </Card>
 
@@ -145,8 +143,12 @@ const MyAccount = () => {
                       <TrendingUp className="h-8 w-8 text-primary" />
                     </div>
                     <h3 className="font-semibold mb-2">Mutual Funds</h3>
-                    <p className="text-2xl font-bold mb-1">₹ 30,21,956</p>
-                    <p className="text-sm text-muted-foreground">Total Mutual Funds Value</p>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Track your mutual fund investments and returns.
+                    </p>
+                    <Button variant="link" className="p-0 h-auto text-primary">
+                      Add Now →
+                    </Button>
                   </CardContent>
                 </Card>
 
@@ -186,8 +188,12 @@ const MyAccount = () => {
                       <Layers className="h-8 w-8 text-muted-foreground" />
                     </div>
                     <h3 className="font-semibold mb-2">Other Assets</h3>
-                    <p className="text-2xl font-bold mb-1">₹ 92,35,956</p>
-                    <p className="text-sm text-muted-foreground">Total Other Asset Value</p>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Manage other investment assets and track their value.
+                    </p>
+                    <Button variant="link" className="p-0 h-auto text-primary">
+                      Add Now →
+                    </Button>
                   </CardContent>
                 </Card>
               </div>
@@ -264,26 +270,32 @@ const MyAccount = () => {
                         View more →
                       </Button>
                     </div>
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead>Date</TableHead>
-                          <TableHead>Scheme</TableHead>
-                          <TableHead>Type</TableHead>
-                          <TableHead className="text-right">Amount</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {recentTransactions.map((transaction, index) => (
-                          <TableRow key={index}>
-                            <TableCell>{transaction.date}</TableCell>
-                            <TableCell>{transaction.scheme}</TableCell>
-                            <TableCell>{transaction.type}</TableCell>
-                            <TableCell className="text-right">{transaction.amount}</TableCell>
+                    {recentTransactions.length > 0 ? (
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Date</TableHead>
+                            <TableHead>Scheme</TableHead>
+                            <TableHead>Type</TableHead>
+                            <TableHead className="text-right">Amount</TableHead>
                           </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
+                        </TableHeader>
+                        <TableBody>
+                          {recentTransactions.map((transaction, index) => (
+                            <TableRow key={index}>
+                              <TableCell>{transaction.date}</TableCell>
+                              <TableCell>{transaction.scheme}</TableCell>
+                              <TableCell>{transaction.type}</TableCell>
+                              <TableCell className="text-right">{transaction.amount}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    ) : (
+                      <div className="text-center py-8 text-muted-foreground">
+                        No recent purchases
+                      </div>
+                    )}
                   </TabsContent>
                   <TabsContent value="redemptions">
                     <div className="text-center py-8 text-muted-foreground">
