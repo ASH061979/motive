@@ -24,12 +24,7 @@ const MyAccount = () => {
   const navigate = useNavigate();
 
   // Placeholder data structure - to be populated with actual data
-  const categoryAllocation = [
-    { name: "Equity", value: 45, color: "hsl(var(--primary))" },
-    { name: "Debt", value: 30, color: "hsl(var(--chart-2))" },
-    { name: "Hybrid", value: 15, color: "hsl(var(--chart-3))" },
-    { name: "Others", value: 10, color: "hsl(var(--chart-4))" },
-  ];
+  const categoryAllocation: any[] = [];
 
   const recentTransactions: Transaction[] = [];
 
@@ -107,27 +102,31 @@ const MyAccount = () => {
                 <CardTitle className="text-xl">Asset Allocation</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="h-[300px]">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={categoryAllocation}
-                        cx="50%"
-                        cy="50%"
-                        labelLine={false}
-                        label={({ name, value }) => `${name}: ${value}%`}
-                        outerRadius={80}
-                        fill="#8884d8"
-                        dataKey="value"
-                      >
-                        {categoryAllocation.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                      </Pie>
-                      <Tooltip />
-                      <Legend />
-                    </PieChart>
-                  </ResponsiveContainer>
+                <div className="h-[300px] flex items-center justify-center">
+                  {categoryAllocation.length > 0 ? (
+                    <ResponsiveContainer width="100%" height="100%">
+                      <PieChart>
+                        <Pie
+                          data={categoryAllocation}
+                          cx="50%"
+                          cy="50%"
+                          labelLine={false}
+                          label={({ name, value }) => `${name}: ${value}%`}
+                          outerRadius={80}
+                          fill="#8884d8"
+                          dataKey="value"
+                        >
+                          {categoryAllocation.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={entry.color} />
+                          ))}
+                        </Pie>
+                        <Tooltip />
+                        <Legend />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  ) : (
+                    <p className="text-muted-foreground">No allocation data available</p>
+                  )}
                 </div>
               </CardContent>
             </Card>
