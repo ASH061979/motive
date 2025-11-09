@@ -28,6 +28,8 @@ const resourceCategories = [
     links: [
       { name: "AMFI SIP & Goal Calculators", url: "https://www.amfiindia.com/investor-corner/calculators" },
       { name: "Groww SIP Calculator", url: "https://groww.in/calculators/sip-calculator" },
+      { name: "Groww SWP Calculator", url: "https://groww.in/calculators/swp-calculator" },
+      { name: "Groww Lumpsum Calculator", url: "https://groww.in/calculators/lumpsum-calculator" },
       { name: "HDFC MF Calculators", url: "https://www.hdfcfund.com/calculators" },
       { name: "ClearTax Financial Calculators", url: "https://cleartax.in/calculators" },
     ]
@@ -67,6 +69,7 @@ const resourceCategories = [
   {
     title: "Support & Grievances",
     links: [
+      { name: "AMFI Helpline", url: "https://www.amfiindia.com/contact-us" },
       { name: "AMFI Grievance Redressal", url: "https://www.amfiindia.com/investor-corner/investor-grievance" },
       { name: "SEBI SCORES Complaint Portal", url: "https://scores.sebi.gov.in" },
       { name: "KFinTech Investor Support", url: "https://mfs.kfintech.com" },
