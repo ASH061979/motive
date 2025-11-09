@@ -1,18 +1,18 @@
 const features = [
   {
-    title: "Expert Guidance",
+    title: "Expert & Caring Guidance",
     description:
-      "Leverage our experience as an AMFI registered distributor to navigate your investments.",
+      "As an AMFI-registered Mutual Fund Distributor, we bring professional expertise with a personal touch. You receive clear, well-researched guidance that helps you make confident financial decisions—without jargon or pressure.",
   },
   {
-    title: "Client-Centric Approach",
+    title: "Truly Client-Centric Approach",
     description:
-      "We prioritize your financial well-being with personalialized investment strategies.",
+      "Your life goals, comfort, and financial well-being come first. We take time to understand your needs and craft personalised investment plans that suit your family, values, and priorities—because every financial journey is unique.",
   },
   {
-    title: "Trust and Integrity",
+    title: "Trust, Transparency & Integrity",
     description:
-      "Committed to transparency and ethics in all our mutual fund distribution practices.",
+      "You deserve advice that's honest and unbiased. We follow ethical, transparent practices so you always know where your money is invested and why. With MotivWealth, you gain a partner you can trust—not just for today, but for years to come.",
   },
 ];
 
