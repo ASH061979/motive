@@ -9,7 +9,6 @@ const resourceCategories = [
       { name: "AMFI (Association of Mutual Funds in India)", url: "https://www.amfiindia.com" },
       { name: "SEBI (Securities & Exchange Board of India)", url: "https://www.sebi.gov.in" },
       { name: "SEBI SCORES – Investor Complaint Portal", url: "https://scores.sebi.gov.in" },
-      { name: "Know Your Distributor (KYD) Details", url: "https://www.amfiindia.com/investor-corner/kyd" },
       { name: "NSE NMF II Platform Login", url: "https://www.nsenmf.com" },
       { name: "BSE Star MF Login", url: "https://www.bseindia.com/mfunds" },
     ]
@@ -19,7 +18,6 @@ const resourceCategories = [
     links: [
       { name: "Mutual Fund Sahi Hai (AMFI Initiative)", url: "https://www.mutualfundssahihai.com" },
       { name: "NISM e-Learning Modules (Free)", url: "https://nism.ac.in/elearning" },
-      { name: "SEBI Investor Awareness", url: "https://investor.sebi.gov.in" },
       { name: "ValueResearch Online (MF Research)", url: "https://www.valueresearchonline.com" },
       { name: "Morningstar India", url: "https://www.morningstar.in" },
       { name: "Finsafe India – Women Financial Awareness", url: "https://finsafe.in" },
