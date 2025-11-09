@@ -4,22 +4,22 @@ const services = [
   {
     icon: TrendingUp,
     title: "Investment Solutions",
-    description: "Providing a range of mutual fund investment options tailored to your goals.",
+    description: "We guide you toward the right mix of mutual funds based on your goals, comfort with risk, and life stage. Every recommendation is thoughtfully selected to help your wealth grow steadily and securely — without overwhelm or confusion.",
   },
   {
     icon: Target,
     title: "Goal Planning",
-    description: "Helping you plan-for future financial mifesteries with strategic investing",
+    description: "Your dreams deserve a clear financial path. Whether it's children's education, retirement, buying a home, or creating a personal financial cushion, we help you plan with structured strategies and practical steps so you reach each milestone with confidence.",
   },
   {
     icon: BookOpen,
     title: "Financial Education",
-    description: "Empowering you with knowledge to make informed investment decisions",
+    description: "We believe informed investors make the best decisions. Through simple explanations, regular learning sessions, and easy-to-understand guidance, we help you build financial clarity and confidence — especially if you're just starting your investment journey.",
   },
   {
     icon: Users,
     title: "Client Support",
-    description: "Offering personalized assistance andall due support  for your investment journey.",
+    description: "You'll never feel alone in your financial journey. We provide personalised support, regular updates, and periodic portfolio reviews — always just a call or message away. Our approach is warm, patient, and relationship-driven, ensuring you feel heard, supported, and valued.",
   },
 ];
 
