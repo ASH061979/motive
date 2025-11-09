@@ -7,32 +7,27 @@ const Services = () => {
     {
       icon: TrendingUp,
       title: "Portfolio Growth",
-      description: "Smart investment strategies designed to maximize your returns while you focus on your career."
+      description: "Your money should grow with you and for you. We help you build a thoughtfully curated portfolio that matches your life dreams, comfort level, and family priorities. With steady and balanced growth, your investments work quietly in the background — helping you move closer to the life you desire."
     },
     {
       icon: Shield,
       title: "Secure Investing",
-      description: "Bank-level security and insurance protection for all your investments and financial data."
+      description: "Financial security gives peace of mind — and that's what we focus on first. We guide you toward safe, regulated and well-diversified investments, so your hard-earned money is protected. You stay in control, informed, and confident at every step, without any pressure or confusion."
     },
     {
       icon: Target,
       title: "Goal-Based Planning",
-      description: "Customized investment plans tailored to your specific financial goals and timeline."
-    },
-    {
-      icon: Users,
-      title: "Expert Advisory",
-      description: "Access to experienced financial advisors who understand your unique needs and aspirations."
+      description: "Every woman has unique dreams — whether it's planning for children's future, creating your own identity, supporting parents, or building a retirement fund that gives freedom. We create a personalised plan for each of your goals, with care, clarity, and step-by-step guidance so you can achieve them with confidence."
     },
     {
       icon: PiggyBank,
-      title: "Systematic Investment Plans",
-      description: "Build wealth gradually with disciplined SIP strategies that fit your budget and lifestyle."
+      title: "Systematic Investment Plans (SIP)",
+      description: "SIPs make investing simple, stress-free, and completely manageable — even if you're new to it. By investing small amounts regularly, you build wealth gradually and peacefully over time. We help you choose the right SIPs so you can enjoy the magic of compounding while still caring for your everyday responsibilities."
     },
     {
       icon: LineChart,
       title: "Portfolio Monitoring",
-      description: "Regular performance reviews and rebalancing to keep your investments aligned with your goals."
+      description: "We don't leave your hand once you start. Your investments are reviewed with sensitivity to life changes — career breaks, children, family needs, or personal goals. With gentle guidance and timely updates, we make sure your money continues to stay aligned with your life's journey."
     }
   ];
 
@@ -43,14 +38,14 @@ const Services = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-              Your Money, Always Working
+              Our Services
             </h1>
             <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-              Experience the future of passive income with our intelligent investment platform designed for busy professionals.
+              Thoughtful financial guidance designed to support your life dreams with care, clarity, and confidence.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {services.map((service, index) => {
               const IconComponent = service.icon;
               return (
@@ -77,13 +72,10 @@ const Services = () => {
             <Card className="max-w-3xl mx-auto bg-primary/5">
               <CardContent className="pt-6">
                 <h2 className="text-2xl font-semibold text-primary mb-4">
-                  Why Choose Our Services?
+                  Why Choose Our Services
                 </h2>
-                <p className="text-foreground/80 leading-relaxed mb-4">
-                  With nearly 20 years of experience in banking and finance, we bring deep expertise in credit, risk management, and wealth advisory. Our SEBI-registered investment advisory services are backed by certifications from NISM and FPAS Singapore, ensuring you receive professional, ethical, and transparent financial guidance.
-                </p>
                 <p className="text-foreground/80 leading-relaxed">
-                  We're committed to empowering middle-class professionals, particularly women, with the knowledge and tools needed to achieve financial independence and long-term wealth creation.
+                  MotivWealth brings a calm, friendly, and educational approach to investing — without pressure or jargon. You receive personalised guidance, transparent advice, and ongoing support tailored especially for families, first-time investors and women who want clarity, confidence, and compassionate support in their financial journey. We prioritise trust, long-term relationships, and helping you grow your wealth confidently and comfortably.
                 </p>
               </CardContent>
             </Card>
