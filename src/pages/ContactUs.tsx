@@ -138,10 +138,10 @@ const ContactUs = () => {
                 </CardHeader>
                 <CardContent>
                   <a 
-                    href="mailto:meghnaprakash21@gmail.com" 
+                    href="mailto:motivwealth.in@gmail.com" 
                     className="text-lg hover:text-primary transition-colors"
                   >
-                    meghnaprakash21@gmail.com
+                    motivwealth.in@gmail.com
                   </a>
                 </CardContent>
               </Card>
