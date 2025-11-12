@@ -10,7 +10,6 @@ import {
 const regulatoryLinks = [
   { title: "AMFI – Official Website", url: "https://www.amfiindia.com" },
   { title: "SEBI – Official Website", url: "https://www.sebi.gov.in" },
-  { title: "Know Your Distributor (KYD)", url: "https://www.amfiindia.com/investor-corner/kyd" },
   { title: "SEBI SCORES – Investor Complaints Portal", url: "https://scores.sebi.gov.in" },
   { title: "AMFI Code of Conduct for MFDs (PDF)", url: "https://www.amfiindia.com/Themes/Theme1/downloads/RevisedCodeofConductforMutualFundDistributors-April2022.pdf" },
 ];
