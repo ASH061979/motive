@@ -24,7 +24,6 @@ const calculatorLinks = [
 
 
 const supportLinks = [
-  { title: "Investor Grievances (to AMC)", description: "Contact respective AMC" },
   { title: "SEBI SCORES Portal", url: "https://scores.sebi.gov.in" },
   { title: "AMFI Helpline", url: "https://www.amfiindia.com/investor-corner/investor-awareness-programs/contact-us" },
 ];
@@ -150,22 +149,15 @@ const ResourcesSection = () => {
           </DialogHeader>
           <div className="space-y-3 mt-4">
             {supportLinks.map((link, index) => (
-              link.url ? (
-                <a
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block p-4 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary"
-                >
-                  <p className="text-foreground font-medium">{link.title}</p>
-                </a>
-              ) : (
-                <div key={index} className="p-4 rounded-lg bg-card border border-border">
-                  <p className="text-foreground font-medium">{link.title}</p>
-                  <p className="text-sm text-muted-foreground mt-1">{link.description}</p>
-                </div>
-              )
+              <a
+                key={index}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block p-4 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary"
+              >
+                <p className="text-foreground font-medium">{link.title}</p>
+              </a>
             ))}
           </div>
         </DialogContent>
