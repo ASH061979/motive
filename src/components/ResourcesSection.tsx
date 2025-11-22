@@ -1,4 +1,4 @@
-import { FileText, GraduationCap, Calculator, Download, Handshake, Newspaper } from "lucide-react";
+import { FileText, GraduationCap, Calculator, Handshake, Newspaper } from "lucide-react";
 import { useState } from "react";
 import {
   Dialog,
@@ -22,13 +22,6 @@ const calculatorLinks = [
   { title: "SIP Calculator", url: "https://www.mutualfundssahihai.com/en/calculators/sip-calculator" },
 ];
 
-const downloadLinks = [
-  { title: "Client Risk Profile Form", url: "#" },
-  { title: "Mutual Fund Basics Handbook", url: "#" },
-  { title: "SIP Factsheet", url: "#" },
-  { title: "Do's & Don'ts for Investors", url: "#" },
-  { title: "Complaint Redressal Matrix", url: "#" },
-];
 
 const supportLinks = [
   { title: "Investor Grievances (to AMC)", description: "Contact respective AMC" },
@@ -46,7 +39,6 @@ const resources = [
   { icon: FileText, title: "Regulatory", dialogType: "regulatory" },
   { icon: GraduationCap, title: "Investor Education", dialogType: "education" },
   { icon: Calculator, title: "Calculators", dialogType: "calculators" },
-  { icon: Download, title: "Downloads", dialogType: "downloads" },
   { icon: Handshake, title: "Support & Grievances", dialogType: "support" },
   { icon: Newspaper, title: "Market Insights", dialogType: "insights" },
 ];
@@ -61,7 +53,7 @@ const ResourcesSection = () => {
           Resources
         </h2>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
           {resources.map((resource, index) => {
             const Icon = resource.icon;
             
@@ -149,25 +141,6 @@ const ResourcesSection = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Downloads Dialog */}
-      <Dialog open={openDialog === "downloads"} onOpenChange={() => setOpenDialog(null)}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-primary">Downloads</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-3 mt-4">
-            {downloadLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.url}
-                className="block p-4 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary"
-              >
-                <p className="text-foreground font-medium">{link.title}</p>
-              </a>
-            ))}
-          </div>
-        </DialogContent>
-      </Dialog>
 
       {/* Support & Grievances Dialog */}
       <Dialog open={openDialog === "support"} onOpenChange={() => setOpenDialog(null)}>
