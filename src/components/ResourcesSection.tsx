@@ -20,8 +20,6 @@ const investorEducationLinks = [
 
 const calculatorLinks = [
   { title: "SIP Calculator", url: "https://www.mutualfundssahihai.com/en/calculators/sip-calculator" },
-  { title: "SWP Calculator", url: "https://www.mutualfundssahihai.com/en/calculators/swp-calculator" },
-  { title: "Lumpsum Calculator", url: "https://www.mutualfundssahihai.com/en/calculators/lumpsum-calculator" },
 ];
 
 const downloadLinks = [
