@@ -16,9 +16,6 @@ const regulatoryLinks = [
 
 const investorEducationLinks = [
   { title: "Mutual Fund Sahi Hai (AMFI)", url: "https://www.mutualfundssahihai.com" },
-  { title: "Investor Awareness Material", url: "https://www.amfiindia.com/investor-corner" },
-  { title: "Riskometer & Product Labelling", url: "https://www.amfiindia.com/investor-corner/riskometer" },
-  { title: "NAVs, Fund Factsheets, Portfolio Holdings", url: "https://www.amfiindia.com/net-asset-value-nav" },
 ];
 
 const calculatorLinks = [
