@@ -225,7 +225,7 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
 
       toast({
         title: "Account Created!",
-        description: "You can now sign in with your credentials.",
+        description: "Please check your email to confirm your account before signing in.",
       });
       
       setSignUpEmail("");
