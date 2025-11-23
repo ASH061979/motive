@@ -47,10 +47,10 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Processing contact form submission from:", name);
 
-    // Send email to MotivWealth with the contact form details
-    const emailResponse = await resend.emails.send({
+    // Send email to MotivWealth team with the contact form details
+    const teamEmailResponse = await resend.emails.send({
       from: "MotivWealth Contact Form <onboarding@resend.dev>",
-      to: ["motivwealth.in@gmail.com", "meghnaprakash21@gmail.com"],
+      to: ["megnaprakash21@gmail.com"],
       reply_to: email,
       subject: `New Contact Form Message from ${name}`,
       html: `
@@ -78,9 +78,62 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    console.log("Email sent successfully:", emailResponse);
+    console.log("Team email sent successfully:", teamEmailResponse);
 
-    return new Response(JSON.stringify(emailResponse), {
+    // Send confirmation email to the user
+    const userEmailResponse = await resend.emails.send({
+      from: "MotivWealth <onboarding@resend.dev>",
+      to: [email],
+      subject: "We've Received Your Message - MotivWealth",
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #4CAF50; border-bottom: 2px solid #4CAF50; padding-bottom: 10px;">
+            Thank You for Contacting MotivWealth
+          </h2>
+          
+          <p style="line-height: 1.6; color: #333; margin: 20px 0;">
+            Dear ${name.replace(/</g, '&lt;').replace(/>/g, '&gt;')},
+          </p>
+          
+          <p style="line-height: 1.6; color: #333; margin: 20px 0;">
+            We have received your message and appreciate you reaching out to us. Our team will review your inquiry and respond within <strong>24 hours</strong>.
+          </p>
+          
+          <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0;">
+            <h3 style="color: #555; margin-top: 0;">Your Message:</h3>
+            <p style="line-height: 1.6; color: #666; white-space: pre-wrap;">${message.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+          </div>
+          
+          <p style="line-height: 1.6; color: #333; margin: 20px 0;">
+            If you have any urgent matters, please feel free to call us at:
+          </p>
+          
+          <div style="margin: 20px 0;">
+            <p style="margin: 5px 0;"><strong>Phone:</strong> +65 8353 8647</p>
+            <p style="margin: 5px 0;"><strong>Phone:</strong> +91 8130498071</p>
+            <p style="margin: 5px 0;"><strong>Email:</strong> motivwealth.in@gmail.com</p>
+          </div>
+          
+          <p style="line-height: 1.6; color: #333; margin: 20px 0;">
+            Best regards,<br>
+            <strong>The MotivWealth Team</strong>
+          </p>
+          
+          <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
+          
+          <p style="color: #999; font-size: 12px;">
+            This is an automated confirmation email. Please do not reply to this message.
+          </p>
+        </div>
+      `,
+    });
+
+    console.log("User confirmation email sent successfully:", userEmailResponse);
+
+    return new Response(JSON.stringify({ 
+      teamEmail: teamEmailResponse, 
+      userEmail: userEmailResponse 
+    }), {
       status: 200,
       headers: {
         "Content-Type": "application/json",
