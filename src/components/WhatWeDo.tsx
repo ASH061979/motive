@@ -11,7 +11,10 @@ const WhatWeDo = () => {
         <Card className="border-primary/20">
           <CardContent className="pt-6">
             <p className="text-foreground/80 leading-relaxed text-lg">
-              Wealthwise Meghna is a trusted distributor of mutual funds, dedicated to helping individuals grow their wealth through smart investment solutions. The Mutual Fund Distributor, partners with leading asset management companies to offer a wide range of mutual fund options tailored to clients' needs. With a focus on transparency, guidance, and customer satisfaction, the distributor simplifies the investment process by providing expert advice and personalized recommendations. The mission is to empower clients with the knowledge and tools they need to make informed financial decisions, ensuring long-term financial growth and stability.
+              At MotiveWealth, Meghna Prakash combines her passion for financial empowerment with professional expertise as a Mutual Fund Distributor. She partners with leading AMCs to offer thoughtfully curated mutual fund solutions that align with every client's unique financial goals.
+            </p>
+            <p className="text-foreground/80 leading-relaxed text-lg mt-4">
+              Meghna believes that investing should feel simple, transparent, and stress-free. Through MotiveWealth, she provides personalised guidance, honest advice, and clear strategies that help clients build long-term wealth with confidence and peace of mind.
             </p>
           </CardContent>
         </Card>

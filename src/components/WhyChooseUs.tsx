@@ -37,11 +37,6 @@ const WhyChooseUs = () => {
           ))}
         </div>
 
-        <div className="text-center text-foreground/70 text-sm border-t border-border pt-8">
-          <p>
-            Mutual Fund Distributor, AMFI registered. Fees and commissions are aplicable in distribution of products
-          </p>
-        </div>
       </div>
     </section>
   );
