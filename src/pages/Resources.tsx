@@ -69,7 +69,6 @@ const resourceCategories = [
   {
     title: "Support & Grievances",
     links: [
-      { name: "AMFI Helpline", url: "https://www.amfiindia.com/contact-us" },
       { name: "AMFI Grievance Redressal", url: "https://www.amfiindia.com/investor-corner/investor-grievance" },
       { name: "SEBI SCORES Complaint Portal", url: "https://scores.sebi.gov.in" },
       { name: "KFinTech Investor Support", url: "https://mfs.kfintech.com" },
@@ -79,7 +78,6 @@ const resourceCategories = [
   {
     title: "Market Insights",
     links: [
-      { name: "Moneycontrol – Markets", url: "https://www.moneycontrol.com" },
       { name: "Economic Times Markets", url: "https://economictimes.indiatimes.com/markets" },
       { name: "LiveMint – Mutual Funds", url: "https://www.livemint.com/mutual-fund" },
       { name: "Morningstar Fund Analysis", url: "https://www.morningstar.in" },

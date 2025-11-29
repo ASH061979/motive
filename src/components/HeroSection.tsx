@@ -14,7 +14,7 @@ const HeroSection = () => {
           Motivating India to Grow Wealth Wisely
         </h1>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div className="flex justify-center items-center">
           <Button 
             size="lg" 
             variant="outline"
@@ -22,12 +22,6 @@ const HeroSection = () => {
             onClick={() => setAuthDialogOpen(true)}
           >
             Get Started
-          </Button>
-          <Button 
-            size="lg" 
-            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold rounded-lg"
-          >
-            Learn More
           </Button>
         </div>
       </div>
