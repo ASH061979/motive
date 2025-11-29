@@ -25,12 +25,10 @@ const calculatorLinks = [
 
 const supportLinks = [
   { title: "SEBI SCORES Portal", url: "https://scores.sebi.gov.in" },
-  { title: "AMFI Helpline", url: "https://www.amfiindia.com/investor-corner/investor-awareness-programs/contact-us" },
 ];
 
 const marketInsightsLinks = [
   { title: "Live Market Data (NSE)", url: "https://www.nseindia.com" },
-  { title: "Moneycontrol MF Section", url: "https://www.moneycontrol.com/mutualfunds" },
   { title: "Economic Times Markets", url: "https://economictimes.indiatimes.com/markets" },
 ];
 
