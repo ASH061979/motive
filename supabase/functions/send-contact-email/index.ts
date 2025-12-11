@@ -50,7 +50,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send email to MotivWealth team with the contact form details
     const teamEmailResponse = await resend.emails.send({
       from: "MotivWealth Contact Form <onboarding@resend.dev>",
-      to: ["megnaprakash21@gmail.com"],
+      to: ["meghna@motivewealth.in"],
       reply_to: email,
       subject: `New Contact Form Message from ${name}`,
       html: `
