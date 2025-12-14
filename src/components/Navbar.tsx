@@ -103,6 +103,15 @@ const Navbar = () => {
               <Button asChild variant="default">
                 <Link to="/my-account">My Account</Link>
               </Button>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={async () => {
+                  await supabase.auth.signOut();
+                }}
+              >
+                Sign Out
+              </Button>
             </div>
           ) : (
             <Button onClick={() => setShowAuthDialog(true)} className="gap-2">

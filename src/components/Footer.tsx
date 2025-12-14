@@ -9,6 +9,9 @@ const Footer = () => {
           <p className="text-foreground/60 text-xs">
             Mutual Fund Investments are subject to market risks. Read all scheme related documents carefully.
           </p>
+          <p className="text-foreground/50 text-xs mt-4">
+            Website developed by Agastya Balaji
+          </p>
         </div>
       </div>
     </footer>
