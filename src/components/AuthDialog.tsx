@@ -422,9 +422,6 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
                 {signUpEmailError && (
                   <p className="text-sm text-destructive">{signUpEmailError}</p>
                 )}
-                <p className="text-xs text-muted-foreground">
-                  Maximum 2 accounts per email address
-                </p>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="signup-password">Password</Label>
