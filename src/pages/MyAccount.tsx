@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
+import ChatWidget from "@/components/ChatWidget";
 
 interface Transaction {
   date: string;
@@ -430,6 +431,9 @@ const MyAccount = () => {
           </div>
         </div>
       </main>
+      
+      {/* Chat Widget */}
+      {user && <ChatWidget userId={user.id} />}
     </div>
   );
 };
