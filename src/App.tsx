@@ -12,6 +12,7 @@ import AMCDirectory from "./pages/AMCDirectory";
 import MyAccount from "./pages/MyAccount";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
+import FloatingBadge from "./components/FloatingBadge";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <FloatingBadge />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
