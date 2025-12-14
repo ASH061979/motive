@@ -24,6 +24,14 @@ const emailSchema = z
   .toLowerCase()
   .max(255, "Email must be less than 255 characters");
 
+// PAN number validation schema (exactly 10 alphanumeric characters)
+const panSchema = z
+  .string()
+  .trim()
+  .toUpperCase()
+  .length(10, "PAN must be exactly 10 characters")
+  .regex(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, "Invalid PAN format. Must be like ABCDE1234F");
+
 interface AuthDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -35,15 +43,31 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
   const [signInPassword, setSignInPassword] = useState("");
   const [signUpEmail, setSignUpEmail] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
+  const [signUpPan, setSignUpPan] = useState("");
   const [signInEmailError, setSignInEmailError] = useState("");
   const [signInPasswordError, setSignInPasswordError] = useState("");
   const [signUpEmailError, setSignUpEmailError] = useState("");
   const [signUpPasswordError, setSignUpPasswordError] = useState("");
+  const [signUpPanError, setSignUpPanError] = useState("");
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
   const [resetEmailError, setResetEmailError] = useState("");
   const { toast } = useToast();
+
+  // Validate PAN
+  const validatePan = (pan: string, setError: (error: string) => void): boolean => {
+    try {
+      panSchema.parse(pan);
+      setError("");
+      return true;
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        setError(error.errors[0].message);
+      }
+      return false;
+    }
+  };
 
   // Calculate password strength (0-100)
   const calculatePasswordStrength = (password: string): number => {
@@ -193,17 +217,29 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
     e.preventDefault();
     setSignUpEmailError("");
     setSignUpPasswordError("");
+    setSignUpPanError("");
 
     const isEmailValid = validateEmail(signUpEmail, setSignUpEmailError);
     const isPasswordValid = validatePassword(signUpPassword, setSignUpPasswordError, true);
+    const isPanValid = validatePan(signUpPan, setSignUpPanError);
 
-    if (!isEmailValid || !isPasswordValid) {
+    if (!isEmailValid || !isPasswordValid || !isPanValid) {
       return;
     }
 
     setIsLoading(true);
 
     try {
+      // First, validate and register PAN with email
+      const { error: panError } = await supabase.rpc('register_pan_for_email', {
+        p_email: signUpEmail.trim().toLowerCase(),
+        p_pan: signUpPan.trim().toUpperCase()
+      });
+
+      if (panError) {
+        throw new Error(panError.message);
+      }
+
       const { error } = await supabase.auth.signUp({
         email: signUpEmail.trim().toLowerCase(),
         password: signUpPassword,
@@ -230,6 +266,7 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
       
       setSignUpEmail("");
       setSignUpPassword("");
+      setSignUpPan("");
       onOpenChange(false);
     } catch (error: any) {
       toast({
@@ -250,7 +287,7 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
         </DialogHeader>
         <Tabs defaultValue="signin" className="w-full">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="signin">Sign In</TabsTrigger>
+            <TabsTrigger value="signin">Your Investment Starts Here</TabsTrigger>
             <TabsTrigger value="signup">Sign Up</TabsTrigger>
           </TabsList>
           
@@ -425,6 +462,30 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
                     </div>
                   </div>
                 )}
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="signup-pan">PAN Number</Label>
+                <Input
+                  id="signup-pan"
+                  type="text"
+                  placeholder="ABCDE1234F"
+                  value={signUpPan}
+                  onChange={(e) => {
+                    const value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+                    setSignUpPan(value);
+                    setSignUpPanError("");
+                  }}
+                  required
+                  disabled={isLoading}
+                  className={signUpPanError ? "border-destructive" : ""}
+                  maxLength={10}
+                />
+                {signUpPanError && (
+                  <p className="text-sm text-destructive">{signUpPanError}</p>
+                )}
+                <p className="text-xs text-muted-foreground">
+                  Each PAN can only be linked to one email address
+                </p>
               </div>
               <Button
                 type="submit"
