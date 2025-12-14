@@ -101,6 +101,30 @@ export type Database = {
         }
         Relationships: []
       }
+      pan_email_tracking: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          pan_number: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          pan_number: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          pan_number?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       user_assets: {
         Row: {
           asset_name: string
@@ -181,6 +205,10 @@ export type Database = {
     }
     Functions: {
       normalize_email: { Args: { email: string }; Returns: string }
+      register_pan_for_email: {
+        Args: { p_email: string; p_pan: string }
+        Returns: boolean
+      }
     }
     Enums: {
       asset_type:
