@@ -10,6 +10,7 @@ import Resources from "./pages/Resources";
 import ContactUs from "./pages/ContactUs";
 import AMCDirectory from "./pages/AMCDirectory";
 import MyAccount from "./pages/MyAccount";
+import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/services" element={<Services />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/my-account" element={<MyAccount />} />
+          <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/amc-directory" element={<AMCDirectory />} />
           <Route path="/contact-us" element={<ContactUs />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
