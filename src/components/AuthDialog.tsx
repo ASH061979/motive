@@ -281,14 +281,14 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-primary">Welcome to MotivWealth</DialogTitle>
         </DialogHeader>
         <Tabs defaultValue="signin" className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="signin">Your Investment Starts Here</TabsTrigger>
-            <TabsTrigger value="signup">Sign Up</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 h-12">
+            <TabsTrigger value="signin" className="text-sm px-2">Your Investment Starts Here</TabsTrigger>
+            <TabsTrigger value="signup" className="text-sm px-2">Sign Up</TabsTrigger>
           </TabsList>
           
           <TabsContent value="signin">
