@@ -4,9 +4,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
 import { Link } from "react-router-dom";
+import { Settings } from "lucide-react";
 
 const Navbar = () => {
   const [user, setUser] = useState<User | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  
   const navItems = [
     { label: "Home", href: "/", isRoute: true },
     { label: "About Us", href: "/about-us", isRoute: true },
@@ -15,15 +18,34 @@ const Navbar = () => {
   ];
 
   useEffect(() => {
+    const checkAdminStatus = async (userId: string) => {
+      const { data, error } = await supabase.rpc('has_role', {
+        _user_id: userId,
+        _role: 'admin'
+      });
+      
+      if (!error) {
+        setIsAdmin(data === true);
+      }
+    };
+
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
+      if (session?.user) {
+        checkAdminStatus(session.user.id);
+      }
     });
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setUser(session?.user ?? null);
+        if (session?.user) {
+          checkAdminStatus(session.user.id);
+        } else {
+          setIsAdmin(false);
+        }
       }
     );
 
@@ -68,6 +90,14 @@ const Navbar = () => {
               <span className="text-foreground font-medium">
                 Welcome {getEmailUsername(user.email || "")}
               </span>
+              {isAdmin && (
+                <Button asChild variant="outline" size="sm" className="gap-2">
+                  <Link to="/admin">
+                    <Settings className="h-4 w-4" />
+                    Admin
+                  </Link>
+                </Button>
+              )}
               <Button asChild variant="default">
                 <Link to="/my-account">My Account</Link>
               </Button>
