@@ -196,12 +196,15 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
 
       toast({
         title: "Welcome back!",
-        description: "You have successfully signed in.",
+        description: "Redirecting to your portfolio...",
       });
       
       setSignInEmail("");
       setSignInPassword("");
       onOpenChange(false);
+      
+      // Redirect to InvestWell portal after successful login
+      window.location.href = "https://motivewealth.investwell.app";
     } catch (error: any) {
       toast({
         title: "Sign In Failed",
