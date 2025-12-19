@@ -284,15 +284,37 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[500px]">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-primary">Welcome to MotivWealth</DialogTitle>
-        </DialogHeader>
-        <Tabs defaultValue="signin" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 h-12">
-            <TabsTrigger value="signin" className="text-sm px-2">Your Investment Starts Here</TabsTrigger>
-            <TabsTrigger value="signup" className="text-sm px-2">Sign Up</TabsTrigger>
-          </TabsList>
+      <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden border-primary/20">
+        {/* Decorative header with gradient */}
+        <div className="bg-gradient-to-br from-primary via-primary to-accent p-6 text-center relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.1),transparent_50%)]" />
+          <DialogHeader className="relative z-10">
+            <DialogTitle className="text-2xl font-bold text-primary-foreground tracking-tight">
+              Welcome to MotivWealth
+            </DialogTitle>
+            <p className="text-primary-foreground/80 text-sm mt-1">
+              Your journey to financial freedom starts here
+            </p>
+          </DialogHeader>
+        </div>
+        
+        <div className="p-6">
+          <Tabs defaultValue="signin" className="w-full">
+            <TabsList className="grid w-full grid-cols-2 h-12 bg-muted/50 p-1 rounded-lg">
+              <TabsTrigger 
+                value="signin" 
+                className="text-sm px-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-md transition-all"
+              >
+                Sign In
+              </TabsTrigger>
+              <TabsTrigger 
+                value="signup" 
+                className="text-sm px-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-md transition-all"
+              >
+                Sign Up
+              </TabsTrigger>
+            </TabsList>
           
           <TabsContent value="signin">
             {!showForgotPassword ? (
@@ -496,7 +518,8 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
               </Button>
             </form>
           </TabsContent>
-        </Tabs>
+          </Tabs>
+        </div>
       </DialogContent>
     </Dialog>
   );
