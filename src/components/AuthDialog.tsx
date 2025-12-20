@@ -4,9 +4,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
+import { Eye, EyeOff } from "lucide-react";
+import motivwealthLogo from "@/assets/motivwealth-logo.png";
 
 // Strong password validation schema
 const passwordSchema = z
@@ -53,6 +56,8 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
   const [resetEmailError, setResetEmailError] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+  const [showSignInPassword, setShowSignInPassword] = useState(false);
   const { toast } = useToast();
 
   // Validate PAN
@@ -284,242 +289,406 @@ const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden border-primary/20">
-        {/* Decorative header with gradient */}
-        <div className="bg-gradient-to-br from-primary via-primary to-accent p-6 text-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_50%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.1),transparent_50%)]" />
-          <DialogHeader className="relative z-10">
-            <DialogTitle className="text-2xl font-bold text-primary-foreground tracking-tight">
-              Welcome to MotivWealth
-            </DialogTitle>
-            <p className="text-primary-foreground/80 text-sm mt-1">
-              Your journey to financial freedom starts here
-            </p>
-          </DialogHeader>
-        </div>
-        
-        <div className="p-6">
-          <Tabs defaultValue="signin" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 h-12 bg-muted/50 p-1 rounded-lg">
-              <TabsTrigger 
-                value="signin" 
-                className="text-sm px-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-md transition-all"
-              >
-                Sign In
-              </TabsTrigger>
-              <TabsTrigger 
-                value="signup" 
-                className="text-sm px-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-md transition-all"
-              >
-                Sign Up
-              </TabsTrigger>
-            </TabsList>
-          
-          <TabsContent value="signin">
+      <DialogContent className="sm:max-w-[450px] p-0 overflow-hidden border-0 shadow-2xl rounded-2xl">
+        <Tabs defaultValue="signin" className="w-full">
+          <TabsContent value="signin" className="m-0">
             {!showForgotPassword ? (
-              <form onSubmit={handleSignIn} className="space-y-4 mt-4">
-                <div className="space-y-2">
-                  <Label htmlFor="signin-email">Email</Label>
-                  <Input
-                    id="signin-email"
-                    type="email"
-                    placeholder="your@email.com"
-                    value={signInEmail}
-                    onChange={(e) => {
-                      setSignInEmail(e.target.value);
-                      setSignInEmailError("");
-                    }}
-                    required
-                    disabled={isLoading}
-                    className={signInEmailError ? "border-destructive" : ""}
-                    maxLength={255}
+              <div className="p-8 pt-10">
+                {/* Logo and Welcome */}
+                <div className="flex flex-col items-center mb-8">
+                  <img 
+                    src={motivwealthLogo} 
+                    alt="MotivWealth" 
+                    className="h-16 w-auto mb-4"
                   />
-                  {signInEmailError && (
-                    <p className="text-sm text-destructive">{signInEmailError}</p>
-                  )}
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl font-semibold text-foreground text-center">
+                      Welcome!
+                    </DialogTitle>
+                  </DialogHeader>
                 </div>
-                <div className="space-y-2">
+
+                <form onSubmit={handleSignIn} className="space-y-6">
+                  {/* Username/Email field with underline style */}
+                  <div className="space-y-1">
+                    <Label 
+                      htmlFor="signin-email" 
+                      className={`text-sm transition-colors ${signInEmail ? 'text-primary' : 'text-muted-foreground'}`}
+                    >
+                      Username
+                    </Label>
+                    <Input
+                      id="signin-email"
+                      type="email"
+                      value={signInEmail}
+                      onChange={(e) => {
+                        setSignInEmail(e.target.value);
+                        setSignInEmailError("");
+                      }}
+                      required
+                      disabled={isLoading}
+                      className={`border-0 border-b-2 rounded-none px-0 focus-visible:ring-0 focus-visible:border-primary bg-transparent ${
+                        signInEmailError ? "border-destructive" : "border-muted"
+                      }`}
+                      maxLength={255}
+                    />
+                    {signInEmailError && (
+                      <p className="text-sm text-destructive">{signInEmailError}</p>
+                    )}
+                  </div>
+
+                  {/* Password field with underline style and eye toggle */}
+                  <div className="space-y-1">
+                    <Label 
+                      htmlFor="signin-password" 
+                      className="text-sm text-muted-foreground"
+                    >
+                      Password
+                    </Label>
+                    <div className="relative">
+                      <Input
+                        id="signin-password"
+                        type={showSignInPassword ? "text" : "password"}
+                        value={signInPassword}
+                        onChange={(e) => {
+                          setSignInPassword(e.target.value);
+                          setSignInPasswordError("");
+                        }}
+                        required
+                        disabled={isLoading}
+                        className={`border-0 border-b-2 rounded-none px-0 pr-10 focus-visible:ring-0 focus-visible:border-primary bg-transparent ${
+                          signInPasswordError ? "border-destructive" : "border-muted"
+                        }`}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowSignInPassword(!showSignInPassword)}
+                        className="absolute right-0 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        {showSignInPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                      </button>
+                    </div>
+                    {signInPasswordError && (
+                      <p className="text-sm text-destructive">{signInPasswordError}</p>
+                    )}
+                  </div>
+
+                  {/* Remember Me & Forgot Password */}
                   <div className="flex items-center justify-between">
-                    <Label htmlFor="signin-password">Password</Label>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="remember-me" 
+                        checked={rememberMe}
+                        onCheckedChange={(checked) => setRememberMe(checked as boolean)}
+                      />
+                      <label 
+                        htmlFor="remember-me" 
+                        className="text-sm text-muted-foreground cursor-pointer"
+                      >
+                        Remember Me
+                      </label>
+                    </div>
                     <Button
                       type="button"
                       variant="link"
-                      className="p-0 h-auto text-xs"
+                      className="p-0 h-auto text-sm text-primary hover:text-primary/80"
                       onClick={() => setShowForgotPassword(true)}
                     >
-                      Forgot password?
+                      Forgot Password?
                     </Button>
                   </div>
-                  <Input
-                    id="signin-password"
-                    type="password"
-                    placeholder="••••••••"
-                    value={signInPassword}
-                    onChange={(e) => {
-                      setSignInPassword(e.target.value);
-                      setSignInPasswordError("");
-                    }}
-                    required
-                    disabled={isLoading}
-                    className={signInPasswordError ? "border-destructive" : ""}
-                  />
-                  {signInPasswordError && (
-                    <p className="text-sm text-destructive">{signInPasswordError}</p>
-                  )}
-                </div>
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Signing in..." : "Sign In"}
-                </Button>
-              </form>
-            ) : (
-              <form onSubmit={handleForgotPassword} className="space-y-4 mt-4">
-                <div className="space-y-2">
-                  <Label htmlFor="reset-email">Email</Label>
-                  <Input
-                    id="reset-email"
-                    type="email"
-                    placeholder="your@email.com"
-                    value={resetEmail}
-                    onChange={(e) => {
-                      setResetEmail(e.target.value);
-                      setResetEmailError("");
-                    }}
-                    required
-                    disabled={isLoading}
-                    className={resetEmailError ? "border-destructive" : ""}
-                    maxLength={255}
-                  />
-                  {resetEmailError && (
-                    <p className="text-sm text-destructive">{resetEmailError}</p>
-                  )}
-                  <p className="text-xs text-muted-foreground">
-                    Enter your email address and we'll send you a link to reset your password.
-                  </p>
-                </div>
-                <div className="space-y-2">
+
+                  {/* Login Button */}
                   <Button
                     type="submit"
-                    className="w-full"
+                    className="w-full h-12 text-base font-medium rounded-lg bg-primary hover:bg-primary/90"
                     disabled={isLoading}
                   >
-                    {isLoading ? "Sending..." : "Send Reset Link"}
+                    {isLoading ? "Logging in..." : "Log in"}
                   </Button>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    className="w-full"
-                    onClick={() => {
-                      setShowForgotPassword(false);
-                      setResetEmail("");
-                      setResetEmailError("");
-                    }}
-                  >
-                    Back to Sign In
-                  </Button>
+
+                  {/* Terms notice */}
+                  <p className="text-center text-xs text-muted-foreground">
+                    By logging in, you confirm acceptance of our{" "}
+                    <a href="#" className="text-primary hover:underline">Terms of Use</a>.
+                  </p>
+
+                  {/* OR divider */}
+                  <div className="relative my-6">
+                    <div className="absolute inset-0 flex items-center">
+                      <div className="w-full border-t border-muted" />
+                    </div>
+                    <div className="relative flex justify-center text-xs uppercase">
+                      <span className="bg-background px-4 text-muted-foreground">OR</span>
+                    </div>
+                  </div>
+
+                  {/* Alternative login options */}
+                  <div className="space-y-3">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="w-full h-11 border-muted hover:bg-muted/50"
+                      disabled={isLoading}
+                    >
+                      <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none">
+                        <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="2"/>
+                        <path d="M8 12L11 15L16 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      Log in with OTP
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="w-full h-11 border-muted hover:bg-muted/50"
+                      disabled={isLoading}
+                    >
+                      <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                      </svg>
+                      Sign in with Google
+                    </Button>
+                  </div>
+                </form>
+
+                {/* Switch to Sign Up */}
+                <div className="mt-6 pt-6 border-t border-muted">
+                  <TabsList className="grid w-full grid-cols-2 h-10 bg-muted/30 p-1 rounded-lg">
+                    <TabsTrigger 
+                      value="signin" 
+                      className="text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-md transition-all"
+                    >
+                      Sign In
+                    </TabsTrigger>
+                    <TabsTrigger 
+                      value="signup" 
+                      className="text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-md transition-all"
+                    >
+                      Sign Up
+                    </TabsTrigger>
+                  </TabsList>
                 </div>
-              </form>
+              </div>
+            ) : (
+              <div className="p-8 pt-10">
+                {/* Logo and header for forgot password */}
+                <div className="flex flex-col items-center mb-8">
+                  <img 
+                    src={motivwealthLogo} 
+                    alt="MotivWealth" 
+                    className="h-16 w-auto mb-4"
+                  />
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl font-semibold text-foreground text-center">
+                      Reset Password
+                    </DialogTitle>
+                  </DialogHeader>
+                </div>
+
+                <form onSubmit={handleForgotPassword} className="space-y-6">
+                  <div className="space-y-1">
+                    <Label 
+                      htmlFor="reset-email" 
+                      className={`text-sm transition-colors ${resetEmail ? 'text-primary' : 'text-muted-foreground'}`}
+                    >
+                      Email
+                    </Label>
+                    <Input
+                      id="reset-email"
+                      type="email"
+                      value={resetEmail}
+                      onChange={(e) => {
+                        setResetEmail(e.target.value);
+                        setResetEmailError("");
+                      }}
+                      required
+                      disabled={isLoading}
+                      className={`border-0 border-b-2 rounded-none px-0 focus-visible:ring-0 focus-visible:border-primary bg-transparent ${
+                        resetEmailError ? "border-destructive" : "border-muted"
+                      }`}
+                      maxLength={255}
+                    />
+                    {resetEmailError && (
+                      <p className="text-sm text-destructive">{resetEmailError}</p>
+                    )}
+                    <p className="text-xs text-muted-foreground mt-2">
+                      Enter your email address and we'll send you a link to reset your password.
+                    </p>
+                  </div>
+                  <div className="space-y-3">
+                    <Button
+                      type="submit"
+                      className="w-full h-12 text-base font-medium rounded-lg bg-primary hover:bg-primary/90"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? "Sending..." : "Send Reset Link"}
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      className="w-full"
+                      onClick={() => {
+                        setShowForgotPassword(false);
+                        setResetEmail("");
+                        setResetEmailError("");
+                      }}
+                    >
+                      Back to Sign In
+                    </Button>
+                  </div>
+                </form>
+              </div>
             )}
           </TabsContent>
           
-          <TabsContent value="signup">
-            <form onSubmit={handleSignUp} className="space-y-4 mt-4">
-              <div className="space-y-2">
-                <Label htmlFor="signup-email">Email</Label>
-                <Input
-                  id="signup-email"
-                  type="email"
-                  placeholder="your@email.com"
-                  value={signUpEmail}
-                  onChange={(e) => {
-                    setSignUpEmail(e.target.value);
-                    setSignUpEmailError("");
-                  }}
-                  required
-                  disabled={isLoading}
-                  className={signUpEmailError ? "border-destructive" : ""}
-                  maxLength={255}
+          <TabsContent value="signup" className="m-0">
+            <div className="p-8 pt-10">
+              {/* Logo and Welcome for Sign Up */}
+              <div className="flex flex-col items-center mb-8">
+                <img 
+                  src={motivwealthLogo} 
+                  alt="MotivWealth" 
+                  className="h-16 w-auto mb-4"
                 />
-                {signUpEmailError && (
-                  <p className="text-sm text-destructive">{signUpEmailError}</p>
-                )}
+                <DialogHeader>
+                  <DialogTitle className="text-2xl font-semibold text-foreground text-center">
+                    Create Account
+                  </DialogTitle>
+                </DialogHeader>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="signup-password">Password</Label>
-                <Input
-                  id="signup-password"
-                  type="password"
-                  placeholder="••••••••"
-                  value={signUpPassword}
-                  onChange={(e) => {
-                    setSignUpPassword(e.target.value);
-                    setSignUpPasswordError("");
-                  }}
-                  onFocus={() => setPasswordFocused(true)}
-                  onBlur={() => setPasswordFocused(false)}
-                  required
-                  disabled={isLoading}
-                  className={signUpPasswordError ? "border-destructive" : ""}
-                  minLength={8}
-                />
-                {signUpPasswordError && (
-                  <p className="text-sm text-destructive">{signUpPasswordError}</p>
-                )}
-                {passwordFocused && signUpPassword && (
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <div className="flex-1 h-2 bg-secondary rounded-full overflow-hidden">
-                        <div
-                          className={`h-full transition-all duration-300 ${getStrengthColor(calculatePasswordStrength(signUpPassword))}`}
-                          style={{ width: `${calculatePasswordStrength(signUpPassword)}%` }}
-                        />
+
+              <form onSubmit={handleSignUp} className="space-y-5">
+                <div className="space-y-1">
+                  <Label 
+                    htmlFor="signup-email" 
+                    className={`text-sm transition-colors ${signUpEmail ? 'text-primary' : 'text-muted-foreground'}`}
+                  >
+                    Email
+                  </Label>
+                  <Input
+                    id="signup-email"
+                    type="email"
+                    value={signUpEmail}
+                    onChange={(e) => {
+                      setSignUpEmail(e.target.value);
+                      setSignUpEmailError("");
+                    }}
+                    required
+                    disabled={isLoading}
+                    className={`border-0 border-b-2 rounded-none px-0 focus-visible:ring-0 focus-visible:border-primary bg-transparent ${
+                      signUpEmailError ? "border-destructive" : "border-muted"
+                    }`}
+                    maxLength={255}
+                  />
+                  {signUpEmailError && (
+                    <p className="text-sm text-destructive">{signUpEmailError}</p>
+                  )}
+                </div>
+                <div className="space-y-1">
+                  <Label 
+                    htmlFor="signup-password" 
+                    className="text-sm text-muted-foreground"
+                  >
+                    Password
+                  </Label>
+                  <Input
+                    id="signup-password"
+                    type="password"
+                    value={signUpPassword}
+                    onChange={(e) => {
+                      setSignUpPassword(e.target.value);
+                      setSignUpPasswordError("");
+                    }}
+                    onFocus={() => setPasswordFocused(true)}
+                    onBlur={() => setPasswordFocused(false)}
+                    required
+                    disabled={isLoading}
+                    className={`border-0 border-b-2 rounded-none px-0 focus-visible:ring-0 focus-visible:border-primary bg-transparent ${
+                      signUpPasswordError ? "border-destructive" : "border-muted"
+                    }`}
+                    minLength={8}
+                  />
+                  {signUpPasswordError && (
+                    <p className="text-sm text-destructive">{signUpPasswordError}</p>
+                  )}
+                  {passwordFocused && signUpPassword && (
+                    <div className="space-y-2 mt-2">
+                      <div className="flex items-center gap-2">
+                        <div className="flex-1 h-2 bg-secondary rounded-full overflow-hidden">
+                          <div
+                            className={`h-full transition-all duration-300 ${getStrengthColor(calculatePasswordStrength(signUpPassword))}`}
+                            style={{ width: `${calculatePasswordStrength(signUpPassword)}%` }}
+                          />
+                        </div>
+                        <span className="text-xs font-medium min-w-[60px]">
+                          {getStrengthText(calculatePasswordStrength(signUpPassword))}
+                        </span>
                       </div>
-                      <span className="text-xs font-medium min-w-[60px]">
-                        {getStrengthText(calculatePasswordStrength(signUpPassword))}
-                      </span>
                     </div>
-                  </div>
-                )}
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="signup-pan">PAN Number</Label>
-                <Input
-                  id="signup-pan"
-                  type="text"
-                  placeholder="ABCDE1234F"
-                  value={signUpPan}
-                  onChange={(e) => {
-                    const value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
-                    setSignUpPan(value);
-                    setSignUpPanError("");
-                  }}
-                  required
+                  )}
+                </div>
+                <div className="space-y-1">
+                  <Label 
+                    htmlFor="signup-pan" 
+                    className={`text-sm transition-colors ${signUpPan ? 'text-primary' : 'text-muted-foreground'}`}
+                  >
+                    PAN Number
+                  </Label>
+                  <Input
+                    id="signup-pan"
+                    type="text"
+                    value={signUpPan}
+                    onChange={(e) => {
+                      const value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+                      setSignUpPan(value);
+                      setSignUpPanError("");
+                    }}
+                    required
+                    disabled={isLoading}
+                    className={`border-0 border-b-2 rounded-none px-0 focus-visible:ring-0 focus-visible:border-primary bg-transparent ${
+                      signUpPanError ? "border-destructive" : "border-muted"
+                    }`}
+                    maxLength={10}
+                  />
+                  {signUpPanError && (
+                    <p className="text-sm text-destructive">{signUpPanError}</p>
+                  )}
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Each PAN can only be linked to one email address
+                  </p>
+                </div>
+                <Button
+                  type="submit"
+                  className="w-full h-12 text-base font-medium rounded-lg bg-primary hover:bg-primary/90"
                   disabled={isLoading}
-                  className={signUpPanError ? "border-destructive" : ""}
-                  maxLength={10}
-                />
-                {signUpPanError && (
-                  <p className="text-sm text-destructive">{signUpPanError}</p>
-                )}
-                <p className="text-xs text-muted-foreground">
-                  Each PAN can only be linked to one email address
-                </p>
+                >
+                  {isLoading ? "Creating account..." : "Sign Up"}
+                </Button>
+              </form>
+
+              {/* Switch to Sign In */}
+              <div className="mt-6 pt-6 border-t border-muted">
+                <TabsList className="grid w-full grid-cols-2 h-10 bg-muted/30 p-1 rounded-lg">
+                  <TabsTrigger 
+                    value="signin" 
+                    className="text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-md transition-all"
+                  >
+                    Sign In
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="signup" 
+                    className="text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-md transition-all"
+                  >
+                    Sign Up
+                  </TabsTrigger>
+                </TabsList>
               </div>
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={isLoading}
-              >
-                {isLoading ? "Creating account..." : "Sign Up"}
-              </Button>
-            </form>
+            </div>
           </TabsContent>
-          </Tabs>
-        </div>
+        </Tabs>
       </DialogContent>
     </Dialog>
   );
