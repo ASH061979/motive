@@ -4,13 +4,21 @@ import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
 import { Link } from "react-router-dom";
-import { Settings, LogIn } from "lucide-react";
+import { Settings, LogIn, Menu, X } from "lucide-react";
 import AuthDialog from "@/components/AuthDialog";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const Navbar = () => {
   const [user, setUser] = useState<User | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showAuthDialog, setShowAuthDialog] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   const navItems = [
     { label: "Home", href: "/", isRoute: true },
@@ -121,9 +129,65 @@ const Navbar = () => {
           )}
         </div>
 
-        <Button variant="ghost" className="md:hidden text-foreground" onClick={() => setShowAuthDialog(true)}>
-          Menu
-        </Button>
+        <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+          <SheetTrigger asChild>
+            <Button variant="ghost" className="md:hidden text-foreground">
+              <Menu className="h-6 w-6" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="right" className="w-[280px] bg-background">
+            <SheetHeader>
+              <SheetTitle className="text-left">Menu</SheetTitle>
+            </SheetHeader>
+            <nav className="flex flex-col gap-4 mt-6">
+              {navItems.map((item) => (
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  className="text-foreground hover:text-foreground/80 transition-colors font-medium py-2 border-b border-border"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <div className="pt-4 flex flex-col gap-3">
+                {user ? (
+                  <>
+                    <span className="text-foreground font-medium">
+                      Welcome {getEmailUsername(user.email || "")}
+                    </span>
+                    {isAdmin && (
+                      <Button asChild variant="outline" size="sm" className="gap-2 justify-start">
+                        <Link to="/admin" onClick={() => setMobileMenuOpen(false)}>
+                          <Settings className="h-4 w-4" />
+                          Admin
+                        </Link>
+                      </Button>
+                    )}
+                    <Button asChild variant="default">
+                      <Link to="/my-account" onClick={() => setMobileMenuOpen(false)}>My Account</Link>
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={async () => {
+                        await supabase.auth.signOut();
+                        setMobileMenuOpen(false);
+                      }}
+                    >
+                      Sign Out
+                    </Button>
+                  </>
+                ) : (
+                  <Button onClick={() => { setShowAuthDialog(true); setMobileMenuOpen(false); }} className="gap-2">
+                    <LogIn className="h-4 w-4" />
+                    Sign In
+                  </Button>
+                )}
+              </div>
+            </nav>
+          </SheetContent>
+        </Sheet>
       </nav>
       
       <AuthDialog open={showAuthDialog} onOpenChange={setShowAuthDialog} />
