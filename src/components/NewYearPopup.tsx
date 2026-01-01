@@ -29,7 +29,7 @@ const NewYearPopup = () => {
 
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && handleClose()}>
-      <DialogContent className="p-0 border-0 bg-transparent max-w-[90vw] sm:max-w-md md:max-w-lg overflow-hidden shadow-2xl">
+      <DialogContent className="p-0 border-0 bg-transparent max-w-[75vw] sm:max-w-sm md:max-w-md overflow-hidden shadow-2xl">
         <Button
           variant="ghost"
           size="icon"
