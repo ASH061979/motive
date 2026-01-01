@@ -5,12 +5,10 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import ResourcesSection from "@/components/ResourcesSection";
 import Footer from "@/components/Footer";
 import NewYearPopup from "@/components/NewYearPopup";
-import FloralDecorations from "@/components/FloralDecorations";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
-      <FloralDecorations />
       <NewYearPopup />
       <Navbar />
       <main>
