@@ -10,11 +10,31 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
-// Input validation schema
+// HTML escape function to prevent XSS attacks
+function escapeHtml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+// Input validation schema with additional restrictions
 const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
-  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
-  message: z.string().trim().min(1, "Message is required").max(1000, "Message must be less than 1000 characters"),
+  name: z.string()
+    .trim()
+    .min(1, "Name is required")
+    .max(100, "Name must be less than 100 characters")
+    .regex(/^[a-zA-Z\s\-'.]+$/, "Name contains invalid characters"),
+  email: z.string()
+    .trim()
+    .email("Invalid email address")
+    .max(255, "Email must be less than 255 characters"),
+  message: z.string()
+    .trim()
+    .min(1, "Message is required")
+    .max(1000, "Message must be less than 1000 characters"),
 });
 
 const handler = async (req: Request): Promise<Response> => {
@@ -60,13 +80,13 @@ const handler = async (req: Request): Promise<Response> => {
           </h2>
           
           <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0;">
-            <p style="margin: 10px 0;"><strong>From:</strong> ${name.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
-            <p style="margin: 10px 0;"><strong>Email:</strong> <a href="mailto:${email}">${email.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</a></p>
+            <p style="margin: 10px 0;"><strong>From:</strong> ${escapeHtml(name)}</p>
+            <p style="margin: 10px 0;"><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
           </div>
           
           <div style="margin: 20px 0;">
             <h3 style="color: #555;">Message:</h3>
-            <p style="line-height: 1.6; color: #666; white-space: pre-wrap;">${message.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+            <p style="line-height: 1.6; color: #666; white-space: pre-wrap;">${escapeHtml(message)}</p>
           </div>
           
           <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
@@ -92,7 +112,7 @@ const handler = async (req: Request): Promise<Response> => {
           </h2>
           
           <p style="line-height: 1.6; color: #333; margin: 20px 0;">
-            Dear ${name.replace(/</g, '&lt;').replace(/>/g, '&gt;')},
+            Dear ${escapeHtml(name)},
           </p>
           
           <p style="line-height: 1.6; color: #333; margin: 20px 0;">
@@ -101,7 +121,7 @@ const handler = async (req: Request): Promise<Response> => {
           
           <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0;">
             <h3 style="color: #555; margin-top: 0;">Your Message:</h3>
-            <p style="line-height: 1.6; color: #666; white-space: pre-wrap;">${message.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+            <p style="line-height: 1.6; color: #666; white-space: pre-wrap;">${escapeHtml(message)}</p>
           </div>
           
           <p style="line-height: 1.6; color: #333; margin: 20px 0;">
