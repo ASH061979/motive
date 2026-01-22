@@ -71,5 +71,103 @@
     "subtitle": "भाषा चुनें",
     "english": "English",
     "hindi": "हिंदी"
+  },
+  "aboutUs": {
+    "title": "About Us",
+    "aboutMeghna": "About Meghna",
+    "bio1": "Meghna is a compassionate and relationship-driven professional who has always believed that financial confidence can transform lives — especially for women and families. After a successful career spanning leadership roles in Banking and Finance, client engagement, and business development across India she discovered a deeper purpose: helping families and women build long-term financial security with clarity and confidence.",
+    "bio2": "Over the years, Meghna has worked closely with professionals, parents, and home-makers, and noticed one common challenge — many people earn well, but do not know how to grow money wisely. This inspired her to bridge the gap with MotivWealth, where she combines her strong corporate experience, people-centric approach, and passion for financial literacy to guide families towards stress-free and goal-based investing.",
+    "bio3": "As a Mutual Fund Distributor, Meghna brings trust, patience, and a teaching mindset to every conversation. She simplifies financial concepts, listens to your unique needs, and ensures that you feel supported and confident while taking investment decisions. Her approach is calm, non-pushy, and personalised — making investing comfortable even for first-time investors.",
+    "mission": "At MotivWealth, Meghna's mission is simple: to empower more women and families to take charge of their finances, build wealth with discipline, and live with financial freedom and dignity.",
+    "credentials": {
+      "title": "Professional Credentials",
+      "qualification": "Qualification / Licence",
+      "details": "Details",
+      "amfi": "AMFI–Registered Mutual Fund Distributor (MFD)",
+      "arnNumber": "ARN: 330963",
+      "nism": "NISM Certified",
+      "nismDetails": "NISM Series V-A Mutual Fund Distributors Certification",
+      "panIndia": "Pan-India Empanelment",
+      "panIndiaDetails": "Empanelled with all major Mutual Fund AMCs",
+      "digital": "Digital Execution & Onboarding",
+      "digitalDetails": "Enabled for online transactions via NSE NMF II",
+      "clients": "Client Segments Served",
+      "clientsDetails": "Resident Indians, NRIs, Working Professionals, Women & Families"
+    },
+    "clientAppreciation": {
+      "title": "What Clients Appreciate About Meghna",
+      "point1": "She explains investing in simple, relatable language",
+      "point2": "Her approach is warm, trustworthy, and family-oriented",
+      "point3": "She focuses on long-term wealth creation, not \"quick returns\"",
+      "point4": "She walks with clients throughout their financial journey — patiently and empathetically"
+    }
+  },
+  "whatWeDo": {
+    "title": "What We Do",
+    "description1": "At MotivWealth, Meghna Prakash combines her passion for financial empowerment with professional expertise as a Mutual Fund Distributor. She partners with leading AMCs to offer thoughtfully curated mutual fund solutions that align with every client's unique financial goals.",
+    "description2": "Meghna believes that investing should feel simple, transparent, and stress-free. Through MotivWealth, she provides personalised guidance, honest advice, and clear strategies that help clients build long-term wealth with confidence and peace of mind."
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Thoughtful financial guidance designed to support your life dreams with care, clarity, and confidence.",
+    "portfolioGrowth": {
+      "title": "Portfolio Growth",
+      "description": "Your money should grow with you and for you. We help you build a thoughtfully curated portfolio that matches your life dreams, comfort level, and family priorities. With steady and balanced growth, your investments work quietly in the background — helping you move closer to the life you desire."
+    },
+    "secureInvesting": {
+      "title": "Secure Investing",
+      "description": "Financial security gives peace of mind — and that's what we focus on first. We guide you toward safe, regulated and well-diversified investments, so your hard-earned money is protected. You stay in control, informed, and confident at every step, without any pressure or confusion."
+    },
+    "goalBasedPlanning": {
+      "title": "Goal-Based Planning",
+      "description": "Every woman has unique dreams — whether it's planning for children's future, creating your own identity, supporting parents, or building a retirement fund that gives freedom. We create a personalised plan for each of your goals, with care, clarity, and step-by-step guidance so you can achieve them with confidence."
+    },
+    "sip": {
+      "title": "Systematic Investment Plans (SIP)",
+      "description": "SIPs make investing simple, stress-free, and completely manageable — even if you're new to it. By investing small amounts regularly, you build wealth gradually and peacefully over time. We help you choose the right SIPs so you can enjoy the magic of compounding while still caring for your everyday responsibilities."
+    },
+    "portfolioMonitoring": {
+      "title": "Portfolio Monitoring",
+      "description": "We don't leave your hand once you start. Your investments are reviewed with sensitivity to life changes — career breaks, children, family needs, or personal goals. With gentle guidance and timely updates, we make sure your money continues to stay aligned with your life's journey."
+    },
+    "whyChoose": {
+      "title": "Why Choose Our Services",
+      "description": "MotivWealth brings a calm, friendly, and educational approach to investing — without pressure or jargon. You receive personalised guidance, transparent advice, and ongoing support tailored especially for families, first-time investors and women who want clarity, confidence, and compassionate support in their financial journey. We prioritise trust, long-term relationships, and helping you grow your wealth confidently and comfortably."
+    }
+  },
+  "contactUs": {
+    "title": "Contact Us",
+    "phoneNumbers": "Phone Numbers",
+    "email": "Email",
+    "sendMessage": "Send Us a Message",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Enter your full name",
+      "email": "Email",
+      "emailPlaceholder": "your.email@example.com",
+      "message": "Message",
+      "messagePlaceholder": "Tell us how we can help you...",
+      "characters": "characters",
+      "sending": "Sending...",
+      "send": "Send Message"
+    },
+    "validation": {
+      "nameRequired": "Name Required",
+      "nameRequiredDesc": "Please enter your name",
+      "emailRequired": "Email Required",
+      "emailRequiredDesc": "Please enter your email address",
+      "messageRequired": "Message Required",
+      "messageRequiredDesc": "Please enter your message",
+      "invalidEmail": "Invalid Email",
+      "invalidEmailDesc": "Please enter a valid email address"
+    },
+    "success": {
+      "title": "Message Sent Successfully!",
+      "description": "Thank you for contacting us. We'll get back to you soon."
+    },
+    "error": {
+      "title": "Failed to Send Message",
+      "description": "Please try again or contact us directly via phone or email."
+    }
   }
 }
