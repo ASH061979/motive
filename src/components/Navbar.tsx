@@ -2,10 +2,12 @@ import { Button } from "@/components/ui/button";
 import logo from "@/assets/motivwealth-full-logo.png";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { User } from "@supabase/supabase-js";
 import { Link } from "react-router-dom";
-import { Settings, LogIn, Menu, X } from "lucide-react";
+import { Settings, LogIn, Menu } from "lucide-react";
 import AuthDialog from "@/components/AuthDialog";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import {
   Sheet,
   SheetContent,
@@ -15,16 +17,17 @@ import {
 } from "@/components/ui/sheet";
 
 const Navbar = () => {
+  const { t } = useTranslation();
   const [user, setUser] = useState<User | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showAuthDialog, setShowAuthDialog] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   const navItems = [
-    { label: "Home", href: "/", isRoute: true },
-    { label: "About Us", href: "/about-us", isRoute: true },
-    { label: "Services", href: "/services", isRoute: true },
-    { label: "Contact Us", href: "/contact-us", isRoute: true }
+    { labelKey: "nav.home", href: "/", isRoute: true },
+    { labelKey: "nav.aboutUs", href: "/about-us", isRoute: true },
+    { labelKey: "nav.services", href: "/services", isRoute: true },
+    { labelKey: "nav.contactUs", href: "/contact-us", isRoute: true }
   ];
 
   useEffect(() => {
@@ -76,40 +79,41 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-8">
           <ul className="flex items-center gap-8">
             {navItems.map((item) => (
-              <li key={item.label}>
+              <li key={item.labelKey}>
                 {item.isRoute ? (
                   <Link
                     to={item.href}
                     className="text-foreground hover:text-foreground/80 transition-colors font-medium"
                   >
-                    {item.label}
+                    {t(item.labelKey)}
                   </Link>
                 ) : (
                   <a
                     href={item.href}
                     className="text-foreground hover:text-foreground/80 transition-colors font-medium"
                   >
-                    {item.label}
+                    {t(item.labelKey)}
                   </a>
                 )}
               </li>
             ))}
           </ul>
+          <LanguageSwitcher />
           {user ? (
             <div className="flex items-center gap-4">
               <span className="text-foreground font-medium">
-                Welcome {getEmailUsername(user.email || "")}
+                {t('common.welcome')} {getEmailUsername(user.email || "")}
               </span>
               {isAdmin && (
                 <Button asChild variant="outline" size="sm" className="gap-2">
                   <Link to="/admin">
                     <Settings className="h-4 w-4" />
-                    Admin
+                    {t('common.admin')}
                   </Link>
                 </Button>
               )}
               <Button asChild variant="default">
-                <Link to="/my-account">My Account</Link>
+                <Link to="/my-account">{t('common.myAccount')}</Link>
               </Button>
               <Button 
                 variant="outline" 
@@ -118,13 +122,13 @@ const Navbar = () => {
                   await supabase.auth.signOut();
                 }}
               >
-                Sign Out
+                {t('common.signOut')}
               </Button>
             </div>
           ) : (
             <Button onClick={() => setShowAuthDialog(true)} className="gap-2">
               <LogIn className="h-4 w-4" />
-              Sign In
+              {t('common.signIn')}
             </Button>
           )}
         </div>
@@ -137,35 +141,36 @@ const Navbar = () => {
           </SheetTrigger>
           <SheetContent side="right" className="w-[280px] bg-background">
             <SheetHeader>
-              <SheetTitle className="text-left">Menu</SheetTitle>
+              <SheetTitle className="text-left">{t('common.menu')}</SheetTitle>
             </SheetHeader>
             <nav className="flex flex-col gap-4 mt-6">
               {navItems.map((item) => (
                 <Link
-                  key={item.label}
+                  key={item.labelKey}
                   to={item.href}
                   className="text-foreground hover:text-foreground/80 transition-colors font-medium py-2 border-b border-border"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  {item.label}
+                  {t(item.labelKey)}
                 </Link>
               ))}
               <div className="pt-4 flex flex-col gap-3">
+                <LanguageSwitcher />
                 {user ? (
                   <>
                     <span className="text-foreground font-medium">
-                      Welcome {getEmailUsername(user.email || "")}
+                      {t('common.welcome')} {getEmailUsername(user.email || "")}
                     </span>
                     {isAdmin && (
                       <Button asChild variant="outline" size="sm" className="gap-2 justify-start">
                         <Link to="/admin" onClick={() => setMobileMenuOpen(false)}>
                           <Settings className="h-4 w-4" />
-                          Admin
+                          {t('common.admin')}
                         </Link>
                       </Button>
                     )}
                     <Button asChild variant="default">
-                      <Link to="/my-account" onClick={() => setMobileMenuOpen(false)}>My Account</Link>
+                      <Link to="/my-account" onClick={() => setMobileMenuOpen(false)}>{t('common.myAccount')}</Link>
                     </Button>
                     <Button 
                       variant="outline" 
@@ -175,13 +180,13 @@ const Navbar = () => {
                         setMobileMenuOpen(false);
                       }}
                     >
-                      Sign Out
+                      {t('common.signOut')}
                     </Button>
                   </>
                 ) : (
                   <Button onClick={() => { setShowAuthDialog(true); setMobileMenuOpen(false); }} className="gap-2">
                     <LogIn className="h-4 w-4" />
-                    Sign In
+                    {t('common.signIn')}
                   </Button>
                 )}
               </div>

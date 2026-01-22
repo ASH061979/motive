@@ -1,5 +1,6 @@
 import { FileText, GraduationCap, Calculator, Handshake, Newspaper } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Dialog,
   DialogContent,
@@ -32,22 +33,23 @@ const marketInsightsLinks = [
   { title: "Economic Times Markets", url: "https://economictimes.indiatimes.com/markets" },
 ];
 
-const resources = [
-  { icon: FileText, title: "Regulatory", dialogType: "regulatory" },
-  { icon: GraduationCap, title: "Investor Education", dialogType: "education" },
-  { icon: Calculator, title: "Calculators", dialogType: "calculators" },
-  { icon: Handshake, title: "Support & Grievances", dialogType: "support" },
-  { icon: Newspaper, title: "Market Insights", dialogType: "insights" },
-];
-
 const ResourcesSection = () => {
+  const { t } = useTranslation();
   const [openDialog, setOpenDialog] = useState<string | null>(null);
+
+  const resources = [
+    { icon: FileText, titleKey: "resources.regulatory", dialogType: "regulatory" },
+    { icon: GraduationCap, titleKey: "resources.investorEducation", dialogType: "education" },
+    { icon: Calculator, titleKey: "resources.calculators", dialogType: "calculators" },
+    { icon: Handshake, titleKey: "resources.supportGrievances", dialogType: "support" },
+    { icon: Newspaper, titleKey: "resources.marketInsights", dialogType: "insights" },
+  ];
 
   return (
     <section className="py-20 bg-card">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl md:text-5xl font-bold text-primary mb-16">
-          Resources
+          {t('resources.title')}
         </h2>
         
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
@@ -64,7 +66,7 @@ const ResourcesSection = () => {
                   <Icon className="w-12 h-12 text-emerald-600" strokeWidth={1.5} />
                 </div>
                 <p className="text-emerald-600 font-semibold text-sm leading-tight">
-                  {resource.title}
+                  {t(resource.titleKey)}
                 </p>
               </div>
             );
@@ -76,7 +78,7 @@ const ResourcesSection = () => {
       <Dialog open={openDialog === "regulatory"} onOpenChange={() => setOpenDialog(null)}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-primary">Regulatory Resources</DialogTitle>
+            <DialogTitle className="text-2xl font-bold text-primary">{t('resources.regulatoryResources')}</DialogTitle>
           </DialogHeader>
           <div className="space-y-3 mt-4">
             {regulatoryLinks.map((link, index) => (
@@ -98,7 +100,7 @@ const ResourcesSection = () => {
       <Dialog open={openDialog === "education"} onOpenChange={() => setOpenDialog(null)}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-primary">Investor Education</DialogTitle>
+            <DialogTitle className="text-2xl font-bold text-primary">{t('resources.investorEducation')}</DialogTitle>
           </DialogHeader>
           <div className="space-y-3 mt-4">
             {investorEducationLinks.map((link, index) => (
@@ -120,7 +122,7 @@ const ResourcesSection = () => {
       <Dialog open={openDialog === "calculators"} onOpenChange={() => setOpenDialog(null)}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-primary">Calculators & Tools</DialogTitle>
+            <DialogTitle className="text-2xl font-bold text-primary">{t('resources.calculatorsTools')}</DialogTitle>
           </DialogHeader>
           <div className="space-y-3 mt-4">
             {calculatorLinks.map((link, index) => (
@@ -143,7 +145,7 @@ const ResourcesSection = () => {
       <Dialog open={openDialog === "support"} onOpenChange={() => setOpenDialog(null)}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-primary">Support & Grievances</DialogTitle>
+            <DialogTitle className="text-2xl font-bold text-primary">{t('resources.supportGrievances')}</DialogTitle>
           </DialogHeader>
           <div className="space-y-3 mt-4">
             {supportLinks.map((link, index) => (
@@ -165,7 +167,7 @@ const ResourcesSection = () => {
       <Dialog open={openDialog === "insights"} onOpenChange={() => setOpenDialog(null)}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-primary">Market Insights</DialogTitle>
+            <DialogTitle className="text-2xl font-bold text-primary">{t('resources.marketInsights')}</DialogTitle>
           </DialogHeader>
           <div className="space-y-3 mt-4">
             {marketInsightsLinks.map((link, index) => (
