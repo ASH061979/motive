@@ -1,0 +1,75 @@
+{
+  "common": {
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "myAccount": "My Account",
+    "admin": "Admin",
+    "welcome": "Welcome",
+    "menu": "Menu",
+    "getStarted": "Get Started"
+  },
+  "nav": {
+    "home": "Home",
+    "aboutUs": "About Us",
+    "services": "Services",
+    "contactUs": "Contact Us"
+  },
+  "hero": {
+    "title": "Motivating India to Grow Wealth Wisely"
+  },
+  "howWeHelp": {
+    "title": "How We Help",
+    "investmentSolutions": {
+      "title": "Investment Solutions",
+      "description": "We guide you toward the right mix of mutual funds based on your goals, comfort with risk, and life stage. Every recommendation is thoughtfully selected to help your wealth grow steadily and securely — without overwhelm or confusion."
+    },
+    "goalPlanning": {
+      "title": "Goal Planning",
+      "description": "Your dreams deserve a clear financial path. Whether it's children's education, retirement, buying a home, or creating a personal financial cushion, we help you plan with structured strategies and practical steps so you reach each milestone with confidence."
+    },
+    "financialEducation": {
+      "title": "Financial Education",
+      "description": "We believe informed investors make the best decisions. Through simple explanations, regular learning sessions, and easy-to-understand guidance, we help you build financial clarity and confidence — especially if you're just starting your investment journey."
+    },
+    "clientSupport": {
+      "title": "Client Support",
+      "description": "You'll never feel alone in your financial journey. We provide personalised support, regular updates, and periodic portfolio reviews — always just a call or message away. Our approach is warm, patient, and relationship-driven, ensuring you feel heard, supported, and valued."
+    }
+  },
+  "whyChooseUs": {
+    "title": "Why Choose Us",
+    "expertGuidance": {
+      "title": "Expert & Caring Guidance",
+      "description": "As an AMFI-registered Mutual Fund Distributor, we bring professional expertise with a personal touch. You receive clear, well-researched guidance that helps you make confident financial decisions—without jargon or pressure."
+    },
+    "clientCentric": {
+      "title": "Truly Client-Centric Approach",
+      "description": "Your life goals, comfort, and financial well-being come first. We take time to understand your needs and craft personalised investment plans that suit your family, values, and priorities—because every financial journey is unique."
+    },
+    "trustTransparency": {
+      "title": "Trust, Transparency & Integrity",
+      "description": "You deserve advice that's honest and unbiased. We follow ethical, transparent practices so you always know where your money is invested and why. With MotivWealth, you gain a partner you can trust—not just for today, but for years to come."
+    }
+  },
+  "resources": {
+    "title": "Resources",
+    "regulatory": "Regulatory",
+    "investorEducation": "Investor Education",
+    "calculators": "Calculators",
+    "supportGrievances": "Support & Grievances",
+    "marketInsights": "Market Insights",
+    "regulatoryResources": "Regulatory Resources",
+    "calculatorsTools": "Calculators & Tools"
+  },
+  "footer": {
+    "disclaimer": "MotivWealth is the brand name used by Meghna Prakash, AMFI Registered Mutual Fund Distributor; ARN-330963, EUIN-E628002",
+    "riskWarning": "Mutual Fund Investments are subject to market risks. Read all scheme related documents carefully.",
+    "developer": "Website developed by Agastya Balaji"
+  },
+  "languageSelector": {
+    "title": "Choose Your Language",
+    "subtitle": "भाषा चुनें",
+    "english": "English",
+    "hindi": "हिंदी"
+  }
+}
