@@ -55,11 +55,8 @@ const Blogs = () => {
               </Card>
             </Link>
           ))}
-        </div>
 
-        {/* Media Section */}
-        <h2 className="text-3xl font-bold text-primary mt-16 mb-8">{t("blogs.mediaTitle")}</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Media Card */}
           <Card className="h-full hover:shadow-lg transition-shadow">
             <CardContent className="p-0">
               <video
