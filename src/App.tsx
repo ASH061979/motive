@@ -12,6 +12,8 @@ import AMCDirectory from "./pages/AMCDirectory";
 import MyAccount from "./pages/MyAccount";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
+import Blogs from "./pages/Blogs";
+import BlogPost from "./pages/BlogPost";
 import FloatingBadge from "./components/FloatingBadge";
 
 const queryClient = new QueryClient();
@@ -31,6 +33,8 @@ const App = () => (
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/amc-directory" element={<AMCDirectory />} />
           <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/blogs/:slug" element={<BlogPost />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
