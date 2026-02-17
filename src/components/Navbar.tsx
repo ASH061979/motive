@@ -27,8 +27,8 @@ const Navbar = () => {
     { labelKey: "nav.home", href: "/", isRoute: true },
     { labelKey: "nav.aboutUs", href: "/about-us", isRoute: true },
     { labelKey: "nav.services", href: "/services", isRoute: true },
-    { labelKey: "nav.contactUs", href: "/contact-us", isRoute: true },
-    { labelKey: "nav.blogs", href: "/blogs", isRoute: true }
+    { labelKey: "nav.blogs", href: "/blogs", isRoute: true },
+    { labelKey: "nav.contactUs", href: "/contact-us", isRoute: true }
   ];
 
   useEffect(() => {
