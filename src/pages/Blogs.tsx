@@ -58,10 +58,10 @@ const Blogs = () => {
 
           {/* Media Card */}
           <Card className="h-full hover:shadow-lg transition-shadow flex flex-col">
-            <CardContent className="p-0 flex-1 flex items-center justify-center bg-muted/30 rounded-t-lg overflow-hidden">
+            <CardContent className="p-0 rounded-t-lg overflow-hidden">
               <video
                 controls
-                className="w-full h-full object-cover max-h-[280px]"
+                className="w-full rounded-t-lg"
                 preload="metadata"
               >
                 <source src="/media/motivwealth-video.mp4" type="video/mp4" />
