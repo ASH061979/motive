@@ -27,10 +27,10 @@ const Blogs = () => {
           {t("blogs.subtitle")}
         </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
           {blogPosts.map((post) => (
             <Link key={post.id} to={`/blogs/${post.id}`}>
-              <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer group">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer group">
                 <CardHeader>
                   <CardTitle className="text-xl group-hover:text-primary transition-colors">
                     {t(post.titleKey)}
@@ -57,11 +57,11 @@ const Blogs = () => {
           ))}
 
           {/* Media Card */}
-          <Card className="h-full hover:shadow-lg transition-shadow flex flex-col">
+          <Card className="hover:shadow-lg transition-shadow">
             <CardContent className="p-0 rounded-t-lg overflow-hidden">
               <video
                 controls
-                className="w-full rounded-t-lg"
+                className="w-full rounded-t-lg max-h-[400px]"
                 preload="metadata"
               >
                 <source src="/media/motivwealth-video.mp4" type="video/mp4" />
