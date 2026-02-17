@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Calendar, User } from "lucide-react";
+import { ArrowRight, Calendar, User, Play } from "lucide-react";
 
 const blogPosts = [
   {
@@ -55,6 +55,26 @@ const Blogs = () => {
               </Card>
             </Link>
           ))}
+        </div>
+
+        {/* Media Section */}
+        <h2 className="text-3xl font-bold text-primary mt-16 mb-8">{t("blogs.mediaTitle")}</h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <Card className="h-full hover:shadow-lg transition-shadow">
+            <CardContent className="p-0">
+              <video
+                controls
+                className="w-full rounded-t-lg"
+                preload="metadata"
+              >
+                <source src="/media/motivwealth-video.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </CardContent>
+            <CardHeader>
+              <CardTitle className="text-lg">{t("blogs.media1.title")}</CardTitle>
+            </CardHeader>
+          </Card>
         </div>
       </main>
       <Footer />

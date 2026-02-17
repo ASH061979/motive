@@ -21,6 +21,10 @@
     "readMore": "Read More",
     "backToBlogs": "Back to Blogs",
     "notFound": "Blog post not found",
+    "mediaTitle": "Media",
+    "media1": {
+      "title": "MotivWealth Video"
+    },
     "post1": {
       "title": "India vs. the World: How the Mutual Fund Industry Compares",
       "excerpt": "The global mutual fund industry manages more than USD 65–70 trillion. India's mutual fund industry, though far younger, has evolved rapidly — emerging as one of the fastest-growing investment markets globally.",
