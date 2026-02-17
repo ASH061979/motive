@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="bg-secondary border-t border-border py-8">
       <div className="container mx-auto px-4">
         <div className="text-center space-y-2">
-          <p className="text-foreground/80 text-sm">
+          <p className="text-foreground/80" style={{ fontSize: '12px' }}>
             {t('footer.disclaimer')}
           </p>
           <p className="text-foreground/60" style={{ fontSize: '12px' }}>
