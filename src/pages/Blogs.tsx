@@ -89,6 +89,40 @@ const Blogs = () => {
               <CardTitle className="text-lg">What does a Mutual Fund do?</CardTitle>
             </CardHeader>
           </Card>
+
+          {/* Media Card 3 */}
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardContent className="p-0 rounded-t-lg overflow-hidden">
+              <video
+                controls
+                className="w-full rounded-t-lg max-h-[400px]"
+                preload="metadata"
+              >
+                <source src="/media/introduction-to-motivwealth.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </CardContent>
+            <CardHeader>
+              <CardTitle className="text-lg">Introduction to MotivWealth</CardTitle>
+            </CardHeader>
+          </Card>
+
+          {/* Media Card 4 */}
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardContent className="p-0 rounded-t-lg overflow-hidden">
+              <video
+                controls
+                className="w-full rounded-t-lg max-h-[400px]"
+                preload="metadata"
+              >
+                <source src="/media/liquid-funds.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </CardContent>
+            <CardHeader>
+              <CardTitle className="text-lg">Liquid Funds</CardTitle>
+            </CardHeader>
+          </Card>
         </div>
       </main>
       <Footer />
