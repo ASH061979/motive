@@ -72,6 +72,23 @@ const Blogs = () => {
               <CardTitle className="text-lg">Introduction to MotivWealth</CardTitle>
             </CardHeader>
           </Card>
+
+          {/* Media Card - What does a Mutual Fund do? */}
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardContent className="p-0 rounded-t-lg overflow-hidden">
+              <video
+                controls
+                className="w-full rounded-t-lg max-h-[400px]"
+                preload="metadata"
+              >
+                <source src="/media/what-does-a-mutual-fund-do.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </CardContent>
+            <CardHeader>
+              <CardTitle className="text-lg">What does a Mutual Fund do?</CardTitle>
+            </CardHeader>
+          </Card>
         </div>
       </main>
       <Footer />
