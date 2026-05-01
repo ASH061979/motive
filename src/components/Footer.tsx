@@ -10,7 +10,7 @@ const Footer = () => {
           <p className="text-foreground/80" style={{ fontSize: '14px' }}>
             {t('footer.disclaimer')}
           </p>
-          <p className="text-foreground/60" style={{ fontSize: '12px' }}>
+          <p className="text-foreground/60" style={{ fontSize: '14px' }}>
             {t('footer.riskWarning')}
           </p>
           <p className="text-foreground/50 text-xs mt-4">
