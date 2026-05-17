@@ -156,6 +156,23 @@ const Blogs = () => {
               <CardTitle className="text-lg">Hybrid Funds</CardTitle>
             </CardHeader>
           </Card>
+
+          {/* Media Card - Index Funds */}
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardContent className="p-0 rounded-t-lg overflow-hidden">
+              <video
+                controls
+                className="w-full rounded-t-lg max-h-[400px]"
+                preload="metadata"
+              >
+                <source src="/media/index-funds.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </CardContent>
+            <CardHeader>
+              <CardTitle className="text-lg">Index Funds</CardTitle>
+            </CardHeader>
+          </Card>
         </div>
       </main>
       <Footer />
