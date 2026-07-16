@@ -87,7 +87,7 @@ const Blogs = () => {
                   <div className="aspect-video w-full bg-black">
                     <video
                       controls
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                       preload="metadata"
                     >
                       <source src={v.src} type="video/mp4" />
