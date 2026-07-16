@@ -95,7 +95,8 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background-color: transparent;
     position: relative;
     min-height: 100vh;
   }
