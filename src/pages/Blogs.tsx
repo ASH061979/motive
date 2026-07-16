@@ -84,10 +84,10 @@ const Blogs = () => {
             {videos.map((v) => (
               <Card key={v.src} className="hover:shadow-lg transition-shadow overflow-hidden">
                 <CardContent className="p-0">
-                  <div className="aspect-video w-full bg-black">
+                  <div className="w-full bg-black flex items-center justify-center">
                     <video
                       controls
-                      className="w-full h-full object-contain"
+                      className="w-full h-auto max-h-[70vh]"
                       preload="metadata"
                     >
                       <source src={v.src} type="video/mp4" />
