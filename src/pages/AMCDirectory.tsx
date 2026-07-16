@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
+import PageBackground from "@/components/PageBackground";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, TrendingUp, Building2, Sparkles } from "lucide-react";
@@ -53,6 +54,7 @@ const AMCDirectory = () => {
   if (loading) {
     return (
       <div className="min-h-screen">
+        <PageBackground variant="amc" />
         <Navbar />
         <main className="container mx-auto px-4 py-12">
           <div className="flex items-center justify-center min-h-[400px]">
@@ -65,6 +67,7 @@ const AMCDirectory = () => {
 
   return (
     <div className="min-h-screen">
+      <PageBackground variant="amc" />
       <Navbar />
       <main className="container mx-auto px-4 py-12">
         <div className="mb-8">

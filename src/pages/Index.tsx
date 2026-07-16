@@ -5,10 +5,12 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import ResourcesSection from "@/components/ResourcesSection";
 import Footer from "@/components/Footer";
 import LanguageSelector from "@/components/LanguageSelector";
+import PageBackground from "@/components/PageBackground";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <PageBackground variant="home" />
       <LanguageSelector />
       <Navbar />
       <main>

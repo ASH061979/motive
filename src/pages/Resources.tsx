@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import PageBackground from "@/components/PageBackground";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ExternalLink } from "lucide-react";
 
@@ -89,7 +90,8 @@ const resourceCategories = [
 
 const Resources = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
+      <PageBackground variant="resources" />
       <Navbar />
       <main className="container mx-auto px-4 py-12">
         <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">Resources</h1>

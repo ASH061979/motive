@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import PageBackground from "@/components/PageBackground";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TrendingUp, Shield, Target, PiggyBank, LineChart } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -35,7 +36,8 @@ const Services = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
+      <PageBackground variant="services" />
       <Navbar />
       <main className="py-20">
         <div className="container mx-auto px-4">

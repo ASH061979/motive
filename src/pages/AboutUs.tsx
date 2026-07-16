@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
 import WhatWeDo from "@/components/WhatWeDo";
+import PageBackground from "@/components/PageBackground";
 import { useTranslation } from "react-i18next";
 
 const AboutUs = () => {
@@ -8,6 +9,7 @@ const AboutUs = () => {
 
   return (
     <div className="min-h-screen">
+      <PageBackground variant="about" />
       <Navbar />
       <main>
         <div className="py-12 bg-background">
