@@ -31,6 +31,7 @@ const Blogs = () => {
 
   return (
     <div className="min-h-screen">
+      <PageBackground variant="blogs" />
       <Navbar />
       <main className="container mx-auto px-4 py-16">
         <h1 className="text-4xl font-bold text-primary mb-4">{t("blogs.title")}</h1>
