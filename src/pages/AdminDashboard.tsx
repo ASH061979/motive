@@ -240,7 +240,8 @@ const AdminDashboard = () => {
   const totalUnread = conversations.reduce((sum, c) => sum + (c.unread_count || 0), 0);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
+      <PageBackground variant="admin" />
       <Navbar />
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-7xl mx-auto">
