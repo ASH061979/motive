@@ -71,8 +71,9 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-background sticky top-0 z-50 shadow-sm">
-      <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
+    <header className="bg-background/95 backdrop-blur shadow-sm rounded-b-xl mx-auto max-w-6xl">
+      <nav className="px-6 py-4 flex items-center justify-between">
+
         <div className="flex items-center gap-3">
           <img src={logo} alt="MotivWealth Logo" className="h-36 object-contain" />
         </div>

@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Calendar, User, Play } from "lucide-react";
+import { ArrowRight, Calendar, User } from "lucide-react";
 
 const blogPosts = [
   {
@@ -13,6 +13,16 @@ const blogPosts = [
     date: "2025-06-15",
     author: "Meghna Prakash",
   },
+];
+
+const videos = [
+  { title: "Introduction to MotivWealth", src: "/media/introduction-to-motivwealth.mp4" },
+  { title: "What does a Mutual Fund do?", src: "/media/what-does-a-mutual-fund-do.mp4" },
+  { title: "Liquid Funds", src: "/media/liquid-funds.mp4" },
+  { title: "Debt Funds", src: "/media/debt-funds.mp4" },
+  { title: "Equity Mutual Funds", src: "/media/equity-mutual-funds.mp4" },
+  { title: "Hybrid Funds", src: "/media/hybrid-funds.mp4" },
+  { title: "Index Funds", src: "/media/index-funds.mp4" },
 ];
 
 const Blogs = () => {
@@ -27,153 +37,69 @@ const Blogs = () => {
           {t("blogs.subtitle")}
         </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
-          {blogPosts.map((post) => (
-            <Link key={post.id} to={`/blogs/${post.id}`}>
-              <Card className="hover:shadow-lg transition-shadow cursor-pointer group">
-                <CardHeader>
-                  <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                    {t(post.titleKey)}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex flex-col gap-4">
-                  <p className="text-muted-foreground text-sm line-clamp-3">
-                    {t(post.excerptKey)}
-                  </p>
-                  <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <User className="h-3 w-3" /> {post.author}
+        {/* Articles Section */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-semibold text-primary mb-6 border-b border-border pb-2">
+            Articles
+          </h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+            {blogPosts.map((post) => (
+              <Link key={post.id} to={`/blogs/${post.id}`}>
+                <Card className="hover:shadow-lg transition-shadow cursor-pointer group h-full">
+                  <CardHeader>
+                    <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                      {t(post.titleKey)}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex flex-col gap-4">
+                    <p className="text-muted-foreground text-sm line-clamp-3">
+                      {t(post.excerptKey)}
+                    </p>
+                    <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                      <span className="flex items-center gap-1">
+                        <User className="h-3 w-3" /> {post.author}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Calendar className="h-3 w-3" /> {post.date}
+                      </span>
+                    </div>
+                    <span className="text-primary text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                      {t("blogs.readMore")} <ArrowRight className="h-4 w-4" />
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Calendar className="h-3 w-3" /> {post.date}
-                    </span>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* Videos Section */}
+        <section>
+          <h2 className="text-2xl font-semibold text-primary mb-6 border-b border-border pb-2">
+            Videos
+          </h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+            {videos.map((v) => (
+              <Card key={v.src} className="hover:shadow-lg transition-shadow overflow-hidden">
+                <CardContent className="p-0">
+                  <div className="aspect-video w-full bg-black">
+                    <video
+                      controls
+                      className="w-full h-full object-cover"
+                      preload="metadata"
+                    >
+                      <source src={v.src} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
-                  <span className="text-primary text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
-                    {t("blogs.readMore")} <ArrowRight className="h-4 w-4" />
-                  </span>
                 </CardContent>
+                <CardHeader>
+                  <CardTitle className="text-lg">{v.title}</CardTitle>
+                </CardHeader>
               </Card>
-            </Link>
-          ))}
-
-          {/* Media Card - Introduction to MotivWealth */}
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardContent className="p-0 rounded-t-lg overflow-hidden">
-              <video
-                controls
-                className="w-full rounded-t-lg max-h-[400px]"
-                preload="metadata"
-              >
-                <source src="/media/introduction-to-motivwealth.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </CardContent>
-            <CardHeader>
-              <CardTitle className="text-lg">Introduction to MotivWealth</CardTitle>
-            </CardHeader>
-          </Card>
-
-          {/* Media Card - What does a Mutual Fund do? */}
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardContent className="p-0 rounded-t-lg overflow-hidden">
-              <video
-                controls
-                className="w-full rounded-t-lg max-h-[400px]"
-                preload="metadata"
-              >
-                <source src="/media/what-does-a-mutual-fund-do.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </CardContent>
-            <CardHeader>
-              <CardTitle className="text-lg">What does a Mutual Fund do?</CardTitle>
-            </CardHeader>
-          </Card>
-
-          {/* Media Card - Liquid Funds */}
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardContent className="p-0 rounded-t-lg overflow-hidden">
-              <video
-                controls
-                className="w-full rounded-t-lg max-h-[400px]"
-                preload="metadata"
-              >
-                <source src="/media/liquid-funds.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </CardContent>
-            <CardHeader>
-              <CardTitle className="text-lg">Liquid Funds</CardTitle>
-            </CardHeader>
-          </Card>
-
-          {/* Media Card - Debt Funds */}
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardContent className="p-0 rounded-t-lg overflow-hidden">
-              <video
-                controls
-                className="w-full rounded-t-lg max-h-[400px]"
-                preload="metadata"
-              >
-                <source src="/media/debt-funds.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </CardContent>
-            <CardHeader>
-              <CardTitle className="text-lg">Debt Funds</CardTitle>
-            </CardHeader>
-          </Card>
-
-          {/* Media Card - Equity Mutual Funds */}
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardContent className="p-0 rounded-t-lg overflow-hidden">
-              <video
-                controls
-                className="w-full rounded-t-lg max-h-[400px]"
-                preload="metadata"
-              >
-                <source src="/media/equity-mutual-funds.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </CardContent>
-            <CardHeader>
-              <CardTitle className="text-lg">Equity Mutual Funds</CardTitle>
-            </CardHeader>
-          </Card>
-          {/* Media Card - Hybrid Funds */}
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardContent className="p-0 rounded-t-lg overflow-hidden">
-              <video
-                controls
-                className="w-full rounded-t-lg max-h-[400px]"
-                preload="metadata"
-              >
-                <source src="/media/hybrid-funds.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </CardContent>
-            <CardHeader>
-              <CardTitle className="text-lg">Hybrid Funds</CardTitle>
-            </CardHeader>
-          </Card>
-
-          {/* Media Card - Index Funds */}
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardContent className="p-0 rounded-t-lg overflow-hidden">
-              <video
-                controls
-                className="w-full rounded-t-lg max-h-[400px]"
-                preload="metadata"
-              >
-                <source src="/media/index-funds.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </CardContent>
-            <CardHeader>
-              <CardTitle className="text-lg">Index Funds</CardTitle>
-            </CardHeader>
-          </Card>
-        </div>
+            ))}
+          </div>
+        </section>
       </main>
       <Footer />
     </div>
