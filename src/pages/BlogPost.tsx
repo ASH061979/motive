@@ -13,6 +13,7 @@ const BlogPost = () => {
   if (slug !== "india-vs-world-mutual-funds") {
     return (
       <div className="min-h-screen">
+        <PageBackground variant="blog-post" />
         <Navbar />
         <main className="container mx-auto px-4 py-16 text-center">
           <h1 className="text-2xl font-bold">{t("blogs.notFound")}</h1>
