@@ -46,7 +46,7 @@ const ResourcesSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-card">
+    <section className="py-20 bg-transparent">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl md:text-5xl font-bold text-primary mb-16">
           {t('resources.title')}

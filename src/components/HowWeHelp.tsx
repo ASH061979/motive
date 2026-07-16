@@ -28,7 +28,7 @@ const HowWeHelp = () => {
   ];
 
   return (
-    <section className="py-20 bg-card" id="services">
+    <section className="py-20 bg-transparent" id="services">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl md:text-5xl font-bold text-primary text-center md:text-left mb-16">
           {t('howWeHelp.title')}

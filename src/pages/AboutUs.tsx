@@ -12,7 +12,7 @@ const AboutUs = () => {
       <PageBackground variant="about" />
       <Navbar />
       <main>
-        <div className="py-12 bg-background">
+        <div className="py-12 bg-transparent">
           <div className="container mx-auto px-4">
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-8">
               {t('aboutUs.title')}
@@ -22,7 +22,7 @@ const AboutUs = () => {
         
         <WhatWeDo />
         
-        <div className="py-12 bg-background">
+        <div className="py-12 bg-transparent">
           <div className="container mx-auto px-4">
             <div>
               <h2 className="text-3xl font-semibold text-primary mb-6">

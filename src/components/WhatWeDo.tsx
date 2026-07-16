@@ -5,7 +5,7 @@ const WhatWeDo = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="py-12 bg-background">
+    <section className="py-12 bg-transparent">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-semibold text-primary mb-6">
           {t('whatWeDo.title')}
