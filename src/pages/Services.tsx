@@ -36,7 +36,8 @@ const Services = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
+      <PageBackground variant="services" />
       <Navbar />
       <main className="py-20">
         <div className="container mx-auto px-4">
