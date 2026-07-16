@@ -96,8 +96,6 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-feature-settings: "ss01", "cv11";
     position: relative;
     min-height: 100vh;
   }
@@ -139,8 +137,4 @@
       auto;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Fraunces', Georgia, serif;
-    letter-spacing: -0.01em;
-  }
 }
