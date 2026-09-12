@@ -5,12 +5,12 @@ const Footer = () => {
   const { t } = useTranslation();
 
   const linkItems = [
-    { label: t("footer.links.regulatory") },
+    { label: t("footer.links.regulatory"), href: "/resources#regulatory" },
     { label: t("footer.links.disclaimerDisclosures"), href: "/disclaimer" },
     { label: t("footer.links.commissionDisclosure"), href: "/commission-disclosure" },
     { label: t("footer.links.privacyPolicy"), href: "/privacy-policy" },
     { label: t("footer.links.termsOfUse"), href: "/terms-of-use" },
-    { label: t("footer.links.supportGrievances") },
+    { label: t("footer.links.supportGrievances"), href: "/resources#support-grievances" },
   ];
 
   return (

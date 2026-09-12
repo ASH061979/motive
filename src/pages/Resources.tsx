@@ -115,7 +115,11 @@ const Resources = () => {
         
         <div className="space-y-8">
           {resourceCategories.map((category, index) => (
-            <Card key={index} className="border-primary/20">
+            <Card
+              key={index}
+              id={category.title === "Regulatory" ? "regulatory" : category.title === "Support & Grievances" ? "support-grievances" : undefined}
+              className="border-primary/20"
+            >
               <CardHeader>
                 <CardTitle className="text-2xl text-primary">{category.title}</CardTitle>
                 {category.description && (
