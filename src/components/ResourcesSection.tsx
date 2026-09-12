@@ -18,7 +18,9 @@ const regulatoryLinks = [
 ];
 
 const investorEducationLinks = [
-  { title: "Mutual Fund Sahi Hai (AMFI)", url: "https://www.mutualfundssahihai.com" },
+  { title: "AMFI Investor Corner", url: "https://www.amfiindia.com/investor" },
+  { title: "Mutual Funds Sahi Hai", url: "https://www.mutualfundssahihai.com/en" },
+  { title: "SEBI Investor Website", url: "https://investor.sebi.gov.in/" },
 ];
 
 const calculatorLinks = [

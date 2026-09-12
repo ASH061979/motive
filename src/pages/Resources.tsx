@@ -18,11 +18,9 @@ const resourceCategories = [
   {
     title: "Investor Education",
     links: [
-      { name: "Mutual Fund Sahi Hai (AMFI Initiative)", url: "https://www.mutualfundssahihai.com" },
-      { name: "NISM e-Learning Modules (Free)", url: "https://nism.ac.in/elearning" },
-      { name: "ValueResearch Online (MF Research)", url: "https://www.valueresearchonline.com" },
-      { name: "Morningstar India", url: "https://www.morningstar.in" },
-      { name: "Finsafe India – Women Financial Awareness", url: "https://finsafe.in" },
+      { name: "AMFI Investor Corner", url: "https://www.amfiindia.com/investor" },
+      { name: "Mutual Funds Sahi Hai", url: "https://www.mutualfundssahihai.com/en" },
+      { name: "SEBI Investor Website", url: "https://investor.sebi.gov.in/" },
     ]
   },
   {
