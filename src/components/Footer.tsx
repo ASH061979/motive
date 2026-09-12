@@ -31,6 +31,8 @@ const Footer = () => {
           ))}
         </div>
 
+        <div className="border-t border-border w-full max-w-xl mx-auto" />
+
         <p className="text-primary text-xs">
           {t('footer.developer')}
         </p>
