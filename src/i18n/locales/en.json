@@ -135,6 +135,24 @@
       "amfiDistributorCorner": "AMFI Distributor Corner",
       "amfiCirculars": "AMFI Circulars for MFDs",
       "sebi": "SEBI - Securities and Exchange Board of India"
+    },
+    "support": {
+      "hereToHelp": "We're Here to Help",
+      "contactPrompt": "Have a question regarding your mutual fund investment, transaction or service request? Please contact MotivWealth first and we will be happy to assist.",
+      "name": "Meghna Prakash",
+      "designation": "AMFI-registered Mutual Fund Distributor",
+      "email": "E-mail",
+      "emailValue": "meghna@motivewealth.in",
+      "phoneWhatsApp": "Phone/WhatsApp",
+      "phoneNumbers": "+91-8130498071 and +65-83538647",
+      "workingHours": "Working hours: 10:00 am - 06:00 pm (IST)",
+      "grievanceEscalation": "Grievance Escalation",
+      "level1": "Level 1 - MotivWealth: Raise the service issue with Meghna / MotivWealth and retain the email or ticket reference.",
+      "level2": "Level 2 - Concerned Mutual Fund / AMC / RTA: For scheme or transaction-related issues, contact the relevant AMC or its investor service centre / RTA.",
+      "level3": "Level 3 - SEBI SCORES: If the grievance relates to a SEBI-regulated entity and remains unresolved, use the official SCORES portal as applicable.",
+      "sebiScores": "SEBI SCORES - Official SEBI Complaint Redressal System",
+      "camsGrievances": "CAMS Investor Grievances - For mutual funds serviced through CAMS",
+      "amfi": "AMFI - Official AMFI website; use Investor Corner for mutual fund investor information"
     }
   },
   "footer": {
