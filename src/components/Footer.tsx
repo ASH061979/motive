@@ -1,15 +1,16 @@
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const { t } = useTranslation();
 
-  const linkKeys = [
-    "footer.links.regulatory",
-    "footer.links.disclaimerDisclosures",
-    "footer.links.commissionDisclosure",
-    "footer.links.privacyPolicy",
-    "footer.links.termsOfUse",
-    "footer.links.supportGrievances",
+  const links = [
+    { key: "footer.links.regulatory", to: "/resources" },
+    { key: "footer.links.disclaimerDisclosures", to: "/resources" },
+    { key: "footer.links.commissionDisclosure", to: "/resources" },
+    { key: "footer.links.privacyPolicy", to: "/resources" },
+    { key: "footer.links.termsOfUse", to: "/resources" },
+    { key: "footer.links.supportGrievances", to: "/contact-us" },
   ];
 
   return (
@@ -22,16 +23,19 @@ const Footer = () => {
           {t('footer.riskWarning')}
         </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-x-1 gap-y-1 text-sm text-foreground/80">
-          {linkKeys.map((key, idx) => (
-            <span key={key}>
-              {t(key)}
-              {idx < linkKeys.length - 1 && <span className="mx-2">|</span>}
-            </span>
+        <nav className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-2 max-w-2xl mx-auto text-sm">
+          {links.map((link) => (
+            <Link
+              key={link.key}
+              to={link.to}
+              className="text-foreground/80 hover:text-primary transition-colors"
+            >
+              {t(link.key)}
+            </Link>
           ))}
-        </div>
+        </nav>
 
-        <div className="border-t border-border w-full max-w-xl mx-auto" />
+        <div className="border-t border-border w-full" />
 
         <p className="text-primary text-xs">
           {t('footer.developer')}
