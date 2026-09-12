@@ -154,19 +154,16 @@
     "bio3": "As a Mutual Fund Distributor, Meghna brings trust, patience, and a teaching mindset to every conversation. She simplifies financial concepts, listens to your unique needs, and ensures that you feel supported and confident while taking investment decisions. Her approach is calm, non-pushy, and personalised — making investing comfortable even for first-time investors.",
     "mission": "At MotivWealth, Meghna's mission is simple: to empower more women and families to take charge of their finances, build wealth with discipline, and live with financial freedom and dignity.",
     "credentials": {
-      "title": "Professional Credentials",
-      "qualification": "Qualification / Licence",
-      "details": "Details",
-      "amfi": "AMFI–Registered Mutual Fund Distributor (MFD)",
-      "arnNumber": "ARN: 330963",
-      "nism": "NISM Certified",
-      "nismDetails": "NISM Series V-A Mutual Fund Distributors Certification",
-      "panIndia": "Pan-India Empanelment",
-      "panIndiaDetails": "Empanelled with all major Mutual Fund AMCs",
-      "digital": "Digital Execution & Onboarding",
-      "digitalDetails": "Enabled for online transactions via NSE NMF II",
-      "clients": "Client Segments Served",
-      "clientsDetails": "Resident Indians, NRIs, Working Professionals, Women & Families"
+      "title": "AMFI-registered Mutual Fund Distributor - ARN-330963",
+      "items": [
+        "EUIN - E628002",
+        "NISM Series V-A - Mutual Fund Distributors Certification",
+        "NISM Series X-A and X-B certifications",
+        "FPAS / AWP / AFP credentials",
+        "IIBF CAIIB",
+        "MBA - IMT Ghaziabad",
+        "B.A. (Hons.) Economics"
+      ]
     },
     "clientAppreciation": {
       "title": "What Clients Appreciate About Meghna",
