@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import PageBackground from "@/components/PageBackground";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const sections = [
   {
@@ -30,7 +31,8 @@ const sections = [
   },
   {
     title: "Regular Plans & Commission",
-    content: `When an investor invests in a Regular Plan through Meghna Prakash (Brand Name – MotivWealth), the relevant AMC may pay trail commission to Meghna Prakash in accordance with the AMC's prevailing commission structure and applicable regulations. See the Commission Disclosure page for further information. The information regarding trailing commissions is also available on respective AMCs' websites.`
+    content: `When an investor invests in a Regular Plan through Meghna Prakash (Brand Name – MotivWealth), the relevant AMC may pay trail commission to Meghna Prakash in accordance with the AMC's prevailing commission structure and applicable regulations. See the Commission Disclosure page for further information. The information regarding trailing commissions is also available on respective AMCs' websites.`,
+    link: { text: "View Commission Disclosure", href: "/commission-disclosure" }
   },
   {
     title: "External Links",
@@ -79,6 +81,14 @@ const Disclaimer = () => {
                 <p className="text-foreground/80 leading-relaxed">
                   {section.content}
                 </p>
+                {section.link && (
+                  <Link
+                    to={section.link.href}
+                    className="inline-block mt-4 text-primary hover:underline font-medium"
+                  >
+                    {section.link.text}
+                  </Link>
+                )}
               </CardContent>
             </Card>
           ))}

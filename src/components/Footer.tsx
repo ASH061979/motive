@@ -7,7 +7,7 @@ const Footer = () => {
   const linkItems = [
     { label: t("footer.links.regulatory") },
     { label: t("footer.links.disclaimerDisclosures"), href: "/disclaimer" },
-    { label: t("footer.links.commissionDisclosure") },
+    { label: t("footer.links.commissionDisclosure"), href: "/commission-disclosure" },
     { label: t("footer.links.privacyPolicy") },
     { label: t("footer.links.termsOfUse") },
     { label: t("footer.links.supportGrievances") },
