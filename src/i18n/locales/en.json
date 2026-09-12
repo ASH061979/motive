@@ -181,30 +181,26 @@
   },
   "services": {
     "title": "Our Services",
-    "subtitle": "Thoughtful financial guidance designed to support your life dreams with care, clarity, and confidence.",
+    "subtitle": "Thoughtful mutual fund guidance designed to support your goals with clarity, discipline and confidence.",
     "portfolioGrowth": {
       "title": "Portfolio Growth",
-      "description": "Your money should grow with you and for you. We help you build a thoughtfully curated portfolio that matches your life dreams, comfort level, and family priorities. With steady and balanced growth, your investments work quietly in the background — helping you move closer to the life you desire."
+      "description": "Build a diversified mutual fund portfolio around your goals, time horizon and comfort with risk. The focus is disciplined long-term wealth creation rather than short-term predictions or assured outcomes."
     },
-    "secureInvesting": {
-      "title": "Secure Investing",
-      "description": "Financial security gives peace of mind — and that's what we focus on first. We guide you toward safe, regulated and well-diversified investments, so your hard-earned money is protected. You stay in control, informed, and confident at every step, without any pressure or confusion."
-    },
-    "goalBasedPlanning": {
-      "title": "Goal-Based Planning",
-      "description": "Every woman has unique dreams — whether it's planning for children's future, creating your own identity, supporting parents, or building a retirement fund that gives freedom. We create a personalised plan for each of your goals, with care, clarity, and step-by-step guidance so you can achieve them with confidence."
+    "goalBasedInvesting": {
+      "title": "Goal-Based Investing",
+      "description": "Structure investments around specific goals such as education, retirement, a home purchase or long-term financial independence. Goals are periodically revisited as circumstances change."
     },
     "sip": {
-      "title": "Systematic Investment Plans (SIP)",
-      "description": "SIPs make investing simple, stress-free, and completely manageable — even if you're new to it. By investing small amounts regularly, you build wealth gradually and peacefully over time. We help you choose the right SIPs so you can enjoy the magic of compounding while still caring for your everyday responsibilities."
+      "title": "Systematic Investment Plans (SIPs)",
+      "description": "SIPs can help create a disciplined investing habit through regular contributions. MotivWealth can assist with selecting suitable mutual fund schemes and setting up SIPs aligned with your goals and investment horizon."
     },
     "portfolioMonitoring": {
       "title": "Portfolio Monitoring",
-      "description": "We don't leave your hand once you start. Your investments are reviewed with sensitivity to life changes — career breaks, children, family needs, or personal goals. With gentle guidance and timely updates, we make sure your money continues to stay aligned with your life's journey."
+      "description": "Your mutual fund portfolio can be reviewed periodically to check goal progress, asset mix, SIP continuity and whether your circumstances have changed. A formal review may be conducted periodically, with support available in between."
     },
-    "whyChoose": {
-      "title": "Why Choose Our Services",
-      "description": "MotivWealth brings a calm, friendly, and educational approach to investing — without pressure or jargon. You receive personalised guidance, transparent advice, and ongoing support tailored especially for families, first-time investors and women who want clarity, confidence, and compassionate support in their financial journey. We prioritise trust, long-term relationships, and helping you grow your wealth confidently and comfortably."
+    "investorEducation": {
+      "title": "Investor Education",
+      "description": "Clear explanations of mutual funds, risk, asset allocation, SIPs and market behaviour so that you can participate more confidently in your investment decisions."
     }
   },
   "contactUs": {

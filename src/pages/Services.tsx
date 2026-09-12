@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import PageBackground from "@/components/PageBackground";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { TrendingUp, Shield, Target, PiggyBank, LineChart } from "lucide-react";
+import { TrendingUp, Target, PiggyBank, LineChart, BookOpen } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const Services = () => {
@@ -14,14 +14,9 @@ const Services = () => {
       descriptionKey: "services.portfolioGrowth.description"
     },
     {
-      icon: Shield,
-      titleKey: "services.secureInvesting.title",
-      descriptionKey: "services.secureInvesting.description"
-    },
-    {
       icon: Target,
-      titleKey: "services.goalBasedPlanning.title",
-      descriptionKey: "services.goalBasedPlanning.description"
+      titleKey: "services.goalBasedInvesting.title",
+      descriptionKey: "services.goalBasedInvesting.description"
     },
     {
       icon: PiggyBank,
@@ -32,6 +27,11 @@ const Services = () => {
       icon: LineChart,
       titleKey: "services.portfolioMonitoring.title",
       descriptionKey: "services.portfolioMonitoring.description"
+    },
+    {
+      icon: BookOpen,
+      titleKey: "services.investorEducation.title",
+      descriptionKey: "services.investorEducation.description"
     }
   ];
 
@@ -73,18 +73,6 @@ const Services = () => {
             })}
           </div>
 
-          <div className="mt-16 text-center">
-            <Card className="max-w-3xl mx-auto bg-primary/5">
-              <CardContent className="pt-6">
-                <h2 className="text-2xl font-semibold text-primary mb-4">
-                  {t('services.whyChoose.title')}
-                </h2>
-                <p className="text-foreground/80 leading-relaxed">
-                  {t('services.whyChoose.description')}
-                </p>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </main>
     </div>
