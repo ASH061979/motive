@@ -172,6 +172,12 @@
     "title": "Disclaimer & Disclosures",
     "subtitle": "Important information about the website, its content, and your investments."
   },
+  "commissionDisclosure": {
+    "title": "Commission Disclosure",
+    "subtitle": "How MotivWealth receives trail commission on Regular Plan mutual fund investments.",
+    "amfiHeading": "AMFI - Commission Structure for Mutual Fund Distributors",
+    "amfiLink": "AMFI Commission Disclosure"
+  },
   "languageSelector": {
     "title": "Choose Your Language",
     "subtitle": "भाषा चुनें",

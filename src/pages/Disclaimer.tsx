@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import PageBackground from "@/components/PageBackground";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const sections = [
   {
@@ -80,6 +81,14 @@ const Disclaimer = () => {
                 <p className="text-foreground/80 leading-relaxed">
                   {section.content}
                 </p>
+                {section.link && (
+                  <Link
+                    to={section.link.href}
+                    className="inline-block mt-4 text-primary hover:underline font-medium"
+                  >
+                    {section.link.text}
+                  </Link>
+                )}
               </CardContent>
             </Card>
           ))}

@@ -172,6 +172,12 @@
     "title": "अस्वीकरण और प्रकटीकरण",
     "subtitle": "वेबसाइट, इसकी सामग्री और आपके निवेश के बारे में महत्वपूर्ण जानकारी।"
   },
+  "commissionDisclosure": {
+    "title": "कमीशन प्रकटीकरण",
+    "subtitle": "MotivWealth को नियमित योजना म्यूचुअल फंड निवेश पर ट्रेल कमीशन कैसे प्राप्त होता है।",
+    "amfiHeading": "AMFI - म्यूचुअल फंड वितरकों के लिए कमीशन संरचना",
+    "amfiLink": "AMFI कमीशन प्रकटीकरण"
+  },
   "languageSelector": {
     "title": "Choose Your Language",
     "subtitle": "भाषा चुनें",
