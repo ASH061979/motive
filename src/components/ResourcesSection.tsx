@@ -61,7 +61,7 @@ const ResourcesSection = () => {
             return (
               <div
                 key={index}
-                onClick={() => resource.dialogType === "regulatory" ? setOpenDialog("regulatory-intro") : setOpenDialog(resource.dialogType)}
+                onClick={() => setOpenDialog(resource.dialogType)}
                 className="text-center bg-white rounded-lg p-6 shadow-md transition-all duration-300 hover:shadow-[0_0_20px_rgba(251,191,36,0.4)] hover:border hover:border-emerald-600 cursor-pointer"
               >
                 <div className="mb-3 flex justify-center transition-transform duration-300 hover:scale-110">
