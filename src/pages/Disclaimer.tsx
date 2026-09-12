@@ -30,7 +30,8 @@ const sections = [
   },
   {
     title: "Regular Plans & Commission",
-    content: `When an investor invests in a Regular Plan through Meghna Prakash (Brand Name – MotivWealth), the relevant AMC may pay trail commission to Meghna Prakash in accordance with the AMC's prevailing commission structure and applicable regulations. See the Commission Disclosure page for further information. The information regarding trailing commissions is also available on respective AMCs' websites.`
+    content: `When an investor invests in a Regular Plan through Meghna Prakash (Brand Name – MotivWealth), the relevant AMC may pay trail commission to Meghna Prakash in accordance with the AMC's prevailing commission structure and applicable regulations. See the Commission Disclosure page for further information. The information regarding trailing commissions is also available on respective AMCs' websites.`,
+    link: { text: "View Commission Disclosure", href: "/commission-disclosure" }
   },
   {
     title: "External Links",
