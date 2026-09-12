@@ -125,7 +125,17 @@
     "supportGrievances": "सहायता और शिकायतें",
     "marketInsights": "बाजार अंतर्दृष्टि",
     "regulatoryResources": "नियामक संसाधन",
-    "calculatorsTools": "कैलकुलेटर और उपकरण"
+    "calculatorsTools": "कैलकुलेटर और उपकरण",
+    "transparencyFirst": "पारदर्शिता पहले",
+    "regulatoryIntro": "MotivWealth मानता है कि पारदर्शिता विश्वसनीय जानकारी तक आसान पहुंच से शुरू होती है। वितरक विवरण सत्यापित करने, म्यूचुअल फंड विनियमों को समझने और निवेशक संसाधनों तक पहुंचने के लिए नीचे दिए गए आधिकारिक लिंक का उपयोग करें।",
+    "regulatoryLinks": {
+      "verifyDistributor": "AMFI-पंजीकृत म्यूचुअल फंड वितरक की जांच करें",
+      "amfi": "AMFI - भारतीय म्यूचुअल फंड संघ",
+      "amfiInvestorCorner": "AMFI निवेशक कोना",
+      "amfiDistributorCorner": "AMFI वितरक कोना",
+      "amfiCirculars": "MFDs के लिए AMFI परिपत्र",
+      "sebi": "SEBI - भारतीय प्रतिभूति और विनिमय बोर्ड"
+    }
   },
   "footer": {
     "disclaimer": "MotivWealth मेघना प्रकाश द्वारा उपयोग किया जाने वाला ब्रांड नाम है, जो AMFI-पंजीकृत म्यूचुअल फंड वितरक हैं (ARN-330963 | EUIN-E628002)।",

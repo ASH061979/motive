@@ -125,7 +125,17 @@
     "supportGrievances": "Support & Grievances",
     "marketInsights": "Market Insights",
     "regulatoryResources": "Regulatory Resources",
-    "calculatorsTools": "Calculators & Tools"
+    "calculatorsTools": "Calculators & Tools",
+    "transparencyFirst": "Transparency First",
+    "regulatoryIntro": "MotivWealth believes transparency begins with easy access to reliable information. Use the official links below to verify distributor details, understand mutual fund regulations and access investor resources.",
+    "regulatoryLinks": {
+      "verifyDistributor": "Verify an AMFI-registered Mutual Fund Distributor",
+      "amfi": "AMFI - Association of Mutual Funds in India",
+      "amfiInvestorCorner": "AMFI Investor Corner",
+      "amfiDistributorCorner": "AMFI Distributor Corner",
+      "amfiCirculars": "AMFI Circulars for MFDs",
+      "sebi": "SEBI - Securities and Exchange Board of India"
+    }
   },
   "footer": {
     "disclaimer": "MotivWealth is the brand name used by Meghna Prakash, an AMFI-registered Mutual Fund Distributor (ARN-330963 | EUIN-E628002).",
