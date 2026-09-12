@@ -20,7 +20,6 @@ const BlogPost = () => {
             <Link to="/blogs">{t("blogs.backToBlogs")}</Link>
           </Button>
         </main>
-        <Footer />
       </div>
     );
   }
