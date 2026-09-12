@@ -1,16 +1,15 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 
 const Footer = () => {
   const { t } = useTranslation();
 
-  const links = [
-    { key: "footer.links.regulatory", to: "/resources" },
-    { key: "footer.links.disclaimerDisclosures", to: "/resources" },
-    { key: "footer.links.commissionDisclosure", to: "/resources" },
-    { key: "footer.links.privacyPolicy", to: "/resources" },
-    { key: "footer.links.termsOfUse", to: "/resources" },
-    { key: "footer.links.supportGrievances", to: "/contact-us" },
+  const linkLabels = [
+    t("footer.links.regulatory"),
+    t("footer.links.disclaimerDisclosures"),
+    t("footer.links.commissionDisclosure"),
+    t("footer.links.privacyPolicy"),
+    t("footer.links.termsOfUse"),
+    t("footer.links.supportGrievances"),
   ];
 
   return (
@@ -23,17 +22,16 @@ const Footer = () => {
           {t('footer.riskWarning')}
         </p>
 
-        <nav className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-2 max-w-2xl mx-auto text-sm">
-          {links.map((link) => (
-            <Link
-              key={link.key}
-              to={link.to}
-              className="text-foreground/80 hover:text-primary transition-colors"
-            >
-              {t(link.key)}
-            </Link>
+        <div className="flex flex-wrap justify-center gap-x-2 text-sm text-foreground/80 max-w-4xl mx-auto">
+          {linkLabels.map((label, index) => (
+            <span key={label} className="whitespace-nowrap">
+              {label}
+              {index < linkLabels.length - 1 && (
+                <span className="ml-2 text-foreground/50">|</span>
+              )}
+            </span>
           ))}
-        </nav>
+        </div>
 
         <p className="text-primary text-xs">
           {t('footer.developer')}
