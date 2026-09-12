@@ -12,9 +12,12 @@ const HeroSection = () => {
       <AuthDialog open={authDialogOpen} onOpenChange={setAuthDialogOpen} />
     <section className="py-20 md:py-32 bg-secondary" id="home">
       <div className="container mx-auto px-4 text-center">
-        <h1 className="text-4xl md:text-6xl font-bold text-primary mb-8 max-w-4xl mx-auto leading-tight">
+        <h1 className="text-4xl md:text-6xl font-bold text-primary mb-4 max-w-4xl mx-auto leading-tight">
           {t('hero.title')}
         </h1>
+        <p className="text-base md:text-lg text-foreground/80 max-w-3xl mx-auto mb-8">
+          {t('hero.subtitle')}
+        </p>
         
         <div className="flex justify-center items-center">
           <Button 
