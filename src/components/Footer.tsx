@@ -22,7 +22,7 @@ const Footer = () => {
           {t('footer.riskWarning')}
         </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-x-1 gap-y-1 text-sm text-primary">
+        <div className="flex flex-wrap items-center justify-center gap-x-1 gap-y-1 text-sm text-foreground/80">
           {linkKeys.map((key, idx) => (
             <span key={key}>
               {t(key)}
