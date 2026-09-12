@@ -168,22 +168,48 @@ const ResourcesSection = () => {
 
       {/* Support & Grievances Dialog */}
       <Dialog open={openDialog === "support"} onOpenChange={() => setOpenDialog(null)}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-lg max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold text-primary">{t('resources.supportGrievances')}</DialogTitle>
           </DialogHeader>
-          <div className="space-y-3 mt-4">
-            {supportLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block p-4 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary"
-              >
-                <p className="text-foreground font-medium">{link.title}</p>
-              </a>
-            ))}
+          <div className="space-y-6 mt-4">
+            <div>
+              <h4 className="font-semibold text-primary text-lg mb-2">{supportContent.introTitle}</h4>
+              <p className="text-foreground/80 leading-relaxed">{supportContent.introText}</p>
+            </div>
+
+            <div className="bg-card border border-border rounded-lg p-4 space-y-2">
+              <p className="font-medium text-foreground">{supportContent.contactName} | {supportContent.contactDesignation} | {supportContent.contactArnEuin}</p>
+              <p className="text-foreground/80"><span className="font-medium">E-mail:</span> <a href={`mailto:${supportContent.email}`} className="text-primary hover:underline">{supportContent.email}</a></p>
+              <p className="text-foreground/80"><span className="font-medium">Phone/WhatsApp:</span> {supportContent.phone}</p>
+              <p className="text-foreground/80"><span className="font-medium">Working hours:</span> {supportContent.workingHours}</p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-primary text-lg mb-3">{supportContent.escalationTitle}</h4>
+              <ul className="space-y-3 ml-4">
+                {supportContent.escalationLevels.map((level, index) => (
+                  <li key={index} className="flex items-start gap-2 text-foreground/80">
+                    <span className="text-primary mt-1">•</span>
+                    <span className="leading-relaxed">{level}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="space-y-3">
+              {supportContent.links.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block p-4 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary"
+                >
+                  <p className="text-foreground font-medium">{link.title}</p>
+                </a>
+              ))}
+            </div>
           </div>
         </DialogContent>
       </Dialog>
