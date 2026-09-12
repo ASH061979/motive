@@ -44,38 +44,14 @@ const AboutUs = () => {
                       <h4 className="text-xl font-semibold text-primary mb-4">
                         {t('aboutUs.credentials.title')}
                       </h4>
-                      <div className="overflow-x-auto">
-                        <table className="w-full border-collapse">
-                          <thead>
-                            <tr className="border-b border-border">
-                              <th className="text-left py-3 px-4 font-semibold text-foreground">{t('aboutUs.credentials.qualification')}</th>
-                              <th className="text-left py-3 px-4 font-semibold text-foreground">{t('aboutUs.credentials.details')}</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr className="border-b border-border/50">
-                              <td className="py-3 px-4">{t('aboutUs.credentials.amfi')}</td>
-                              <td className="py-3 px-4">{t('aboutUs.credentials.arnNumber')}</td>
-                            </tr>
-                            <tr className="border-b border-border/50">
-                              <td className="py-3 px-4">{t('aboutUs.credentials.nism')}</td>
-                              <td className="py-3 px-4">{t('aboutUs.credentials.nismDetails')}</td>
-                            </tr>
-                            <tr className="border-b border-border/50">
-                              <td className="py-3 px-4">{t('aboutUs.credentials.panIndia')}</td>
-                              <td className="py-3 px-4">{t('aboutUs.credentials.panIndiaDetails')}</td>
-                            </tr>
-                            <tr className="border-b border-border/50">
-                              <td className="py-3 px-4">{t('aboutUs.credentials.digital')}</td>
-                              <td className="py-3 px-4">{t('aboutUs.credentials.digitalDetails')}</td>
-                            </tr>
-                            <tr>
-                              <td className="py-3 px-4">{t('aboutUs.credentials.clients')}</td>
-                              <td className="py-3 px-4">{t('aboutUs.credentials.clientsDetails')}</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                      <ul className="space-y-2">
+                        {(t('aboutUs.credentials.items', { returnObjects: true }) as string[]).map((item, index) => (
+                          <li key={index} className="flex items-start">
+                            <span className="text-primary mr-2">•</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                     
                     <div className="mt-8 pt-6 border-t border-border">
