@@ -4,6 +4,14 @@ import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
+// Use a verified domain sender when available; Resend's onboarding address
+// only delivers to the Resend account owner, so a verified domain is required
+// to reliably reach meghna@motivewealth.in and other recipients.
+const FROM_EMAIL = Deno.env.get("RESEND_FROM_EMAIL") ||
+  "MotivWealth Contact Form <onboarding@resend.dev>";
+const FROM_CONFIRMATION = Deno.env.get("RESEND_FROM_EMAIL") ||
+  "MotivWealth <onboarding@resend.dev>";
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
