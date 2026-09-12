@@ -148,7 +148,7 @@ const handler = async (req: Request): Promise<Response> => {
           <div style="margin: 20px 0;">
             <p style="margin: 5px 0;"><strong>Phone:</strong> +65 8353 8647</p>
             <p style="margin: 5px 0;"><strong>Phone:</strong> +91 8130498071</p>
-            <p style="margin: 5px 0;"><strong>Email:</strong> motivwealth.in@gmail.com</p>
+            <p style="margin: 5px 0;"><strong>Email:</strong> meghna@motivewealth.in</p>
           </div>
 
           <p style="line-height: 1.6; color: #333; margin: 20px 0;">
