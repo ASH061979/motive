@@ -168,6 +168,10 @@
       "supportGrievances": "सहायता और शिकायतें"
     }
   },
+  "disclaimer": {
+    "title": "अस्वीकरण और प्रकटीकरण",
+    "subtitle": "वेबसाइट, इसकी सामग्री और आपके निवेश के बारे में महत्वपूर्ण जानकारी।"
+  },
   "languageSelector": {
     "title": "Choose Your Language",
     "subtitle": "भाषा चुनें",

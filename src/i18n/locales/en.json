@@ -168,6 +168,10 @@
       "supportGrievances": "Support & Grievances"
     }
   },
+  "disclaimer": {
+    "title": "Disclaimer & Disclosures",
+    "subtitle": "Important information about the website, its content, and your investments."
+  },
   "languageSelector": {
     "title": "Choose Your Language",
     "subtitle": "भाषा चुनें",
