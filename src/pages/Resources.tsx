@@ -110,49 +110,6 @@ const Resources = () => {
                 </ul>
               )}
 
-              {category.supportContent && (
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="font-semibold text-primary text-lg mb-2">{category.supportContent.introTitle}</h4>
-                    <p className="text-foreground/80 leading-relaxed">{category.supportContent.introText}</p>
-                  </div>
-
-                  <div className="bg-card border border-border rounded-lg p-4 space-y-2">
-                    <p className="font-medium text-foreground">{category.supportContent.contactName} | {category.supportContent.contactDesignation} | {category.supportContent.contactArnEuin}</p>
-                    <p className="text-foreground/80"><span className="font-medium">E-mail:</span> <a href={`mailto:${category.supportContent.email}`} className="text-primary hover:underline">{category.supportContent.email}</a></p>
-                    <p className="text-foreground/80"><span className="font-medium">Phone/WhatsApp:</span> {category.supportContent.phone}</p>
-                    <p className="text-foreground/80"><span className="font-medium">Working hours:</span> {category.supportContent.workingHours}</p>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold text-primary text-lg mb-3">{category.supportContent.escalationTitle}</h4>
-                    <ul className="space-y-3 ml-4">
-                      {category.supportContent.escalationLevels.map((level, levelIndex) => (
-                        <li key={levelIndex} className="flex items-start gap-2 text-foreground/80">
-                          <span className="text-primary mt-1">•</span>
-                          <span className="leading-relaxed">{level}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <ul className="space-y-3">
-                    {category.supportContent.links.map((link, linkIndex) => (
-                      <li key={linkIndex}>
-                        <a
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-start gap-2 text-foreground hover:text-primary transition-colors group"
-                        >
-                          <ExternalLink className="w-4 h-4 mt-1 flex-shrink-0 group-hover:text-primary" />
-                          <span>{link.name}</span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
                 
                 {category.subsections && (
                   <div className="space-y-6">
