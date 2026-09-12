@@ -73,18 +73,6 @@ const Services = () => {
             })}
           </div>
 
-          <div className="mt-16 text-center">
-            <Card className="max-w-3xl mx-auto bg-primary/5">
-              <CardContent className="pt-6">
-                <h2 className="text-2xl font-semibold text-primary mb-4">
-                  {t('services.whyChoose.title')}
-                </h2>
-                <p className="text-foreground/80 leading-relaxed">
-                  {t('services.whyChoose.description')}
-                </p>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </main>
     </div>
