@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound";
 import Blogs from "./pages/Blogs";
 import BlogPost from "./pages/BlogPost";
 import FloatingBadge from "./components/FloatingBadge";
+import Footer from "./components/Footer";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         <FloatingBadge />
+        <Footer />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

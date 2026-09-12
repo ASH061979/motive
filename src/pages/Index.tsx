@@ -3,7 +3,6 @@ import HeroSection from "@/components/HeroSection";
 import HowWeHelp from "@/components/HowWeHelp";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import ResourcesSection from "@/components/ResourcesSection";
-import Footer from "@/components/Footer";
 import LanguageSelector from "@/components/LanguageSelector";
 import PageBackground from "@/components/PageBackground";
 
@@ -19,7 +18,6 @@ const Index = () => {
         <WhyChooseUs />
         <ResourcesSection />
       </main>
-      <Footer />
     </div>
   );
 };
