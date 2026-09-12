@@ -7,11 +7,12 @@ const resourceCategories = [
   {
     title: "Regulatory",
     links: [
-      { name: "AMFI (Association of Mutual Funds in India)", url: "https://www.amfiindia.com" },
-      { name: "SEBI (Securities & Exchange Board of India)", url: "https://www.sebi.gov.in" },
-      { name: "SEBI SCORES – Investor Complaint Portal", url: "https://scores.sebi.gov.in" },
-      { name: "NSE NMF II Platform Login", url: "https://www.nsenmf.com" },
-      { name: "BSE Star MF Login", url: "https://www.bseindia.com/mfunds" },
+      { name: "Verify an AMFI-registered Mutual Fund Distributor", url: "https://www.amfiindia.com/locate-distributor" },
+      { name: "AMFI - Association of Mutual Funds in India", url: "https://www.amfiindia.com" },
+      { name: "AMFI Investor Corner", url: "https://www.amfiindia.com/investor-corner" },
+      { name: "AMFI Distributor Corner", url: "https://www.amfiindia.com/distributor-corner" },
+      { name: "AMFI Circulars for MFDs", url: "https://www.amfiindia.com/distributor/amfi-circulars" },
+      { name: "SEBI", url: "https://www.sebi.gov.in" },
     ]
   },
   {
