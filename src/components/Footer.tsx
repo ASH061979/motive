@@ -10,7 +10,7 @@ const Footer = () => {
     { key: "footer.links.commissionDisclosure", to: "/resources" },
     { key: "footer.links.privacyPolicy", to: "/resources" },
     { key: "footer.links.termsOfUse", to: "/resources" },
-    { key: "footer.links.supportGrievances", to: "/contact" },
+    { key: "footer.links.supportGrievances", to: "/contact-us" },
   ];
 
   return (
