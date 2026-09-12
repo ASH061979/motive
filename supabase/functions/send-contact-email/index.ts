@@ -31,6 +31,20 @@ const contactSchema = z.object({
     .trim()
     .email("Invalid email address")
     .max(255, "Email must be less than 255 characters"),
+  mobile: z.string()
+    .trim()
+    .min(1, "Mobile / WhatsApp is required")
+    .max(30, "Mobile number must be less than 30 characters")
+    .regex(/^[\d\s\+\-\(\)]+$/, "Mobile number contains invalid characters"),
+  cityCountry: z.string()
+    .trim()
+    .min(1, "City / Country is required")
+    .max(100, "City / Country must be less than 100 characters")
+    .regex(/^[a-zA-Z0-9\s,\-'.()]+$/, "City / Country contains invalid characters"),
+  helpTopic: z.string()
+    .trim()
+    .min(1, "Help topic is required")
+    .max(50, "Help topic must be less than 50 characters"),
   message: z.string()
     .trim()
     .min(1, "Message is required")
@@ -45,25 +59,25 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     const body = await req.json();
-    
+
     // Validate input
     const validationResult = contactSchema.safeParse(body);
-    
+
     if (!validationResult.success) {
       console.error("Validation error:", validationResult.error.errors);
       return new Response(
-        JSON.stringify({ 
+        JSON.stringify({
           error: "Invalid input",
-          details: validationResult.error.errors 
+          details: validationResult.error.errors,
         }),
         {
           status: 400,
           headers: { "Content-Type": "application/json", ...corsHeaders },
-        }
+        },
       );
     }
 
-    const { name, email, message } = validationResult.data;
+    const { name, email, mobile, cityCountry, helpTopic, message } = validationResult.data;
 
     console.log("Processing contact form submission from:", name);
 
@@ -78,19 +92,22 @@ const handler = async (req: Request): Promise<Response> => {
           <h2 style="color: #333; border-bottom: 2px solid #4CAF50; padding-bottom: 10px;">
             New Contact Form Submission
           </h2>
-          
+
           <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0;">
             <p style="margin: 10px 0;"><strong>From:</strong> ${escapeHtml(name)}</p>
             <p style="margin: 10px 0;"><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
+            <p style="margin: 10px 0;"><strong>Mobile / WhatsApp:</strong> ${escapeHtml(mobile)}</p>
+            <p style="margin: 10px 0;"><strong>City / Country:</strong> ${escapeHtml(cityCountry)}</p>
+            <p style="margin: 10px 0;"><strong>I would like help with:</strong> ${escapeHtml(helpTopic)}</p>
           </div>
-          
+
           <div style="margin: 20px 0;">
             <h3 style="color: #555;">Message:</h3>
             <p style="line-height: 1.6; color: #666; white-space: pre-wrap;">${escapeHtml(message)}</p>
           </div>
-          
+
           <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
-          
+
           <p style="color: #999; font-size: 12px;">
             This email was sent from the MotivWealth contact form.
           </p>
@@ -110,37 +127,37 @@ const handler = async (req: Request): Promise<Response> => {
           <h2 style="color: #4CAF50; border-bottom: 2px solid #4CAF50; padding-bottom: 10px;">
             Thank You for Contacting MotivWealth
           </h2>
-          
+
           <p style="line-height: 1.6; color: #333; margin: 20px 0;">
             Dear ${escapeHtml(name)},
           </p>
-          
+
           <p style="line-height: 1.6; color: #333; margin: 20px 0;">
             We have received your message and appreciate you reaching out to us. Our team will review your inquiry and respond within <strong>24 hours</strong>.
           </p>
-          
+
           <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0;">
             <h3 style="color: #555; margin-top: 0;">Your Message:</h3>
             <p style="line-height: 1.6; color: #666; white-space: pre-wrap;">${escapeHtml(message)}</p>
           </div>
-          
+
           <p style="line-height: 1.6; color: #333; margin: 20px 0;">
             If you have any urgent matters, please feel free to call us at:
           </p>
-          
+
           <div style="margin: 20px 0;">
             <p style="margin: 5px 0;"><strong>Phone:</strong> +65 8353 8647</p>
             <p style="margin: 5px 0;"><strong>Phone:</strong> +91 8130498071</p>
             <p style="margin: 5px 0;"><strong>Email:</strong> motivwealth.in@gmail.com</p>
           </div>
-          
+
           <p style="line-height: 1.6; color: #333; margin: 20px 0;">
             Best regards,<br>
             <strong>The MotivWealth Team</strong>
           </p>
-          
+
           <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
-          
+
           <p style="color: #999; font-size: 12px;">
             This is an automated confirmation email. Please do not reply to this message.
           </p>
@@ -150,9 +167,9 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("User confirmation email sent successfully:", userEmailResponse);
 
-    return new Response(JSON.stringify({ 
-      teamEmail: teamEmailResponse, 
-      userEmail: userEmailResponse 
+    return new Response(JSON.stringify({
+      teamEmail: teamEmailResponse,
+      userEmail: userEmailResponse,
     }), {
       status: 200,
       headers: {
@@ -167,7 +184,7 @@ const handler = async (req: Request): Promise<Response> => {
       {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
-      }
+      },
     );
   }
 };
