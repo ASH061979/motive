@@ -178,6 +178,10 @@
     "amfiHeading": "AMFI - म्यूचुअल फंड वितरकों के लिए कमीशन संरचना",
     "amfiLink": "AMFI कमीशन प्रकटीकरण"
   },
+  "privacyPolicy": {
+    "title": "गोपनीयता नीति",
+    "subtitle": "MotivWealth आपकी व्यक्तिगत जानकारी कैसे एकत्रित, उपयोग और सुरक्षित करता है।"
+  },
   "languageSelector": {
     "title": "Choose Your Language",
     "subtitle": "भाषा चुनें",
