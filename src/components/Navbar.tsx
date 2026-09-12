@@ -77,7 +77,7 @@ const Navbar = () => {
         <div className="flex flex-col items-start -space-y-2">
           <img src={logo} alt="MotivWealth Logo" className="h-36 object-contain" />
           <span className="text-[10px] sm:text-xs md:text-sm font-medium text-foreground whitespace-nowrap italic">
-            Invest with Clarity. Build with Confidence
+            Motivating India to Grow Wealth Wisely
           </span>
         </div>
         
