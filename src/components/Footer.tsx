@@ -35,8 +35,6 @@ const Footer = () => {
           ))}
         </nav>
 
-        <div className="border-t border-border w-full" />
-
         <p className="text-primary text-xs">
           {t('footer.developer')}
         </p>
