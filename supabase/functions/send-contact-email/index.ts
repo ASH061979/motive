@@ -91,7 +91,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send email to MotivWealth team with the contact form details
     const teamEmailResponse = await resend.emails.send({
-      from: "MotivWealth Contact Form <onboarding@resend.dev>",
+      from: FROM_EMAIL,
       to: ["meghna@motivewealth.in"],
       reply_to: email,
       subject: `New Contact Form Message from ${name}`,
@@ -123,62 +123,88 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    console.log("Team email sent successfully:", teamEmailResponse);
+    if (teamEmailResponse.error) {
+      console.error("Team email failed:", teamEmailResponse.error);
+      return new Response(
+        JSON.stringify({
+          error: "Failed to send message to MotivWealth",
+          details: teamEmailResponse.error,
+        }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        },
+      );
+    }
 
-    // Send confirmation email to the user
-    const userEmailResponse = await resend.emails.send({
-      from: "MotivWealth <onboarding@resend.dev>",
-      to: [email],
-      bcc: ["meghna@motivewealth.in"],
-      subject: "We've Received Your Message - MotivWealth",
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #4CAF50; border-bottom: 2px solid #4CAF50; padding-bottom: 10px;">
-            Thank You for Contacting MotivWealth
-          </h2>
+    console.log("Team email sent successfully:", teamEmailResponse.data);
 
-          <p style="line-height: 1.6; color: #333; margin: 20px 0;">
-            Dear ${escapeHtml(name)},
-          </p>
+    // Send confirmation email to the user; this is secondary, so a failure
+    // here should not make the whole request fail once the team email is sent.
+    let userEmailResponse = null;
+    try {
+      userEmailResponse = await resend.emails.send({
+        from: FROM_CONFIRMATION,
+        to: [email],
+        bcc: ["meghna@motivewealth.in"],
+        subject: "We've Received Your Message - MotivWealth",
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #4CAF50; border-bottom: 2px solid #4CAF50; padding-bottom: 10px;">
+              Thank You for Contacting MotivWealth
+            </h2>
 
-          <p style="line-height: 1.6; color: #333; margin: 20px 0;">
-            We have received your message and appreciate you reaching out to us. Our team will review your inquiry and respond within <strong>24 hours</strong>.
-          </p>
+            <p style="line-height: 1.6; color: #333; margin: 20px 0;">
+              Dear ${escapeHtml(name)},
+            </p>
 
-          <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0;">
-            <h3 style="color: #555; margin-top: 0;">Your Message:</h3>
-            <p style="line-height: 1.6; color: #666; white-space: pre-wrap;">${escapeHtml(message)}</p>
+            <p style="line-height: 1.6; color: #333; margin: 20px 0;">
+              We have received your message and appreciate you reaching out to us. Our team will review your inquiry and respond within <strong>24 hours</strong>.
+            </p>
+
+            <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0;">
+              <h3 style="color: #555; margin-top: 0;">Your Message:</h3>
+              <p style="line-height: 1.6; color: #666; white-space: pre-wrap;">${escapeHtml(message)}</p>
+            </div>
+
+            <p style="line-height: 1.6; color: #333; margin: 20px 0;">
+              If you have any urgent matters, please feel free to call us at:
+            </p>
+
+            <div style="margin: 20px 0;">
+              <p style="margin: 5px 0;"><strong>Phone:</strong> +65 8353 8647</p>
+              <p style="margin: 5px 0;"><strong>Phone:</strong> +91 8130498071</p>
+              <p style="margin: 5px 0;"><strong>Email:</strong> meghna@motivewealth.in</p>
+            </div>
+
+            <p style="line-height: 1.6; color: #333; margin: 20px 0;">
+              Best regards,<br>
+              <strong>The MotivWealth Team</strong>
+            </p>
+
+            <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
+
+            <p style="color: #999; font-size: 12px;">
+              This is an automated confirmation email. Please do not reply to this message.
+            </p>
           </div>
+        `,
+      });
 
-          <p style="line-height: 1.6; color: #333; margin: 20px 0;">
-            If you have any urgent matters, please feel free to call us at:
-          </p>
-
-          <div style="margin: 20px 0;">
-            <p style="margin: 5px 0;"><strong>Phone:</strong> +65 8353 8647</p>
-            <p style="margin: 5px 0;"><strong>Phone:</strong> +91 8130498071</p>
-            <p style="margin: 5px 0;"><strong>Email:</strong> meghna@motivewealth.in</p>
-          </div>
-
-          <p style="line-height: 1.6; color: #333; margin: 20px 0;">
-            Best regards,<br>
-            <strong>The MotivWealth Team</strong>
-          </p>
-
-          <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
-
-          <p style="color: #999; font-size: 12px;">
-            This is an automated confirmation email. Please do not reply to this message.
-          </p>
-        </div>
-      `,
-    });
-
-    console.log("User confirmation email sent successfully:", userEmailResponse);
+      if (userEmailResponse.error) {
+        console.error("User confirmation email failed:", userEmailResponse.error);
+      } else {
+        console.log("User confirmation email sent successfully:", userEmailResponse.data);
+      }
+    } catch (userEmailError) {
+      console.error("User confirmation email threw an error:", userEmailError);
+    }
 
     return new Response(JSON.stringify({
-      teamEmail: teamEmailResponse,
-      userEmail: userEmailResponse,
+      success: true,
+      teamEmail: teamEmailResponse.data,
+      userEmail: userEmailResponse?.data || null,
+      userEmailError: userEmailResponse?.error || null,
     }), {
       status: 200,
       headers: {
