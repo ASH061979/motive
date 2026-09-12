@@ -14,6 +14,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 import Blogs from "./pages/Blogs";
 import BlogPost from "./pages/BlogPost";
+import Disclaimer from "./pages/Disclaimer";
 import FloatingBadge from "./components/FloatingBadge";
 import Footer from "./components/Footer";
 
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blogs/:slug" element={<BlogPost />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
