@@ -56,30 +56,6 @@ const resourceCategories = [
     ]
   },
   {
-    title: "Support & Grievances",
-    supportContent: {
-      introTitle: "We're Here to Help",
-      introText: "Have a question regarding your mutual fund investment, transaction or service request? Please contact MotivWealth first and we will be happy to assist.",
-      contactName: "Meghna Prakash",
-      contactDesignation: "AMFI-registered Mutual Fund Distributor",
-      contactArnEuin: "ARN-330963 | EUIN-E628002",
-      email: "meghna@motivewealth.in",
-      phone: "+91-8130498071 and +65-83538647",
-      workingHours: "10:00 am - 06:00 pm (IST)",
-      escalationTitle: "Grievance Escalation",
-      escalationLevels: [
-        "Level 1 - MotivWealth: Raise the service issue with Meghna / MotivWealth and retain the email or ticket reference.",
-        "Level 2 - Concerned Mutual Fund / AMC / RTA: For scheme or transaction-related issues, contact the relevant AMC or its investor service centre / RTA.",
-        "Level 3 - SEBI SCORES: If the grievance relates to a SEBI-regulated entity and remains unresolved, use the official SCORES portal as applicable."
-      ],
-      links: [
-        { name: "SEBI SCORES - Official SEBI Complaint Redressal System", url: "https://scores.sebi.gov.in" },
-        { name: "CAMS Investor Grievances - For mutual funds serviced through CAMS", url: "https://www.camsonline.com" },
-        { name: "AMFI - Official AMFI website; use Investor Corner for mutual fund investor information", url: "https://www.amfiindia.com" }
-      ]
-    }
-  },
-  {
     title: "Market Insights",
     links: [
       { name: "Economic Times Markets", url: "https://economictimes.indiatimes.com/markets" },
