@@ -68,12 +68,27 @@ const resourceCategories = [
   },
   {
     title: "Support & Grievances",
-    links: [
-      { name: "AMFI Grievance Redressal", url: "https://www.amfiindia.com/investor-corner/investor-grievance" },
-      { name: "SEBI SCORES Complaint Portal", url: "https://scores.sebi.gov.in" },
-      { name: "KFinTech Investor Support", url: "https://mfs.kfintech.com" },
-      { name: "CAMS Investor Support", url: "https://www.camsonline.com" },
-    ]
+    supportContent: {
+      introTitle: "We're Here to Help",
+      introText: "Have a question regarding your mutual fund investment, transaction or service request? Please contact MotivWealth first and we will be happy to assist.",
+      contactName: "Meghna Prakash",
+      contactDesignation: "AMFI-registered Mutual Fund Distributor",
+      contactArnEuin: "ARN-330963 | EUIN-E628002",
+      email: "meghna@motivewealth.in",
+      phone: "+91-8130498071 and +65-83538647",
+      workingHours: "10:00 am - 06:00 pm (IST)",
+      escalationTitle: "Grievance Escalation",
+      escalationLevels: [
+        "Level 1 - MotivWealth: Raise the service issue with Meghna / MotivWealth and retain the email or ticket reference.",
+        "Level 2 - Concerned Mutual Fund / AMC / RTA: For scheme or transaction-related issues, contact the relevant AMC or its investor service centre / RTA.",
+        "Level 3 - SEBI SCORES: If the grievance relates to a SEBI-regulated entity and remains unresolved, use the official SCORES portal as applicable."
+      ],
+      links: [
+        { name: "SEBI SCORES - Official SEBI Complaint Redressal System", url: "https://scores.sebi.gov.in" },
+        { name: "CAMS Investor Grievances - For mutual funds serviced through CAMS", url: "https://www.camsonline.com" },
+        { name: "AMFI - Official AMFI website; use Investor Corner for mutual fund investor information", url: "https://www.amfiindia.com" }
+      ]
+    }
   },
   {
     title: "Market Insights",
@@ -108,9 +123,52 @@ const Resources = () => {
                 )}
               </CardHeader>
               <CardContent>
-                {category.links && (
+              {category.links && (
+                <ul className="space-y-3">
+                  {category.links.map((link, linkIndex) => (
+                    <li key={linkIndex}>
+                      <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-start gap-2 text-foreground hover:text-primary transition-colors group"
+                      >
+                        <ExternalLink className="w-4 h-4 mt-1 flex-shrink-0 group-hover:text-primary" />
+                        <span>{link.name}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {category.supportContent && (
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="font-semibold text-primary text-lg mb-2">{category.supportContent.introTitle}</h4>
+                    <p className="text-foreground/80 leading-relaxed">{category.supportContent.introText}</p>
+                  </div>
+
+                  <div className="bg-card border border-border rounded-lg p-4 space-y-2">
+                    <p className="font-medium text-foreground">{category.supportContent.contactName} | {category.supportContent.contactDesignation} | {category.supportContent.contactArnEuin}</p>
+                    <p className="text-foreground/80"><span className="font-medium">E-mail:</span> <a href={`mailto:${category.supportContent.email}`} className="text-primary hover:underline">{category.supportContent.email}</a></p>
+                    <p className="text-foreground/80"><span className="font-medium">Phone/WhatsApp:</span> {category.supportContent.phone}</p>
+                    <p className="text-foreground/80"><span className="font-medium">Working hours:</span> {category.supportContent.workingHours}</p>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold text-primary text-lg mb-3">{category.supportContent.escalationTitle}</h4>
+                    <ul className="space-y-3 ml-4">
+                      {category.supportContent.escalationLevels.map((level, levelIndex) => (
+                        <li key={levelIndex} className="flex items-start gap-2 text-foreground/80">
+                          <span className="text-primary mt-1">•</span>
+                          <span className="leading-relaxed">{level}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
                   <ul className="space-y-3">
-                    {category.links.map((link, linkIndex) => (
+                    {category.supportContent.links.map((link, linkIndex) => (
                       <li key={linkIndex}>
                         <a
                           href={link.url}
@@ -124,7 +182,8 @@ const Resources = () => {
                       </li>
                     ))}
                   </ul>
-                )}
+                </div>
+              )}
                 
                 {category.subsections && (
                   <div className="space-y-6">
