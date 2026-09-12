@@ -16,6 +16,7 @@ import Blogs from "./pages/Blogs";
 import BlogPost from "./pages/BlogPost";
 import Disclaimer from "./pages/Disclaimer";
 import CommissionDisclosure from "./pages/CommissionDisclosure";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import FloatingBadge from "./components/FloatingBadge";
 import Footer from "./components/Footer";
 
@@ -40,6 +41,7 @@ const App = () => (
           <Route path="/blogs/:slug" element={<BlogPost />} />
           <Route path="/disclaimer" element={<Disclaimer />} />
           <Route path="/commission-disclosure" element={<CommissionDisclosure />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
