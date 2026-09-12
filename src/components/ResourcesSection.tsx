@@ -61,7 +61,7 @@ const ResourcesSection = () => {
             return (
               <div
                 key={index}
-                onClick={() => resource.dialogType === "regulatory" ? setOpenDialog("regulatory-intro") : setOpenDialog(resource.dialogType)}
+                onClick={() => setOpenDialog(resource.dialogType)}
                 className="text-center bg-white rounded-lg p-6 shadow-md transition-all duration-300 hover:shadow-[0_0_20px_rgba(251,191,36,0.4)] hover:border hover:border-emerald-600 cursor-pointer"
               >
                 <div className="mb-3 flex justify-center transition-transform duration-300 hover:scale-110">
@@ -76,8 +76,8 @@ const ResourcesSection = () => {
         </div>
       </div>
 
-      {/* Regulatory Intro Dialog */}
-      <Dialog open={openDialog === "regulatory-intro"} onOpenChange={(isOpen) => { if (!isOpen) setOpenDialog("regulatory"); }}>
+      {/* Regulatory Dialog */}
+      <Dialog open={openDialog === "regulatory"} onOpenChange={() => setOpenDialog(null)}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold text-primary">{t('resources.transparencyFirst')}</DialogTitle>
@@ -85,16 +85,7 @@ const ResourcesSection = () => {
           <p className="text-foreground/80 mt-4 leading-relaxed">
             {t('resources.regulatoryIntro')}
           </p>
-        </DialogContent>
-      </Dialog>
-
-      {/* Regulatory Links Dialog */}
-      <Dialog open={openDialog === "regulatory"} onOpenChange={() => setOpenDialog(null)}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-primary">{t('resources.regulatoryResources')}</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-3 mt-4">
+          <div className="space-y-3 mt-6">
             {regulatoryLinks.map((link, index) => (
               <a
                 key={index}
