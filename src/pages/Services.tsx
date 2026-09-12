@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import PageBackground from "@/components/PageBackground";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { TrendingUp, Shield, Target, PiggyBank, LineChart } from "lucide-react";
+import { TrendingUp, Target, PiggyBank, LineChart, BookOpen } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const Services = () => {
@@ -14,14 +14,9 @@ const Services = () => {
       descriptionKey: "services.portfolioGrowth.description"
     },
     {
-      icon: Shield,
-      titleKey: "services.secureInvesting.title",
-      descriptionKey: "services.secureInvesting.description"
-    },
-    {
       icon: Target,
-      titleKey: "services.goalBasedPlanning.title",
-      descriptionKey: "services.goalBasedPlanning.description"
+      titleKey: "services.goalBasedInvesting.title",
+      descriptionKey: "services.goalBasedInvesting.description"
     },
     {
       icon: PiggyBank,
@@ -32,6 +27,11 @@ const Services = () => {
       icon: LineChart,
       titleKey: "services.portfolioMonitoring.title",
       descriptionKey: "services.portfolioMonitoring.description"
+    },
+    {
+      icon: BookOpen,
+      titleKey: "services.investorEducation.title",
+      descriptionKey: "services.investorEducation.description"
     }
   ];
 
