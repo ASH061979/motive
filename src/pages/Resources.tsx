@@ -5,17 +5,6 @@ import { ExternalLink } from "lucide-react";
 
 const resourceCategories = [
   {
-    title: "Regulatory",
-    links: [
-      { name: "Verify an AMFI-registered Mutual Fund Distributor", url: "https://www.amfiindia.com/locate-distributor" },
-      { name: "AMFI - Association of Mutual Funds in India", url: "https://www.amfiindia.com" },
-      { name: "AMFI Investor Corner", url: "https://www.amfiindia.com/investor" },
-      { name: "AMFI Distributor Corner", url: "https://www.amfiindia.com/distributor-corner" },
-      { name: "AMFI Circulars for MFDs", url: "https://www.amfiindia.com/distributor/amfi-circulars" },
-      { name: "SEBI", url: "https://www.sebi.gov.in" },
-    ]
-  },
-  {
     title: "Investor Education",
     links: [
       { name: "AMFI Investor Corner", url: "https://www.amfiindia.com/investor" },
