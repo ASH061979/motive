@@ -11,7 +11,7 @@ import {
 const regulatoryLinks = [
   { titleKey: "resources.regulatoryLinks.verifyDistributor", url: "https://www.amfiindia.com/locate-distributor" },
   { titleKey: "resources.regulatoryLinks.amfi", url: "https://www.amfiindia.com" },
-  { titleKey: "resources.regulatoryLinks.amfiInvestorCorner", url: "https://www.amfiindia.com/investor-corner" },
+  { titleKey: "resources.regulatoryLinks.amfiInvestorCorner", url: "https://www.amfiindia.com/investor" },
   { titleKey: "resources.regulatoryLinks.amfiDistributorCorner", url: "https://www.amfiindia.com/distributor-corner" },
   { titleKey: "resources.regulatoryLinks.amfiCirculars", url: "https://www.amfiindia.com/distributor/amfi-circulars" },
   { titleKey: "resources.regulatoryLinks.sebi", url: "https://www.sebi.gov.in" },
