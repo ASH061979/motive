@@ -74,9 +74,9 @@ const Navbar = () => {
     <header className="bg-background/95 backdrop-blur shadow-sm rounded-b-xl mx-auto max-w-6xl">
       <nav className="px-6 py-4 flex items-center justify-between">
 
-        <div className="flex flex-col items-start -space-y-2">
+        <div className="flex flex-col items-start -space-y-3">
           <img src={logo} alt="MotivWealth Logo" className="h-36 object-contain" />
-          <span className="text-[10px] sm:text-xs md:text-sm font-medium text-foreground whitespace-nowrap italic">
+          <span className="text-[9px] sm:text-[10px] md:text-xs font-medium text-foreground whitespace-nowrap italic">
             Motivating India to Grow Wealth Wisely
           </span>
         </div>
