@@ -1,5 +1,4 @@
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import PageBackground from "@/components/PageBackground";
 import { useTranslation } from "react-i18next";
 import { useParams, Link } from "react-router-dom";
@@ -97,7 +96,6 @@ const BlogPost = () => {
           </div>
         </article>
       </main>
-      <Footer />
     </div>
   );
 };

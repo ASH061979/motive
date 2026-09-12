@@ -128,9 +128,17 @@
     "calculatorsTools": "Calculators & Tools"
   },
   "footer": {
-    "disclaimer": "MotivWealth is the brand name used by Meghna Prakash, AMFI Registered Mutual Fund Distributor; ARN-330963, EUIN-E628002",
-    "riskWarning": "Mutual Fund Investments are subject to market risks. Read all scheme related documents carefully.",
-    "developer": "Website developed by Agastya Balaji"
+    "disclaimer": "MotivWealth is the brand name used by Meghna Prakash, an AMFI-registered Mutual Fund Distributor (ARN-330963 | EUIN-E628002).",
+    "riskWarning": "Mutual Fund investments are subject to market risks. Read all scheme-related documents carefully.",
+    "developer": "Website Developed by Agastya Balaji",
+    "links": {
+      "regulatory": "Regulatory",
+      "disclaimerDisclosures": "Disclaimer & Disclosures",
+      "commissionDisclosure": "Commission Disclosure",
+      "privacyPolicy": "Privacy Policy",
+      "termsOfUse": "Terms of Use",
+      "supportGrievances": "Support & Grievances"
+    }
   },
   "languageSelector": {
     "title": "Choose Your Language",
