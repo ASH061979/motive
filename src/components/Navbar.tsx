@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/motivwealth-full-logo.png";
+import logoAsset from "@/assets/motivwealth-full-logo.png.asset.json";
+const logo = logoAsset.url;
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
