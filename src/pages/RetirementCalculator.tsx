@@ -464,16 +464,22 @@ const RetirementCalculator = () => {
                 </h3>
                 <div className="flex flex-col md:flex-row items-stretch md:items-center justify-center gap-2">
                   {journey.map((stage, idx) => (
-                    <div key={stage.label} className="flex items-center gap-2">
-                      <div className="flex-1 md:flex-none md:w-32 rounded-lg border border-primary/20 bg-background px-3 py-3 text-center">
-                        <p className="text-[10px] font-semibold tracking-wide text-primary/80">
+                    <div key={stage.label} className="flex items-center gap-2 md:flex-1 md:min-w-0">
+                      <div className="flex-1 md:min-w-0 rounded-lg border border-primary/20 bg-background px-2 py-3 text-center">
+                        <p className="text-[10px] font-semibold tracking-wide text-primary/80 leading-tight">
                           {stage.label}
                         </p>
-                        <p className="text-sm font-bold text-foreground mt-1">{stage.headline}</p>
+                        <p className="text-xs font-bold text-foreground mt-1 break-words">
+                          {stage.headline}
+                        </p>
                         {stage.value && (
-                          <p className="text-sm font-semibold text-foreground">{stage.value}</p>
+                          <p className="text-xs font-semibold text-foreground break-words">
+                            {stage.value}
+                          </p>
                         )}
-                        <p className="text-[10px] text-foreground/50 mt-1">{stage.caption}</p>
+                        <p className="text-[10px] text-foreground/50 mt-1 leading-tight">
+                          {stage.caption}
+                        </p>
                       </div>
                       {idx < journey.length - 1 && (
                         <>
