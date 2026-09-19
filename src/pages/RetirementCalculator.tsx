@@ -457,41 +457,6 @@ const RetirementCalculator = () => {
                 )}
               </div>
 
-              {/* Your Retirement Journey */}
-              <div className="pt-2">
-                <h3 className="text-sm font-semibold text-primary mb-4 text-center">
-                  Your Retirement Journey
-                </h3>
-                <div className="flex flex-col md:flex-row items-stretch md:items-center justify-center gap-2">
-                  {journey.map((stage, idx) => (
-                    <div key={stage.label} className="flex items-center gap-2 md:flex-1 md:min-w-0">
-                      <div className="flex-1 md:min-w-0 rounded-lg border border-primary/20 bg-background px-2 py-3 text-center">
-                        <p className="text-[10px] font-semibold tracking-wide text-primary/80 leading-tight">
-                          {stage.label}
-                        </p>
-                        <p className="text-xs font-bold text-foreground mt-1 break-words">
-                          {stage.headline}
-                        </p>
-                        {stage.value && (
-                          <p className="text-xs font-semibold text-foreground break-words">
-                            {stage.value}
-                          </p>
-                        )}
-                        <p className="text-[10px] text-foreground/50 mt-1 leading-tight">
-                          {stage.caption}
-                        </p>
-                      </div>
-                      {idx < journey.length - 1 && (
-                        <>
-                          <ArrowRight className="hidden md:block h-4 w-4 shrink-0 text-primary/50" />
-                          <ArrowDown className="md:hidden h-4 w-4 shrink-0 text-primary/50 self-center" />
-                        </>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
               {/* Assumptions Used */}
               <div className="border-t border-border pt-4">
                 <button
@@ -542,6 +507,44 @@ const RetirementCalculator = () => {
             </CardContent>
           </Card>
         </div>
+
+        {/* Your Retirement Journey */}
+        <Card className="border-primary/20 mt-8">
+          <CardContent className="pt-6">
+            <h3 className="text-lg font-semibold text-primary mb-6 text-center">
+              Your Retirement Journey
+            </h3>
+            <div className="flex flex-col md:flex-row items-center md:items-stretch justify-center gap-3">
+              {journey.map((stage, idx) => (
+                <div
+                  key={stage.label}
+                  className="flex flex-col md:flex-row items-center gap-3 md:flex-1 md:min-w-0"
+                >
+                  <div className="w-full md:flex-1 md:min-w-0 rounded-lg border border-primary/20 bg-background px-3 py-4 text-center">
+                    <p className="text-[11px] font-semibold tracking-wide text-primary/80">
+                      {stage.label}
+                    </p>
+                    <p className="text-sm font-bold text-foreground mt-1 break-words">
+                      {stage.headline}
+                    </p>
+                    {stage.value && (
+                      <p className="text-sm font-semibold text-foreground break-words">
+                        {stage.value}
+                      </p>
+                    )}
+                    <p className="text-[11px] text-foreground/50 mt-1">{stage.caption}</p>
+                  </div>
+                  {idx < journey.length - 1 && (
+                    <>
+                      <ArrowRight className="hidden md:block h-4 w-4 shrink-0 text-primary/50" />
+                      <ArrowDown className="md:hidden h-4 w-4 shrink-0 text-primary/50" />
+                    </>
+                  )}
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
 
         <p className="text-sm text-foreground/60 italic mt-8 leading-relaxed">
           This retirement calculator is for illustration and investor education only. Results are
