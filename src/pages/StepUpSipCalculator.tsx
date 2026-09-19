@@ -15,6 +15,7 @@ const StepUpSipCalculator = () => {
   const [stepUp, setStepUp] = useState(10);
   const [annualReturn, setAnnualReturn] = useState(12);
   const [years, setYears] = useState(10);
+  const [showFullSchedule, setShowFullSchedule] = useState(false);
 
   const { invested, gain, futureValue, finalYearSip, schedule } = useMemo(() => {
     const n = Math.round(years * 12);
@@ -231,7 +232,7 @@ const StepUpSipCalculator = () => {
           <CardContent className="pt-6">
             <h2 className="text-xl font-bold text-primary mb-4">Year-by-Year SIP Schedule</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-              {schedule.map((item) => (
+              {(years <= 10 || showFullSchedule ? schedule : schedule.slice(0, 10)).map((item) => (
                 <div
                   key={item.year}
                   className="rounded-lg border border-border bg-card px-3 py-2 text-center"
@@ -243,6 +244,17 @@ const StepUpSipCalculator = () => {
                 </div>
               ))}
             </div>
+            {years > 10 && (
+              <div className="mt-4 text-center">
+                <button
+                  type="button"
+                  onClick={() => setShowFullSchedule((s) => !s)}
+                  className="text-sm font-medium text-primary underline-offset-4 hover:underline"
+                >
+                  {showFullSchedule ? "Show First 10 Years" : "View Full Schedule"}
+                </button>
+              </div>
+            )}
           </CardContent>
         </Card>
 
