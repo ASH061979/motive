@@ -24,7 +24,8 @@ const investorEducationLinks = [
 ];
 
 const calculatorLinks = [
-  { title: "SIP Calculator", url: "https://www.mutualfundssahihai.com/en/calculators/sip-calculator" },
+  { title: "MotivWealth SIP Calculator", url: "/sip-calculator", internal: true },
+  { title: "SIP Calculator (Mutual Funds Sahi Hai)", url: "https://www.mutualfundssahihai.com/en/calculators/sip-calculator" },
 ];
 
 
