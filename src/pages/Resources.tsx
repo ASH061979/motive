@@ -4,7 +4,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ExternalLink, ChevronDown } from "lucide-react";
 import { useState } from "react";
 
-const resourceCategories = [
+type ResourceLink = { name: string; url: string; internal?: boolean };
+
+const resourceCategories: { title: string; description?: string; links?: ResourceLink[]; subsections?: { subtitle: string; items: string[] }[] }[] = [
   {
     title: "Investor Education",
     links: [
