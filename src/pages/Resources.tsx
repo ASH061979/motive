@@ -10,6 +10,7 @@ const resourceCategories = [
       { name: "AMFI Investor Corner", url: "https://www.amfiindia.com/investor" },
       { name: "Mutual Funds Sahi Hai", url: "https://www.mutualfundssahihai.com/en" },
       { name: "SEBI Investor Website", url: "https://investor.sebi.gov.in/" },
+      { name: "MotivWealth Learning Library", url: "/blogs", internal: true },
     ]
   },
   {

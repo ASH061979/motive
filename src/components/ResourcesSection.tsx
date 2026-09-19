@@ -139,6 +139,14 @@ const ResourcesSection = () => {
                 <p className="text-foreground font-medium">{link.title}</p>
               </a>
             ))}
+
+            <a
+              href="/blogs"
+              className="block p-4 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary"
+            >
+              <p className="text-foreground font-medium">MotivWealth Learning Library</p>
+              <p className="text-foreground/70 text-sm mt-1">Explore our articles and videos on mutual fund investing</p>
+            </a>
           </div>
         </DialogContent>
       </Dialog>
