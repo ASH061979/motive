@@ -182,8 +182,8 @@ const ResourcesSection = () => {
               <a
                 key={index}
                 href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={link.internal ? undefined : "_blank"}
+                rel={link.internal ? undefined : "noopener noreferrer"}
                 className="block p-4 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary"
               >
                 <p className="text-foreground font-medium">{link.title}</p>
