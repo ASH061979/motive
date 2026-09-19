@@ -12,7 +12,8 @@ import AMCDirectory from "./pages/AMCDirectory";
 import MyAccount from "./pages/MyAccount";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
-import Blogs from "./pages/Blogs";
+import EducationalVideos from "./pages/EducationalVideos";
+import MarketInvestorNotes from "./pages/MarketInvestorNotes";
 import BlogPost from "./pages/BlogPost";
 import Disclaimer from "./pages/Disclaimer";
 import CommissionDisclosure from "./pages/CommissionDisclosure";
@@ -38,7 +39,8 @@ const App = () => (
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/amc-directory" element={<AMCDirectory />} />
           <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/educational-videos" element={<EducationalVideos />} />
+          <Route path="/market-investor-notes" element={<MarketInvestorNotes />} />
           <Route path="/blogs/:slug" element={<BlogPost />} />
           <Route path="/disclaimer" element={<Disclaimer />} />
           <Route path="/commission-disclosure" element={<CommissionDisclosure />} />

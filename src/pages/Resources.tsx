@@ -129,13 +129,13 @@ const Resources = () => {
                   {libraryOpen && (
                     <div className="space-y-2 mt-3 ml-6">
                       <a
-                        href="/blogs#videos"
+                        href="/educational-videos"
                         className="block p-3 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary text-sm font-medium text-foreground"
                       >
                         Educational Videos
                       </a>
                       <a
-                        href="/blogs#articles"
+                        href="/market-investor-notes"
                         className="block p-3 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary text-sm font-medium text-foreground"
                       >
                         Market and Investor Notes

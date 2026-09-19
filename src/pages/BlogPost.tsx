@@ -17,7 +17,7 @@ const BlogPost = () => {
         <main className="container mx-auto px-4 py-16 text-center">
           <h1 className="text-2xl font-bold">{t("blogs.notFound")}</h1>
           <Button asChild className="mt-4">
-            <Link to="/blogs">{t("blogs.backToBlogs")}</Link>
+            <Link to="/market-investor-notes">{t("blogs.backToBlogs")}</Link>
           </Button>
         </main>
       </div>
@@ -43,7 +43,7 @@ const BlogPost = () => {
       <Navbar />
       <main className="container mx-auto px-4 py-16 max-w-4xl">
         <Button asChild variant="ghost" className="mb-8 gap-2">
-          <Link to="/blogs">
+          <Link to="/market-investor-notes">
             <ArrowLeft className="h-4 w-4" /> {t("blogs.backToBlogs")}
           </Link>
         </Button>

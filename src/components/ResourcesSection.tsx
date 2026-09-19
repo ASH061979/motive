@@ -153,13 +153,13 @@ const ResourcesSection = () => {
             {libraryOpen && (
               <div className="space-y-2 ml-4 pl-4 border-l border-border">
                 <a
-                  href="/blogs#videos"
+                  href="/educational-videos"
                   className="block p-3 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary"
                 >
                   <p className="text-foreground text-sm font-medium">Educational Videos</p>
                 </a>
                 <a
-                  href="/blogs#articles"
+                  href="/market-investor-notes"
                   className="block p-3 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary"
                 >
                   <p className="text-foreground text-sm font-medium">Market and Investor Notes</p>
