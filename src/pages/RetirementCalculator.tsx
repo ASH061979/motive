@@ -4,7 +4,7 @@ import PageBackground from "@/components/PageBackground";
 import { Card, CardContent } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Input } from "@/components/ui/input";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ArrowRight, ArrowDown } from "lucide-react";
 
 const formatINR = (value: number) =>
   "₹" + Math.round(Number.isFinite(value) ? Math.max(value, 0) : 0).toLocaleString("en-IN");
@@ -43,6 +43,7 @@ const RetirementCalculator = () => {
   const [retirementAge, setRetirementAge] = useState(60);
   const [lifeExpectancy, setLifeExpectancy] = useState(85);
   const [monthlyExpenses, setMonthlyExpenses] = useState(75000);
+  const [existingSavings, setExistingSavings] = useState(0);
   const [inflation, setInflation] = useState(6);
   const [preReturn, setPreReturn] = useState(12);
   const [postReturn, setPostReturn] = useState(7);
@@ -63,14 +64,21 @@ const RetirementCalculator = () => {
       inflation
     );
 
+    // Grow existing retirement savings to retirement age using the same
+    // pre-retirement return assumption (compound growth).
+    const savingsAtRetirement =
+      existingSavings * Math.pow(1 + preReturn / 100, yearsToRetire);
+
+    const fundingGap = Math.max(corpus - savingsAtRetirement, 0);
+
     const n = yearsToRetire * 12;
     let sip: number;
     if (preReturn === 0) {
-      sip = n > 0 ? corpus / n : 0;
+      sip = n > 0 ? fundingGap / n : 0;
     } else {
       const r = preReturn / 12 / 100;
       const factor = ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
-      sip = factor > 0 ? corpus / factor : 0;
+      sip = factor > 0 ? fundingGap / factor : 0;
     }
 
     const totalContributions = sip * n;
@@ -79,6 +87,10 @@ const RetirementCalculator = () => {
       yearsToRetire,
       expensesAtRetirement,
       corpus,
+      savingsAtRetirement: Number.isFinite(savingsAtRetirement)
+        ? Math.max(savingsAtRetirement, 0)
+        : 0,
+      fundingGap,
       sip: Number.isFinite(sip) ? Math.max(sip, 0) : 0,
       totalContributions: Number.isFinite(totalContributions)
         ? Math.max(totalContributions, 0)
@@ -90,27 +102,41 @@ const RetirementCalculator = () => {
     safeRetirementAge,
     safeLifeExpectancy,
     monthlyExpenses,
+    existingSavings,
     inflation,
     preReturn,
     postReturn,
   ]);
 
-  const stages = [
-    { label: "Today", sub: `Age ${currentAge}`, value: monthlyExpenses, caption: "Monthly expenses" },
+  const savingsSufficient =
+    existingSavings > 0 && result.savingsAtRetirement >= result.corpus;
+
+  const journey = [
     {
-      label: "Retirement",
-      sub: `Age ${safeRetirementAge}`,
-      value: result.expensesAtRetirement,
-      caption: "Monthly expenses",
+      label: "TODAY",
+      headline: `Age ${currentAge}`,
+      value: `${formatINR(monthlyExpenses)}/month`,
+      caption: "Current monthly expenses",
     },
     {
-      label: "Retirement Years",
-      sub: `to age ${safeLifeExpectancy}`,
-      value: result.corpus,
-      caption: "Corpus required",
+      label: "RETIREMENT",
+      headline: `Age ${safeRetirementAge}`,
+      value: `${formatINR(result.expensesAtRetirement)}/month`,
+      caption: "Estimated monthly expenses",
+    },
+    {
+      label: "CORPUS REQUIRED",
+      headline: formatINR(result.corpus),
+      value: null as string | null,
+      caption: "Estimated retirement corpus",
+    },
+    {
+      label: "MONTHLY INVESTMENT",
+      headline: `${formatINR(result.sip)}/month`,
+      value: null as string | null,
+      caption: "Estimated SIP required",
     },
   ];
-  const maxStage = Math.max(...stages.map((s) => s.value), 1);
 
   return (
     <div className="min-h-screen">
@@ -251,7 +277,36 @@ const RetirementCalculator = () => {
 
                   <div>
                     <div className="flex items-center justify-between mb-3">
-                      <label className="font-medium text-foreground">Expected Inflation (%)</label>
+                      <label className="font-medium text-foreground">
+                        Existing Retirement Savings (₹)
+                      </label>
+                      <Input
+                        type="number"
+                        min={0}
+                        value={existingSavings}
+                        onChange={(e) =>
+                          setExistingSavings(
+                            clamp(Number(e.target.value) || 0, 0, 1000000000)
+                          )
+                        }
+                        className="w-32 text-right"
+                      />
+                    </div>
+                    <Slider
+                      value={[existingSavings]}
+                      min={0}
+                      max={50000000}
+                      step={10000}
+                      onValueChange={([v]) => setExistingSavings(v)}
+                    />
+                    <p className="text-xs text-foreground/50 mt-1">
+                      Money already earmarked specifically for retirement
+                    </p>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <label className="font-medium text-foreground">Assumed Inflation (%)</label>
                       <Input
                         type="number"
                         min={0}
@@ -280,7 +335,7 @@ const RetirementCalculator = () => {
                   <div>
                     <div className="flex items-center justify-between mb-3">
                       <label className="font-medium text-foreground">
-                        Return Before Retirement (%)
+                        Assumed Return Before Retirement (%)
                       </label>
                       <Input
                         type="number"
@@ -298,13 +353,15 @@ const RetirementCalculator = () => {
                       step={0.5}
                       onValueChange={([v]) => setPreReturn(v)}
                     />
-                    <p className="text-xs text-foreground/50 mt-1">For illustration · 0%–30%</p>
+                    <p className="text-xs text-foreground/50 mt-1">
+                      Assumed return while building your retirement corpus · For illustration only
+                    </p>
                   </div>
 
                   <div>
                     <div className="flex items-center justify-between mb-3">
                       <label className="font-medium text-foreground">
-                        Return During Retirement (%)
+                        Assumed Return During Retirement (%)
                       </label>
                       <Input
                         type="number"
@@ -322,7 +379,10 @@ const RetirementCalculator = () => {
                       step={0.5}
                       onValueChange={([v]) => setPostReturn(v)}
                     />
-                    <p className="text-xs text-foreground/50 mt-1">For illustration · 0%–20%</p>
+                    <p className="text-xs text-foreground/50 mt-1">
+                      Assumed return on the remaining corpus during retirement · For illustration
+                      only
+                    </p>
                   </div>
                 </div>
               </div>
@@ -337,6 +397,9 @@ const RetirementCalculator = () => {
                   Estimated Retirement Corpus Required
                 </p>
                 <p className="text-4xl font-bold text-primary">{formatINR(result.corpus)}</p>
+                <p className="text-xs text-foreground/50 mt-2">
+                  Based on the assumptions selected above
+                </p>
               </div>
 
               <div className="space-y-3">
@@ -362,38 +425,62 @@ const RetirementCalculator = () => {
                   <span className="text-foreground/70">Est. Retirement Corpus Required</span>
                   <span className="font-semibold text-foreground">{formatINR(result.corpus)}</span>
                 </div>
+                {existingSavings > 0 && (
+                  <>
+                    <div className="flex justify-between">
+                      <span className="text-foreground/70">
+                        Est. Value of Existing Savings at Retirement
+                      </span>
+                      <span className="font-semibold text-foreground">
+                        {formatINR(result.savingsAtRetirement)}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-foreground/70">Retirement Funding Gap</span>
+                      <span className="font-semibold text-foreground">
+                        {formatINR(result.fundingGap)}
+                      </span>
+                    </div>
+                  </>
+                )}
                 <div className="flex justify-between border-t border-border pt-3">
                   <span className="text-foreground/70">Estimated Monthly SIP Required</span>
                   <span className="font-semibold text-emerald-600">
                     {formatINR(result.sip)}/month
                   </span>
                 </div>
+                {savingsSufficient && (
+                  <p className="text-sm text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-md px-3 py-2 leading-relaxed">
+                    Based on the assumptions selected, your existing retirement savings may be
+                    sufficient to meet the estimated retirement corpus.
+                  </p>
+                )}
               </div>
 
-              {/* Today → Retirement → Retirement Years */}
+              {/* Your Retirement Journey */}
               <div className="pt-2">
-                <div className="h-52 flex items-end justify-center gap-8 px-2 border-b border-border">
-                  {stages.map((s) => (
-                    <div key={s.label} className="flex flex-col items-center justify-end h-full">
-                      <span className="text-[11px] font-semibold text-foreground mb-2">
-                        {formatINR(s.value)}
-                      </span>
-                      <div
-                        className="w-16 rounded-t-md bg-primary/70 transition-all duration-200"
-                        style={{
-                          height: `${(s.value / maxStage) * 100}%`,
-                          minHeight: "4px",
-                        }}
-                      />
-                    </div>
-                  ))}
-                </div>
-                <div className="flex justify-center gap-8 px-2 mt-2">
-                  {stages.map((s) => (
-                    <div key={s.label} className="w-16 text-center">
-                      <p className="text-xs font-medium text-foreground/80">{s.label}</p>
-                      <p className="text-[10px] text-foreground/50">{s.sub}</p>
-                      <p className="text-[10px] text-foreground/50">{s.caption}</p>
+                <h3 className="text-sm font-semibold text-primary mb-4 text-center">
+                  Your Retirement Journey
+                </h3>
+                <div className="flex flex-col md:flex-row items-stretch md:items-center justify-center gap-2">
+                  {journey.map((stage, idx) => (
+                    <div key={stage.label} className="flex items-center gap-2">
+                      <div className="flex-1 md:flex-none md:w-32 rounded-lg border border-primary/20 bg-background px-3 py-3 text-center">
+                        <p className="text-[10px] font-semibold tracking-wide text-primary/80">
+                          {stage.label}
+                        </p>
+                        <p className="text-sm font-bold text-foreground mt-1">{stage.headline}</p>
+                        {stage.value && (
+                          <p className="text-sm font-semibold text-foreground">{stage.value}</p>
+                        )}
+                        <p className="text-[10px] text-foreground/50 mt-1">{stage.caption}</p>
+                      </div>
+                      {idx < journey.length - 1 && (
+                        <>
+                          <ArrowRight className="hidden md:block h-4 w-4 shrink-0 text-primary/50" />
+                          <ArrowDown className="md:hidden h-4 w-4 shrink-0 text-primary/50 self-center" />
+                        </>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -433,6 +520,12 @@ const RetirementCalculator = () => {
                       <span className="text-foreground/70">Life Expectancy</span>
                       <span className="text-foreground">{safeLifeExpectancy}</span>
                     </div>
+                    {existingSavings > 0 && (
+                      <div className="flex justify-between">
+                        <span className="text-foreground/70">Existing Retirement Savings</span>
+                        <span className="text-foreground">{formatINR(existingSavings)}</span>
+                      </div>
+                    )}
                     <p className="text-xs text-foreground/60 pt-2 leading-relaxed">
                       These are assumptions selected by you for illustration. They are not actual or
                       expected investment performance.
@@ -445,12 +538,12 @@ const RetirementCalculator = () => {
         </div>
 
         <p className="text-sm text-foreground/60 italic mt-8 leading-relaxed">
-          This retirement calculator is an educational illustration based on assumptions selected by
-          the user. It does not constitute investment advice and does not guarantee that the
-          estimated corpus or investment amount will be sufficient for retirement. Actual expenses,
-          inflation, investment returns, taxation and personal circumstances may differ materially
-          from the assumptions used. Mutual Fund investments are subject to market risks. Read all
-          scheme-related documents carefully.
+          This retirement calculator is for illustration and investor education only. Results are
+          based on assumptions selected by the user and do not constitute investment advice or
+          guarantee that the estimated corpus or investment amount will be sufficient for
+          retirement. Actual expenses, inflation, investment returns, taxation and personal
+          circumstances may differ materially from the assumptions used. Mutual Fund investments are
+          subject to market risks. Read all scheme-related documents carefully.
         </p>
       </main>
     </div>
