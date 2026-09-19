@@ -24,6 +24,7 @@ import SipCalculator from "./pages/SipCalculator";
 import StepUpSipCalculator from "./pages/StepUpSipCalculator";
 import GoalCalculator from "./pages/GoalCalculator";
 import LumpsumCalculator from "./pages/LumpsumCalculator";
+import RetirementCalculator from "./pages/RetirementCalculator";
 import FloatingBadge from "./components/FloatingBadge";
 import Footer from "./components/Footer";
 
@@ -56,6 +57,7 @@ const App = () => (
           <Route path="/step-up-sip-calculator" element={<StepUpSipCalculator />} />
           <Route path="/goal-calculator" element={<GoalCalculator />} />
           <Route path="/lumpsum-calculator" element={<LumpsumCalculator />} />
+          <Route path="/retirement-calculator" element={<RetirementCalculator />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
