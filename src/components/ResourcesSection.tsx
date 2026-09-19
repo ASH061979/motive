@@ -140,13 +140,31 @@ const ResourcesSection = () => {
               </a>
             ))}
 
-            <a
-              href="/blogs"
-              className="block p-4 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary"
+            <button
+              type="button"
+              onClick={() => setLibraryOpen((open) => !open)}
+              className="w-full flex items-center justify-between p-4 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary text-left"
+              aria-expanded={libraryOpen}
             >
               <p className="text-foreground font-medium">MotivWealth Learning Library</p>
-              <p className="text-foreground/70 text-sm mt-1">Explore our articles and videos on mutual fund investing</p>
-            </a>
+              <ChevronDown className={`w-4 h-4 text-foreground/70 transition-transform duration-200 ${libraryOpen ? "rotate-180" : ""}`} />
+            </button>
+            {libraryOpen && (
+              <div className="space-y-2 ml-4 pl-4 border-l border-border">
+                <a
+                  href="/blogs#videos"
+                  className="block p-3 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary"
+                >
+                  <p className="text-foreground text-sm font-medium">Educational Videos</p>
+                </a>
+                <a
+                  href="/blogs#articles"
+                  className="block p-3 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary"
+                >
+                  <p className="text-foreground text-sm font-medium">Market and Investor Notes</p>
+                </a>
+              </div>
+            )}
           </div>
         </DialogContent>
       </Dialog>
