@@ -10,6 +10,7 @@ const resourceCategories = [
       { name: "AMFI Investor Corner", url: "https://www.amfiindia.com/investor" },
       { name: "Mutual Funds Sahi Hai", url: "https://www.mutualfundssahihai.com/en" },
       { name: "SEBI Investor Website", url: "https://investor.sebi.gov.in/" },
+      { name: "MotivWealth Learning Library", url: "/blogs", internal: true },
     ]
   },
   {
@@ -98,8 +99,8 @@ const Resources = () => {
                     <li key={linkIndex}>
                       <a
                         href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        target={link.internal ? undefined : "_blank"}
+                        rel={link.internal ? undefined : "noopener noreferrer"}
                         className="flex items-start gap-2 text-foreground hover:text-primary transition-colors group"
                       >
                         <ExternalLink className="w-4 h-4 mt-1 flex-shrink-0 group-hover:text-primary" />
