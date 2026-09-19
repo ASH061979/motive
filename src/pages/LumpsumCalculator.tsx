@@ -12,6 +12,8 @@ const LumpsumCalculator = () => {
   const [amount, setAmount] = useState(100000);
   const [annualReturn, setAnnualReturn] = useState(12);
   const [years, setYears] = useState(10);
+  const [isEditingAmount, setIsEditingAmount] = useState(false);
+  const [amountInput, setAmountInput] = useState(String(amount));
 
   const { invested, gain, futureValue } = useMemo(() => {
     if (annualReturn === 0) {
@@ -37,7 +39,7 @@ const LumpsumCalculator = () => {
       <main className="container mx-auto px-4 py-12 max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">Lumpsum Calculator</h1>
         <p className="text-foreground/70 text-lg mb-10">
-          Estimate how a one-time investment could grow over time with compound growth.
+          See how a one-time investment could build over time based on an assumed rate of return.
         </p>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -48,11 +50,25 @@ const LumpsumCalculator = () => {
                 <div className="flex items-center justify-between mb-3">
                   <label className="font-medium text-foreground">Investment Amount (₹)</label>
                   <Input
-                    type="number"
-                    min={1000}
-                    value={amount}
-                    onChange={(e) => setAmount(clamp(Number(e.target.value) || 1000, 1000, 100000000))}
-                    className="w-32 text-right"
+                    type="text"
+                    inputMode="numeric"
+                    value={isEditingAmount ? amountInput : formatINR(amount)}
+                    onFocus={() => {
+                      setIsEditingAmount(true);
+                      setAmountInput(String(amount));
+                    }}
+                    onChange={(e) => {
+                      const digits = e.target.value.replace(/\D/g, "");
+                      setAmountInput(digits);
+                      if (digits) setAmount(Number(digits));
+                    }}
+                    onBlur={() => {
+                      const nextAmount = clamp(Number(amountInput) || 1000, 1000, 100000000);
+                      setAmount(nextAmount);
+                      setAmountInput(String(nextAmount));
+                      setIsEditingAmount(false);
+                    }}
+                    className="w-36 text-right"
                   />
                 </div>
                 <Slider
@@ -67,7 +83,7 @@ const LumpsumCalculator = () => {
 
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <label className="font-medium text-foreground">Expected Annual Return (%)</label>
+                  <label className="font-medium text-foreground">Assumed Annual Return (%)</label>
                   <Input
                     type="number"
                     min={1}
@@ -117,6 +133,7 @@ const LumpsumCalculator = () => {
               <div className="text-center pb-4 border-b border-border">
                 <p className="text-sm text-foreground/60 mb-1">Estimated Future Value</p>
                 <p className="text-4xl font-bold text-primary">{formatINR(futureValue)}</p>
+                <p className="text-xs text-foreground/50 mt-2">Based on the assumptions selected above</p>
               </div>
 
               <div className="space-y-3">
@@ -125,7 +142,7 @@ const LumpsumCalculator = () => {
                   <span className="font-semibold text-foreground">{formatINR(invested)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-foreground/70">Estimated Gain</span>
+                  <span className="text-foreground/70">Estimated Growth</span>
                   <span className="font-semibold text-emerald-600">{formatINR(gain)}</span>
                 </div>
                 <div className="flex justify-between border-t border-border pt-3">
@@ -167,7 +184,7 @@ const LumpsumCalculator = () => {
                     Amount Invested
                   </span>
                   <span className="w-20 text-center text-xs text-foreground/60">
-                    Estimated Gain
+                    Estimated Growth
                   </span>
                 </div>
               </div>
@@ -176,10 +193,10 @@ const LumpsumCalculator = () => {
         </div>
 
         <p className="text-sm text-foreground/60 italic mt-8 leading-relaxed">
-          This calculator is for illustration purposes only. The estimated values are based on the
-          assumed rate of return you enter and are not guaranteed. Mutual fund investments are
-          subject to market risks; actual returns may be higher or lower. Please read all
-          scheme-related documents carefully before investing.
+          This calculator is for illustration and investor education only. Results are based on
+          assumptions entered by the user and do not represent or guarantee actual or future
+          returns. Mutual fund returns are market-linked and may vary. Mutual Fund investments
+          are subject to market risks. Read all scheme-related documents carefully.
         </p>
       </main>
     </div>
