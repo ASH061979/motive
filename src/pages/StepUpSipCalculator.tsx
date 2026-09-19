@@ -15,6 +15,7 @@ const StepUpSipCalculator = () => {
   const [stepUp, setStepUp] = useState(10);
   const [annualReturn, setAnnualReturn] = useState(12);
   const [years, setYears] = useState(10);
+  const [showFullSchedule, setShowFullSchedule] = useState(false);
 
   const { invested, gain, futureValue, finalYearSip, schedule } = useMemo(() => {
     const n = Math.round(years * 12);
@@ -60,7 +61,7 @@ const StepUpSipCalculator = () => {
       <main className="container mx-auto px-4 py-12 max-w-5xl">
         <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">Step-Up SIP Calculator</h1>
         <p className="text-foreground/70 text-lg mb-10">
-          Estimate how your SIP could grow if you increase it by a fixed percentage every year.
+          See how increasing your monthly SIP each year could build over time.
         </p>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -90,7 +91,7 @@ const StepUpSipCalculator = () => {
 
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <label className="font-medium text-foreground">Annual SIP Increase (%)</label>
+                  <label className="font-medium text-foreground">Annual SIP Step-Up (%)</label>
                   <Input
                     type="number"
                     min={0}
@@ -107,12 +108,13 @@ const StepUpSipCalculator = () => {
                   step={1}
                   onValueChange={([v]) => setStepUp(v)}
                 />
-                <p className="text-xs text-foreground/50 mt-1">0%–50% per year</p>
+                <p className="text-xs text-foreground/50 mt-1">Percentage by which your monthly SIP increases each year</p>
+                <p className="text-xs text-foreground/50">0%–50%</p>
               </div>
 
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <label className="font-medium text-foreground">Expected Annual Return (%)</label>
+                  <label className="font-medium text-foreground">Assumed Annual Return (%)</label>
                   <Input
                     type="number"
                     min={0}
@@ -162,6 +164,7 @@ const StepUpSipCalculator = () => {
               <div className="text-center pb-4 border-b border-border">
                 <p className="text-sm text-foreground/60 mb-1">Estimated Future Value</p>
                 <p className="text-4xl font-bold text-primary">{formatINR(futureValue)}</p>
+                <p className="text-xs text-foreground/50 mt-1">Based on the assumptions selected above</p>
               </div>
 
               <div className="space-y-3">
@@ -170,7 +173,7 @@ const StepUpSipCalculator = () => {
                   <span className="font-semibold text-foreground">{formatINR(invested)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-foreground/70">Estimated Gain</span>
+                  <span className="text-foreground/70">Estimated Growth</span>
                   <span className="font-semibold text-emerald-600">{formatINR(gain)}</span>
                 </div>
                 <div className="flex justify-between">
@@ -216,7 +219,7 @@ const StepUpSipCalculator = () => {
                     Amount Invested
                   </span>
                   <span className="w-20 text-center text-xs text-foreground/60">
-                    Estimated Gain
+                    Estimated Growth
                   </span>
                 </div>
               </div>
@@ -229,7 +232,7 @@ const StepUpSipCalculator = () => {
           <CardContent className="pt-6">
             <h2 className="text-xl font-bold text-primary mb-4">Year-by-Year SIP Schedule</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-              {schedule.map((item) => (
+              {(years <= 10 || showFullSchedule ? schedule : schedule.slice(0, 10)).map((item) => (
                 <div
                   key={item.year}
                   className="rounded-lg border border-border bg-card px-3 py-2 text-center"
@@ -241,14 +244,25 @@ const StepUpSipCalculator = () => {
                 </div>
               ))}
             </div>
+            {years > 10 && (
+              <div className="mt-4 text-center">
+                <button
+                  type="button"
+                  onClick={() => setShowFullSchedule((s) => !s)}
+                  className="text-sm font-medium text-primary underline-offset-4 hover:underline"
+                >
+                  {showFullSchedule ? "Show First 10 Years" : "View Full Schedule"}
+                </button>
+              </div>
+            )}
           </CardContent>
         </Card>
 
         <p className="text-sm text-foreground/60 italic mt-8 leading-relaxed">
-          This calculator is for illustration purposes only. The estimated values are based on the
-          assumed rate of return you enter and are not guaranteed. Mutual fund investments are
-          subject to market risks; actual returns may be higher or lower. Please read all
-          scheme-related documents carefully before investing.
+          This calculator is for illustration and investor education only. Results are based on
+          assumptions entered by the user and do not represent or guarantee actual or future
+          returns. Mutual fund returns are market-linked and may vary. Mutual Fund investments
+          are subject to market risks. Read all scheme-related documents carefully.
         </p>
       </main>
     </div>
