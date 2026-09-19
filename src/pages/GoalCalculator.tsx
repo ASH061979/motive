@@ -4,31 +4,40 @@ import PageBackground from "@/components/PageBackground";
 import { Card, CardContent } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
 
 const formatINR = (value: number) =>
   "₹" + Math.round(value).toLocaleString("en-IN");
 
 const GoalCalculator = () => {
   const [targetAmount, setTargetAmount] = useState(5000000);
+  const [targetAmountInput, setTargetAmountInput] = useState("5000000");
+  const [isEditingTarget, setIsEditingTarget] = useState(false);
   const [years, setYears] = useState(10);
   const [annualReturn, setAnnualReturn] = useState(12);
+  const [adjustForInflation, setAdjustForInflation] = useState(false);
+  const [inflation, setInflation] = useState(6);
 
-  const { monthlySip, contributions, growth } = useMemo(() => {
+  const { futureGoalAmount, monthlySip, contributions, growth } = useMemo(() => {
+    const goalAmount = adjustForInflation
+      ? targetAmount * Math.pow(1 + inflation / 100, years)
+      : targetAmount;
     const n = Math.round(years * 12);
     let sip: number;
     if (annualReturn === 0) {
-      sip = targetAmount / n;
+      sip = goalAmount / n;
     } else {
       const r = annualReturn / 12 / 100;
-      sip = targetAmount / (((Math.pow(1 + r, n) - 1) / r) * (1 + r));
+      sip = goalAmount / (((Math.pow(1 + r, n) - 1) / r) * (1 + r));
     }
     const totalContributions = sip * n;
     return {
+      futureGoalAmount: goalAmount,
       monthlySip: sip,
       contributions: totalContributions,
-      growth: Math.max(targetAmount - totalContributions, 0),
+      growth: Math.max(goalAmount - totalContributions, 0),
     };
-  }, [targetAmount, annualReturn, years]);
+  }, [targetAmount, annualReturn, years, adjustForInflation, inflation]);
 
   const maxValue = Math.max(contributions, growth);
 
@@ -42,21 +51,53 @@ const GoalCalculator = () => {
       <main className="container mx-auto px-4 py-12 max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">Goal Calculator</h1>
         <p className="text-foreground/70 text-lg mb-10">
-          Estimate the monthly SIP that could work towards a financial goal.
+          Estimate the monthly SIP you may need to work towards a financial goal.
         </p>
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Inputs */}
           <Card className="border-primary/20">
             <CardContent className="pt-6 space-y-8">
+              <div className="flex items-center justify-between gap-4 rounded-md border border-border p-4">
+                <label htmlFor="inflation-adjustment" className="font-medium text-foreground">
+                  Adjust target for inflation?
+                </label>
+                <Switch
+                  id="inflation-adjustment"
+                  checked={adjustForInflation}
+                  onCheckedChange={setAdjustForInflation}
+                  aria-label="Adjust target for inflation"
+                />
+              </div>
+
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <label className="font-medium text-foreground">Target Amount (₹)</label>
+                  <label className="font-medium text-foreground">
+                    {adjustForInflation ? "Current Cost of Goal (₹)" : "Target Amount (₹)"}
+                  </label>
                   <Input
-                    type="number"
-                    min={100000}
-                    value={targetAmount}
-                    onChange={(e) => setTargetAmount(clamp(Number(e.target.value) || 100000, 100000, 1000000000))}
+                    type="text"
+                    inputMode="numeric"
+                    value={
+                      isEditingTarget
+                        ? targetAmountInput
+                        : formatINR(targetAmount)
+                    }
+                    onFocus={() => {
+                      setIsEditingTarget(true);
+                      setTargetAmountInput(String(targetAmount));
+                    }}
+                    onChange={(e) => {
+                      const digits = e.target.value.replace(/\D/g, "");
+                      setTargetAmountInput(digits);
+                      if (digits) setTargetAmount(Number(digits));
+                    }}
+                    onBlur={() => {
+                      const nextAmount = clamp(Number(targetAmountInput) || 100000, 100000, 1000000000);
+                      setTargetAmount(nextAmount);
+                      setTargetAmountInput(String(nextAmount));
+                      setIsEditingTarget(false);
+                    }}
                     className="w-36 text-right"
                   />
                 </div>
@@ -65,7 +106,10 @@ const GoalCalculator = () => {
                   min={100000}
                   max={50000000}
                   step={100000}
-                  onValueChange={([v]) => setTargetAmount(v)}
+                  onValueChange={([v]) => {
+                    setTargetAmount(v);
+                    setTargetAmountInput(String(v));
+                  }}
                 />
                 <p className="text-xs text-foreground/50 mt-1">Minimum ₹1,00,000</p>
               </div>
@@ -94,7 +138,7 @@ const GoalCalculator = () => {
 
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <label className="font-medium text-foreground">Expected Annual Return (%)</label>
+                  <label className="font-medium text-foreground">Assumed Annual Return (%)</label>
                   <Input
                     type="number"
                     min={1}
@@ -113,6 +157,30 @@ const GoalCalculator = () => {
                 />
                 <p className="text-xs text-foreground/50 mt-1">For illustration only · 1%–30%</p>
               </div>
+
+              {adjustForInflation && (
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <label className="font-medium text-foreground">Assumed Inflation (%)</label>
+                    <Input
+                      type="number"
+                      min={0}
+                      max={15}
+                      value={inflation}
+                      onChange={(e) => setInflation(clamp(Number(e.target.value) || 0, 0, 15))}
+                      className="w-24 text-right"
+                    />
+                  </div>
+                  <Slider
+                    value={[inflation]}
+                    min={0}
+                    max={15}
+                    step={0.5}
+                    onValueChange={([v]) => setInflation(v)}
+                  />
+                  <p className="text-xs text-foreground/50 mt-1">For illustration only · 0%–15%</p>
+                </div>
+              )}
             </CardContent>
           </Card>
 
@@ -122,13 +190,27 @@ const GoalCalculator = () => {
               <div className="text-center pb-4 border-b border-border">
                 <p className="text-sm text-foreground/60 mb-1">Estimated Monthly SIP Required</p>
                 <p className="text-4xl font-bold text-primary">{formatINR(monthlySip)}</p>
+                <p className="text-xs text-foreground/50 mt-2">Based on the assumptions selected above</p>
               </div>
 
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-foreground/70">Target Amount</span>
+                  <span className="text-foreground/70">
+                    {adjustForInflation ? "Current Cost of Goal" : "Target Amount"}
+                  </span>
                   <span className="font-semibold text-foreground">{formatINR(targetAmount)}</span>
                 </div>
+                {adjustForInflation && (
+                  <div>
+                    <div className="flex justify-between gap-4">
+                      <span className="text-foreground/70">Estimated Future Cost of Goal</span>
+                      <span className="font-semibold text-foreground">{formatINR(futureGoalAmount)}</span>
+                    </div>
+                    <p className="text-xs text-foreground/50 mt-1">
+                      Estimate based on the inflation assumption selected above.
+                    </p>
+                  </div>
+                )}
                 <div className="flex justify-between">
                   <span className="text-foreground/70">Time to Goal</span>
                   <span className="font-semibold text-foreground">{years} {years === 1 ? "year" : "years"}</span>
@@ -138,7 +220,7 @@ const GoalCalculator = () => {
                   <span className="font-semibold text-foreground">{formatINR(contributions)}</span>
                 </div>
                 <div className="flex justify-between border-t border-border pt-3">
-                  <span className="text-foreground/70">Estimated Growth Component</span>
+                  <span className="text-foreground/70">Estimated Growth</span>
                   <span className="font-semibold text-emerald-600">{formatINR(growth)}</span>
                 </div>
               </div>
@@ -185,10 +267,11 @@ const GoalCalculator = () => {
         </div>
 
         <p className="text-sm text-foreground/60 italic mt-8 leading-relaxed">
-          This calculator is for illustration purposes only. The estimated monthly SIP is based on
-          the assumed rate of return you enter and is not a recommendation or guarantee. Mutual
-          fund investments are subject to market risks; actual returns may be higher or lower.
-          Please read all scheme-related documents carefully before investing.
+          This calculator is for illustration and investor education only. Results are based on
+          assumptions entered by the user and do not represent a recommendation or guarantee that
+          a financial goal will be achieved. Actual inflation and mutual fund returns may vary from
+          the assumptions used. Mutual Fund investments are subject to market risks. Read all
+          scheme-related documents carefully.
         </p>
         <p className="text-sm text-foreground/60 mt-4">
           Note: Starting earlier may reduce the monthly amount required to work towards the same
