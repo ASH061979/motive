@@ -12,6 +12,8 @@ const LumpsumCalculator = () => {
   const [amount, setAmount] = useState(100000);
   const [annualReturn, setAnnualReturn] = useState(12);
   const [years, setYears] = useState(10);
+  const [isEditingAmount, setIsEditingAmount] = useState(false);
+  const [amountInput, setAmountInput] = useState(String(amount));
 
   const { invested, gain, futureValue } = useMemo(() => {
     if (annualReturn === 0) {
