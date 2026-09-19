@@ -21,6 +21,7 @@ const resourceCategories: { title: string; description?: string; links?: Resourc
       { name: "MotivWealth SIP Calculator", url: "/sip-calculator", internal: true },
       { name: "MotivWealth Step-Up SIP Calculator", url: "/step-up-sip-calculator", internal: true },
       { name: "MotivWealth Goal Calculator", url: "/goal-calculator", internal: true },
+      { name: "MotivWealth Lumpsum Calculator", url: "/lumpsum-calculator", internal: true },
       { name: "AMFI SIP & Goal Calculators", url: "https://www.amfiindia.com/investor-corner/calculators" },
       { name: "Groww SIP Calculator", url: "https://groww.in/calculators/sip-calculator" },
       { name: "Groww SWP Calculator", url: "https://groww.in/calculators/swp-calculator" },
