@@ -1,7 +1,8 @@
 import Navbar from "@/components/Navbar";
 import PageBackground from "@/components/PageBackground";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 const resourceCategories = [
   {
@@ -10,7 +11,6 @@ const resourceCategories = [
       { name: "AMFI Investor Corner", url: "https://www.amfiindia.com/investor" },
       { name: "Mutual Funds Sahi Hai", url: "https://www.mutualfundssahihai.com/en" },
       { name: "SEBI Investor Website", url: "https://investor.sebi.gov.in/" },
-      { name: "MotivWealth Learning Library", url: "/blogs", internal: true },
     ]
   },
   {
