@@ -23,10 +23,7 @@ const MarketInvestorNotes = () => {
       <PageBackground variant="blogs" />
       <Navbar />
       <main className="container mx-auto px-4 py-16">
-        <h1 className="text-4xl font-bold text-primary mb-4">Market and Investor Notes</h1>
-        <p className="text-muted-foreground mb-12 text-lg max-w-2xl">
-          {t("blogs.subtitle")}
-        </p>
+        <h1 className="text-4xl font-bold text-primary mb-12">Market and Investor Notes</h1>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
           {blogPosts.map((post) => (
