@@ -39,7 +39,7 @@ const Blogs = () => {
         </p>
 
         {/* Articles Section */}
-        <section className="mb-16">
+        <section id="articles" className="mb-16">
           <h2 className="text-2xl font-semibold text-primary mb-6 border-b border-border pb-2">
             Articles
           </h2>
@@ -75,7 +75,7 @@ const Blogs = () => {
         </section>
 
         {/* Videos Section */}
-        <section>
+        <section id="videos">
           <h2 className="text-2xl font-semibold text-primary mb-6 border-b border-border pb-2">
             Videos
           </h2>
