@@ -133,6 +133,7 @@ const LumpsumCalculator = () => {
               <div className="text-center pb-4 border-b border-border">
                 <p className="text-sm text-foreground/60 mb-1">Estimated Future Value</p>
                 <p className="text-4xl font-bold text-primary">{formatINR(futureValue)}</p>
+                <p className="text-xs text-foreground/50 mt-2">Based on the assumptions selected above</p>
               </div>
 
               <div className="space-y-3">
@@ -141,7 +142,7 @@ const LumpsumCalculator = () => {
                   <span className="font-semibold text-foreground">{formatINR(invested)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-foreground/70">Estimated Gain</span>
+                  <span className="text-foreground/70">Estimated Growth</span>
                   <span className="font-semibold text-emerald-600">{formatINR(gain)}</span>
                 </div>
                 <div className="flex justify-between border-t border-border pt-3">
@@ -183,7 +184,7 @@ const LumpsumCalculator = () => {
                     Amount Invested
                   </span>
                   <span className="w-20 text-center text-xs text-foreground/60">
-                    Estimated Gain
+                    Estimated Growth
                   </span>
                 </div>
               </div>
@@ -192,10 +193,10 @@ const LumpsumCalculator = () => {
         </div>
 
         <p className="text-sm text-foreground/60 italic mt-8 leading-relaxed">
-          This calculator is for illustration purposes only. The estimated values are based on the
-          assumed rate of return you enter and are not guaranteed. Mutual fund investments are
-          subject to market risks; actual returns may be higher or lower. Please read all
-          scheme-related documents carefully before investing.
+          This calculator is for illustration and investor education only. Results are based on
+          assumptions entered by the user and do not represent or guarantee actual or future
+          returns. Mutual fund returns are market-linked and may vary. Mutual Fund investments
+          are subject to market risks. Read all scheme-related documents carefully.
         </p>
       </main>
     </div>
