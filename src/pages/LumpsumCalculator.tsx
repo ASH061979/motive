@@ -39,7 +39,7 @@ const LumpsumCalculator = () => {
       <main className="container mx-auto px-4 py-12 max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">Lumpsum Calculator</h1>
         <p className="text-foreground/70 text-lg mb-10">
-          Estimate how a one-time investment could grow over time with compound growth.
+          See how a one-time investment could build over time based on an assumed rate of return.
         </p>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -50,11 +50,25 @@ const LumpsumCalculator = () => {
                 <div className="flex items-center justify-between mb-3">
                   <label className="font-medium text-foreground">Investment Amount (₹)</label>
                   <Input
-                    type="number"
-                    min={1000}
-                    value={amount}
-                    onChange={(e) => setAmount(clamp(Number(e.target.value) || 1000, 1000, 100000000))}
-                    className="w-32 text-right"
+                    type="text"
+                    inputMode="numeric"
+                    value={isEditingAmount ? amountInput : formatINR(amount)}
+                    onFocus={() => {
+                      setIsEditingAmount(true);
+                      setAmountInput(String(amount));
+                    }}
+                    onChange={(e) => {
+                      const digits = e.target.value.replace(/\D/g, "");
+                      setAmountInput(digits);
+                      if (digits) setAmount(Number(digits));
+                    }}
+                    onBlur={() => {
+                      const nextAmount = clamp(Number(amountInput) || 1000, 1000, 100000000);
+                      setAmount(nextAmount);
+                      setAmountInput(String(nextAmount));
+                      setIsEditingAmount(false);
+                    }}
+                    className="w-36 text-right"
                   />
                 </div>
                 <Slider
@@ -69,7 +83,7 @@ const LumpsumCalculator = () => {
 
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <label className="font-medium text-foreground">Expected Annual Return (%)</label>
+                  <label className="font-medium text-foreground">Assumed Annual Return (%)</label>
                   <Input
                     type="number"
                     min={1}
