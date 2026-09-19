@@ -252,6 +252,10 @@
       "description": "Clear explanations of mutual funds, risk, asset allocation, SIPs and market behaviour so that you can participate more confidently in your investment decisions."
     }
   },
+  "testimonials": {
+    "subtitle": "What our clients say about working with MotivWealth.",
+    "empty": "Client testimonials will be shared here soon. Check back shortly!"
+  },
   "contactUs": {
     "title": "Contact Us",
     "intro": "Have a question about getting started with mutual funds, setting up an SIP, or organising investments around a financial goal? Get in touch with Meghna and start with a simple conversation.",
