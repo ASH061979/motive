@@ -22,6 +22,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 import SipCalculator from "./pages/SipCalculator";
 import StepUpSipCalculator from "./pages/StepUpSipCalculator";
+import GoalCalculator from "./pages/GoalCalculator";
 import FloatingBadge from "./components/FloatingBadge";
 import Footer from "./components/Footer";
 
@@ -52,6 +53,7 @@ const App = () => (
           <Route path="/terms-of-use" element={<TermsOfUse />} />
           <Route path="/sip-calculator" element={<SipCalculator />} />
           <Route path="/step-up-sip-calculator" element={<StepUpSipCalculator />} />
+          <Route path="/goal-calculator" element={<GoalCalculator />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
