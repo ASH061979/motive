@@ -30,8 +30,7 @@ const SipCalculator = () => {
     };
   }, [monthly, annualReturn, years]);
 
-  const investedPct = futureValue > 0 ? Math.min((invested / futureValue) * 100, 100) : 0;
-  const gainPct = futureValue > 0 ? Math.min((gain / futureValue) * 100, 100) : 0;
+  const maxValue = Math.max(invested, gain);
 
   const clamp = (val: number, min: number, max: number) =>
     Math.min(Math.max(val, min), max);
@@ -140,31 +139,41 @@ const SipCalculator = () => {
                 </div>
               </div>
 
-              {/* Chart */}
-              <div className="space-y-4 pt-2">
-                <div>
-                  <div className="flex justify-between text-xs text-foreground/60 mb-1">
-                    <span>Amount Invested</span>
-                    <span>{formatINR(invested)}</span>
-                  </div>
-                  <div className="h-4 w-full rounded bg-muted overflow-hidden">
+              {/* Bar chart */}
+              <div className="pt-2">
+                <div className="h-52 flex items-end justify-center gap-10 px-4 border-b border-border">
+                  <div className="flex flex-col items-center justify-end h-full">
+                    <span className="text-xs font-semibold text-foreground mb-2">
+                      {formatINR(invested)}
+                    </span>
                     <div
-                      className="h-full bg-primary/70 transition-all duration-200"
-                      style={{ width: `${investedPct}%` }}
+                      className="w-20 rounded-t-md bg-primary/70 transition-all duration-200"
+                      style={{
+                        height: `${maxValue > 0 ? (invested / maxValue) * 100 : 0}%`,
+                        minHeight: "4px",
+                      }}
+                    />
+                  </div>
+                  <div className="flex flex-col items-center justify-end h-full">
+                    <span className="text-xs font-semibold text-amber-600 mb-2">
+                      {formatINR(gain)}
+                    </span>
+                    <div
+                      className="w-20 rounded-t-md bg-amber-500 transition-all duration-200"
+                      style={{
+                        height: `${maxValue > 0 ? (gain / maxValue) * 100 : 0}%`,
+                        minHeight: "4px",
+                      }}
                     />
                   </div>
                 </div>
-                <div>
-                  <div className="flex justify-between text-xs text-foreground/60 mb-1">
-                    <span>Estimated Gain</span>
-                    <span>{formatINR(gain)}</span>
-                  </div>
-                  <div className="h-4 w-full rounded bg-muted overflow-hidden">
-                    <div
-                      className="h-full bg-amber-500 transition-all duration-200"
-                      style={{ width: `${gainPct}%` }}
-                    />
-                  </div>
+                <div className="flex justify-center gap-10 px-4 mt-2">
+                  <span className="w-20 text-center text-xs text-foreground/60">
+                    Amount Invested
+                  </span>
+                  <span className="w-20 text-center text-xs text-foreground/60">
+                    Estimated Gain
+                  </span>
                 </div>
               </div>
             </CardContent>
