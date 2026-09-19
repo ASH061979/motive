@@ -13,7 +13,9 @@
     "aboutUs": "About Us",
     "services": "Services",
     "contactUs": "Contact Us",
-    "blogs": "Blogs/Media"
+    "blogs": "Blogs/Media",
+    "videos": "Educational Videos",
+    "notes": "Market & Investor Notes"
   },
   "blogs": {
     "title": "Blogs / Media",
