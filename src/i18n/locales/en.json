@@ -15,7 +15,8 @@
     "contactUs": "Contact Us",
     "blogs": "Blogs/Media",
     "videos": "Educational Videos",
-    "notes": "Market & Investor Notes"
+    "notes": "Market & Investor Notes",
+    "testimonials": "Testimonials"
   },
   "blogs": {
     "title": "Blogs / Media",
@@ -250,6 +251,10 @@
       "title": "Investor Education",
       "description": "Clear explanations of mutual funds, risk, asset allocation, SIPs and market behaviour so that you can participate more confidently in your investment decisions."
     }
+  },
+  "testimonials": {
+    "subtitle": "What our clients say about working with MotivWealth.",
+    "empty": "Client testimonials will be shared here soon. Check back shortly!"
   },
   "contactUs": {
     "title": "Contact Us",
