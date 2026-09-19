@@ -20,6 +20,7 @@ import Disclaimer from "./pages/Disclaimer";
 import CommissionDisclosure from "./pages/CommissionDisclosure";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
+import SipCalculator from "./pages/SipCalculator";
 import FloatingBadge from "./components/FloatingBadge";
 import Footer from "./components/Footer";
 
