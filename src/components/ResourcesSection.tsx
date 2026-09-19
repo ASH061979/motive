@@ -1,4 +1,4 @@
-import { FileText, GraduationCap, Calculator, Handshake, Newspaper } from "lucide-react";
+import { FileText, GraduationCap, Calculator, Handshake, Newspaper, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -58,6 +58,7 @@ const marketInsightsLinks = [
 const ResourcesSection = () => {
   const { t } = useTranslation();
   const [openDialog, setOpenDialog] = useState<string | null>(null);
+  const [libraryOpen, setLibraryOpen] = useState(false);
 
   const resources = [
     { icon: FileText, titleKey: "resources.regulatory", dialogType: "regulatory" },
