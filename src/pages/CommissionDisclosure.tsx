@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import PageBackground from "@/components/PageBackground";
 import { Card, CardContent } from "@/components/ui/card";
-import { ExternalLink } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const CommissionDisclosure = () => {
@@ -44,22 +43,6 @@ const CommissionDisclosure = () => {
             </CardContent>
           </Card>
 
-          <Card className="border-primary/20">
-            <CardContent className="pt-6">
-              <h2 className="text-xl font-semibold text-primary mb-3">
-                {t('commissionDisclosure.amfiHeading')}
-              </h2>
-              <a
-                href="https://www.amfiindia.com/research-information/commission-disclosure"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors group"
-              >
-                <ExternalLink className="w-4 h-4 flex-shrink-0 group-hover:text-primary" />
-                <span>{t('commissionDisclosure.amfiLink')}</span>
-              </a>
-            </CardContent>
-          </Card>
         </div>
       </main>
     </div>
