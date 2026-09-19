@@ -1,16 +1,18 @@
 import Navbar from "@/components/Navbar";
 import PageBackground from "@/components/PageBackground";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ChevronDown } from "lucide-react";
+import { useState } from "react";
 
-const resourceCategories = [
+type ResourceLink = { name: string; url: string; internal?: boolean };
+
+const resourceCategories: { title: string; description?: string; links?: ResourceLink[]; subsections?: { subtitle: string; items: string[] }[] }[] = [
   {
     title: "Investor Education",
     links: [
       { name: "AMFI Investor Corner", url: "https://www.amfiindia.com/investor" },
       { name: "Mutual Funds Sahi Hai", url: "https://www.mutualfundssahihai.com/en" },
       { name: "SEBI Investor Website", url: "https://investor.sebi.gov.in/" },
-      { name: "MotivWealth Learning Library", url: "/blogs", internal: true },
     ]
   },
   {
@@ -69,6 +71,8 @@ const resourceCategories = [
 ];
 
 const Resources = () => {
+  const [libraryOpen, setLibraryOpen] = useState(false);
+
   return (
     <div className="min-h-screen">
       <PageBackground variant="resources" />
@@ -109,6 +113,36 @@ const Resources = () => {
                     </li>
                   ))}
                 </ul>
+              )}
+
+              {category.title === "Investor Education" && (
+                <div className="mt-4">
+                  <button
+                    type="button"
+                    onClick={() => setLibraryOpen((open) => !open)}
+                    className="flex items-center gap-2 text-foreground hover:text-primary transition-colors"
+                    aria-expanded={libraryOpen}
+                  >
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${libraryOpen ? "rotate-180" : ""}`} />
+                    <span className="font-medium">MotivWealth Learning Library</span>
+                  </button>
+                  {libraryOpen && (
+                    <div className="space-y-2 mt-3 ml-6">
+                      <a
+                        href="/blogs#videos"
+                        className="block p-3 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary text-sm font-medium text-foreground"
+                      >
+                        Educational Videos
+                      </a>
+                      <a
+                        href="/blogs#articles"
+                        className="block p-3 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary text-sm font-medium text-foreground"
+                      >
+                        Market and Investor Notes
+                      </a>
+                    </div>
+                  )}
+                </div>
               )}
 
                 
