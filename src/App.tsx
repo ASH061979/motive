@@ -22,6 +22,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 import SipCalculator from "./pages/SipCalculator";
 import StepUpSipCalculator from "./pages/StepUpSipCalculator";
+import GoalCalculator from "./pages/GoalCalculator";
 import FloatingBadge from "./components/FloatingBadge";
 import Footer from "./components/Footer";
 
