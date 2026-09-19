@@ -30,8 +30,7 @@ const SipCalculator = () => {
     };
   }, [monthly, annualReturn, years]);
 
-  const investedPct = futureValue > 0 ? Math.min((invested / futureValue) * 100, 100) : 0;
-  const gainPct = futureValue > 0 ? Math.min((gain / futureValue) * 100, 100) : 0;
+  const maxValue = Math.max(invested, gain);
 
   const clamp = (val: number, min: number, max: number) =>
     Math.min(Math.max(val, min), max);
