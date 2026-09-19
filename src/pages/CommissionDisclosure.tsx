@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import PageBackground from "@/components/PageBackground";
 import { Card, CardContent } from "@/components/ui/card";
-import { ExternalLink } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const CommissionDisclosure = () => {
