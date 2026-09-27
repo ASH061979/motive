@@ -7,16 +7,16 @@ import { ArrowRight, Calendar, User } from "lucide-react";
 
 const blogPosts = [
   {
-    id: "what-is-an-sip-and-how-does-it-work",
-    titleKey: "blogs.post3.title",
-    excerptKey: "blogs.post3.excerpt",
+    id: "new-to-mutual-funds-start-here",
+    titleKey: "blogs.post2.title",
+    excerptKey: "blogs.post2.excerpt",
     date: "2026-09-27",
     author: "Meghna Prakash",
   },
   {
-    id: "new-to-mutual-funds-start-here",
-    titleKey: "blogs.post2.title",
-    excerptKey: "blogs.post2.excerpt",
+    id: "what-is-an-sip-and-how-does-it-work",
+    titleKey: "blogs.post3.title",
+    excerptKey: "blogs.post3.excerpt",
     date: "2026-09-27",
     author: "Meghna Prakash",
   },
