@@ -77,6 +77,9 @@ const Navbar = () => {
 
         <div className="flex flex-col items-start">
           <img src={logo} alt="MotivWealth Logo" className="h-36 object-contain" />
+          <p className="text-[10px] leading-tight text-foreground/70 max-w-[14rem]">
+            MotivWealth is the brand name used by Meghna Prakash, an AMFI-registered Mutual Fund Distributor (ARN-330963 | EUIN-E628002).
+          </p>
         </div>
         
         <div className="hidden md:flex items-center gap-8">
