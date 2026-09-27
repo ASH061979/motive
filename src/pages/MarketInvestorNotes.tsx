@@ -69,7 +69,7 @@ const MarketInvestorNotes = () => {
                     <a
                       href={post.docx}
                       download
-                      onClick={(e) => e.stopPropagation()}
+                      onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.location.href = post.docx; }}
                       className="text-primary text-sm font-medium flex items-center gap-1 hover:underline"
                     >
                       <Download className="h-4 w-4" /> Download original document (DOCX)
