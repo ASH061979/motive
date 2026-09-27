@@ -143,24 +143,28 @@ const BlogPost = () => {
     },
   };
   if (note) {
-    const pdfUrl = notePdfs[slug ?? ""];
+    const doc = noteDocs[slug ?? ""];
     return (
       <div className="min-h-screen">
         <PageBackground variant="blog-post" />
         <Navbar />
-        <main className="container mx-auto px-4 py-16 max-w-5xl">
+        <main className="container mx-auto px-4 py-16 max-w-4xl">
           <Button asChild variant="ghost" className="mb-8 gap-2">
             <Link to="/market-investor-notes">
               <ArrowLeft className="h-4 w-4" /> {t("blogs.backToBlogs")}
             </Link>
           </Button>
-          {pdfUrl ? (
-            <div className="border border-border rounded-lg overflow-hidden bg-card shadow-sm">
-              <iframe
-                src={pdfUrl}
-                title={note.title}
-                className="w-full h-[80vh]"
-              />
+          {doc ? (
+            <div className="space-y-6">
+              {doc.pages.map((src, i) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt={`${note.title} — page ${i + 1}`}
+                  className="w-full h-auto border border-border rounded-lg shadow-sm bg-card"
+                  loading={i === 0 ? "eager" : "lazy"}
+                />
+              ))}
             </div>
           ) : (
             <article>
