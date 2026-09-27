@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import logoAsset from "@/assets/motivwealth-full-logo.png.asset.json";
 import {
   Dialog,
   DialogContent,
@@ -10,8 +9,6 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { ExternalLink, Mail, Phone, Clock } from "lucide-react";
-
-const logo = logoAsset.url;
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -51,9 +48,6 @@ const Footer = () => {
   return (
     <footer className="bg-secondary border-t border-border py-8">
       <div className="container mx-auto px-4 text-center space-y-4">
-        <div className="flex flex-col items-center gap-2">
-          <img src={logo} alt="MotivWealth Logo" className="h-24 object-contain" />
-        </div>
 
         <p className="text-primary" style={{ fontSize: '14px' }}>
           {t('footer.disclaimer')}
