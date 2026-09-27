@@ -72,8 +72,8 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-background/95 backdrop-blur shadow-sm rounded-b-xl mx-auto max-w-6xl">
-      <nav className="px-6 py-4 flex items-center justify-between">
+    <header className="w-full bg-background/95 backdrop-blur shadow-sm rounded-b-xl">
+      <nav className="px-4 lg:px-8 py-4 flex items-center justify-between gap-6">
 
         <div className="flex flex-col items-start shrink-0">
           <img src={logo} alt="MotivWealth Logo" className="h-28 md:h-32 w-auto object-contain" />
@@ -82,8 +82,8 @@ const Navbar = () => {
           </p>
         </div>
         
-        <div className="hidden md:flex items-center gap-8">
-          <ul className="flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-4 lg:gap-6 shrink-0">
+          <ul className="flex items-center gap-4 lg:gap-6 whitespace-nowrap">
             {navItems.map((item) => (
               <li key={item.labelKey}>
                 {item.isRoute ? (
