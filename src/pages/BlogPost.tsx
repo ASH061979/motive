@@ -62,11 +62,33 @@ const BlogPost = () => {
   const { slug } = useParams();
 
   if (slug !== "india-vs-world-mutual-funds" && slug !== "new-to-mutual-funds-start-here" && slug !== "what-is-an-sip-and-how-does-it-work") {
-...
+    return (
+      <div className="min-h-screen">
+        <PageBackground variant="blog-post" />
+        <Navbar />
+        <main className="container mx-auto px-4 py-16 text-center">
+          <h1 className="text-2xl font-bold">{t("blogs.notFound")}</h1>
+          <Button asChild className="mt-4">
+            <Link to="/market-investor-notes">{t("blogs.backToBlogs")}</Link>
+          </Button>
+        </main>
+      </div>
+    );
+  }
+
   if (slug === "new-to-mutual-funds-start-here" || slug === "what-is-an-sip-and-how-does-it-work") {
     const pk = slug === "what-is-an-sip-and-how-does-it-work" ? "blogs.post3" : "blogs.post2";
     const sectionList = slug === "what-is-an-sip-and-how-does-it-work" ? post3Sections : post2Sections;
-...
+    return (
+      <div className="min-h-screen">
+        <PageBackground variant="blog-post" />
+        <Navbar />
+        <main className="container mx-auto px-4 py-16 max-w-4xl">
+          <Button asChild variant="ghost" className="mb-8 gap-2">
+            <Link to="/market-investor-notes">
+              <ArrowLeft className="h-4 w-4" /> {t("blogs.backToBlogs")}
+            </Link>
+          </Button>
           <article>
             <h1 className="text-3xl md:text-4xl font-bold text-primary mb-3">
               {t(`${pk}.title`)}
