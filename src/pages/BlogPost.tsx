@@ -45,6 +45,18 @@ const post2Sections: { key: string; subs?: string[] }[] = [
   { key: "s13", subs: ["q1", "q2", "q3", "q4", "q5"] },
 ];
 
+const post3Sections: { key: string; subs?: string[] }[] = [
+  { key: "s1" },
+  { key: "s2" },
+  { key: "s3" },
+  { key: "s4" },
+  { key: "s5" },
+  { key: "s6" },
+  { key: "s7" },
+  { key: "s8" },
+  { key: "s9" },
+];
+
 const BlogPost = () => {
   const { t } = useTranslation();
   const { slug } = useParams();
