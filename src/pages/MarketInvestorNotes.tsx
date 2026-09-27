@@ -3,7 +3,7 @@ import PageBackground from "@/components/PageBackground";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Calendar, User } from "lucide-react";
+import { ArrowRight, Calendar, Download, User } from "lucide-react";
 
 const blogPosts = [
   {
@@ -12,6 +12,7 @@ const blogPosts = [
     excerptKey: "blogs.post2.excerpt",
     date: "2026-09-27",
     author: "Meghna Prakash",
+    docx: "/MotivWealth_New_to_Mutual_Funds_Start_Here.docx",
   },
   {
     id: "what-is-an-sip-and-how-does-it-work",
@@ -19,6 +20,7 @@ const blogPosts = [
     excerptKey: "blogs.post3.excerpt",
     date: "2026-09-27",
     author: "Meghna Prakash",
+    docx: "/MotivWealth_What_is_an_SIP_and_How_Does_it_Work.docx",
   },
   {
     id: "india-vs-world-mutual-funds",
