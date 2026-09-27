@@ -10,8 +10,6 @@ import {
 } from "@/components/ui/dialog";
 import { ExternalLink, Mail, Phone, Clock } from "lucide-react";
 
-const logo = logoAsset.url;
-
 const Footer = () => {
   const { t } = useTranslation();
   const [regulatoryOpen, setRegulatoryOpen] = useState(false);
