@@ -65,6 +65,16 @@ const MarketInvestorNotes = () => {
                   <span className="text-primary text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                     {t("blogs.readMore")} <ArrowRight className="h-4 w-4" />
                   </span>
+                  {post.docx && (
+                    <a
+                      href={post.docx}
+                      download
+                      onClick={(e) => e.stopPropagation()}
+                      className="text-primary text-sm font-medium flex items-center gap-1 hover:underline"
+                    >
+                      <Download className="h-4 w-4" /> Download original document (DOCX)
+                    </a>
+                  )}
                 </CardContent>
               </Card>
             </Link>
