@@ -7,6 +7,13 @@ import { ArrowRight, Calendar, User } from "lucide-react";
 
 const blogPosts = [
   {
+    id: "new-to-mutual-funds-start-here",
+    titleKey: "blogs.post2.title",
+    excerptKey: "blogs.post2.excerpt",
+    date: "2026-09-27",
+    author: "Meghna Prakash",
+  },
+  {
     id: "india-vs-world-mutual-funds",
     titleKey: "blogs.post1.title",
     excerptKey: "blogs.post1.excerpt",
