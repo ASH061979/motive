@@ -132,9 +132,15 @@ const BlogPost = () => {
   }
 
   const note = slug ? learningNotes[slug] : undefined;
-  const notePdfs: Record<string, string> = {
-    "new-to-mutual-funds-start-here": "/MotivWealth_New_to_Mutual_Funds_Start_Here.pdf",
-    "what-is-an-sip-and-how-does-it-work": "/MotivWealth_What_is_an_SIP_and_How_Does_it_Work.pdf",
+  const noteDocs: Record<string, { pages: string[]; pdf: string }> = {
+    "new-to-mutual-funds-start-here": {
+      pages: Array.from({ length: 8 }, (_, i) => `/articles/new-to-mutual-funds-${i + 1}.jpg`),
+      pdf: "/MotivWealth_New_to_Mutual_Funds_Start_Here.pdf",
+    },
+    "what-is-an-sip-and-how-does-it-work": {
+      pages: Array.from({ length: 4 }, (_, i) => `/articles/what-is-an-sip-${i + 1}.jpg`),
+      pdf: "/MotivWealth_What_is_an_SIP_and_How_Does_it_Work.pdf",
+    },
   };
   if (note) {
     const pdfUrl = notePdfs[slug ?? ""];
