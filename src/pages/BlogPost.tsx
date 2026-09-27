@@ -132,35 +132,50 @@ const BlogPost = () => {
   }
 
   const note = slug ? learningNotes[slug] : undefined;
+  const notePdfs: Record<string, string> = {
+    "new-to-mutual-funds-start-here": "/MotivWealth_New_to_Mutual_Funds_Start_Here.pdf",
+    "what-is-an-sip-and-how-does-it-work": "/MotivWealth_What_is_an_SIP_and_How_Does_it_Work.pdf",
+  };
   if (note) {
+    const pdfUrl = notePdfs[slug ?? ""];
     return (
       <div className="min-h-screen">
         <PageBackground variant="blog-post" />
         <Navbar />
-        <main className="container mx-auto px-4 py-16 max-w-4xl">
+        <main className="container mx-auto px-4 py-16 max-w-5xl">
           <Button asChild variant="ghost" className="mb-8 gap-2">
             <Link to="/market-investor-notes">
               <ArrowLeft className="h-4 w-4" /> {t("blogs.backToBlogs")}
             </Link>
           </Button>
-          <article>
-            <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase mb-2">
-              {note.kicker}
-            </p>
-            <h1 className="text-3xl md:text-4xl font-bold text-primary mb-3">{note.title}</h1>
-            <p className="text-muted-foreground text-lg mb-8">{note.tagline}</p>
-
-            {note.blocks.map(renderBlock)}
-
-            <div className="border border-border bg-card rounded-lg p-5 my-8">
-              <h3 className="text-lg font-semibold text-primary mb-2">About MotivWealth</h3>
-              <p className="text-foreground/90 leading-relaxed">{note.about}</p>
+          {pdfUrl ? (
+            <div className="border border-border rounded-lg overflow-hidden bg-card shadow-sm">
+              <iframe
+                src={pdfUrl}
+                title={note.title}
+                className="w-full h-[80vh]"
+              />
             </div>
+          ) : (
+            <article>
+              <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase mb-2">
+                {note.kicker}
+              </p>
+              <h1 className="text-3xl md:text-4xl font-bold text-primary mb-3">{note.title}</h1>
+              <p className="text-muted-foreground text-lg mb-8">{note.tagline}</p>
 
-            <div className="mt-8 pt-4 border-t border-border">
-              <p className="text-xs text-muted-foreground">{note.disclaimer}</p>
-            </div>
-          </article>
+              {note.blocks.map(renderBlock)}
+
+              <div className="border border-border bg-card rounded-lg p-5 my-8">
+                <h3 className="text-lg font-semibold text-primary mb-2">About MotivWealth</h3>
+                <p className="text-foreground/90 leading-relaxed">{note.about}</p>
+              </div>
+
+              <div className="mt-8 pt-4 border-t border-border">
+                <p className="text-xs text-muted-foreground">{note.disclaimer}</p>
+              </div>
+            </article>
+          )}
         </main>
       </div>
     );
