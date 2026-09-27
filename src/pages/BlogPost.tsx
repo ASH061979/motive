@@ -45,11 +45,23 @@ const post2Sections: { key: string; subs?: string[] }[] = [
   { key: "s13", subs: ["q1", "q2", "q3", "q4", "q5"] },
 ];
 
+const post3Sections: { key: string; subs?: string[] }[] = [
+  { key: "s1" },
+  { key: "s2" },
+  { key: "s3" },
+  { key: "s4" },
+  { key: "s5" },
+  { key: "s6" },
+  { key: "s7" },
+  { key: "s8" },
+  { key: "s9" },
+];
+
 const BlogPost = () => {
   const { t } = useTranslation();
   const { slug } = useParams();
 
-  if (slug !== "india-vs-world-mutual-funds" && slug !== "new-to-mutual-funds-start-here") {
+  if (slug !== "india-vs-world-mutual-funds" && slug !== "new-to-mutual-funds-start-here" && slug !== "what-is-an-sip-and-how-does-it-work") {
     return (
       <div className="min-h-screen">
         <PageBackground variant="blog-post" />
@@ -64,7 +76,9 @@ const BlogPost = () => {
     );
   }
 
-  if (slug === "new-to-mutual-funds-start-here") {
+  if (slug === "new-to-mutual-funds-start-here" || slug === "what-is-an-sip-and-how-does-it-work") {
+    const pk = slug === "what-is-an-sip-and-how-does-it-work" ? "blogs.post3" : "blogs.post2";
+    const sectionList = slug === "what-is-an-sip-and-how-does-it-work" ? post3Sections : post2Sections;
     return (
       <div className="min-h-screen">
         <PageBackground variant="blog-post" />
@@ -75,36 +89,35 @@ const BlogPost = () => {
               <ArrowLeft className="h-4 w-4" /> {t("blogs.backToBlogs")}
             </Link>
           </Button>
-
           <article>
             <h1 className="text-3xl md:text-4xl font-bold text-primary mb-3">
-              {t("blogs.post2.title")}
+              {t(`${pk}.title`)}
             </h1>
-            <p className="text-muted-foreground text-lg mb-8">{t("blogs.post2.excerpt")}</p>
+            <p className="text-muted-foreground text-lg mb-8">{t(`${pk}.excerpt`)}</p>
 
-            <div className="mb-10">{renderContent(t("blogs.post2.intro"))}</div>
+            <div className="mb-10">{renderContent(t(`${pk}.intro`))}</div>
 
-            {post2Sections.map((section) => (
+            {sectionList.map((section) => (
               <div key={section.key} className="mb-10">
                 <h2 className="text-xl font-semibold text-primary mb-3">
-                  {t(`blogs.post2.sections.${section.key}.title`)}
+                  {t(`${pk}.sections.${section.key}.title`)}
                 </h2>
-                {renderContent(t(`blogs.post2.sections.${section.key}.content`))}
+                {renderContent(t(`${pk}.sections.${section.key}.content`))}
 
                 {section.subs?.map((subKey) => (
                   <div key={subKey} className="ml-4 my-3">
                     <h3 className="text-base font-semibold text-foreground mb-1">
-                      {t(`blogs.post2.sections.${section.key}.subs.${subKey}.title`)}
+                      {t(`${pk}.sections.${section.key}.subs.${subKey}.title`)}
                     </h3>
                     <p className="text-foreground/90 leading-relaxed">
-                      {t(`blogs.post2.sections.${section.key}.subs.${subKey}.content`)}
+                      {t(`${pk}.sections.${section.key}.subs.${subKey}.content`)}
                     </p>
                   </div>
                 ))}
 
-                {t(`blogs.post2.sections.${section.key}.callout`, { defaultValue: "" }) && (
+                {t(`${pk}.sections.${section.key}.callout`, { defaultValue: "" }) && (
                   <div className="border-l-4 border-amber-400 bg-accent/40 rounded-r-lg px-4 py-3 my-4 text-foreground/90 italic leading-relaxed whitespace-pre-line">
-                    {t(`blogs.post2.sections.${section.key}.callout`)}
+                    {t(`${pk}.sections.${section.key}.callout`)}
                   </div>
                 )}
               </div>
@@ -112,27 +125,27 @@ const BlogPost = () => {
 
             <div className="mb-10">
               <h2 className="text-xl font-semibold text-primary mb-3">
-                {t("blogs.post2.conclusionTitle")}
+                {t(`${pk}.conclusionTitle`)}
               </h2>
-              {renderContent(t("blogs.post2.conclusion"))}
+              {renderContent(t(`${pk}.conclusion`))}
             </div>
 
             <div className="mb-10">
               <h2 className="text-xl font-semibold text-primary mb-3">
-                {t("blogs.post2.whatsNextTitle")}
+                {t(`${pk}.whatsNextTitle`)}
               </h2>
-              {renderContent(t("blogs.post2.whatsNext"))}
+              {renderContent(t(`${pk}.whatsNext`))}
             </div>
 
             <div className="border border-border bg-card rounded-lg p-5 my-8">
               <h3 className="text-lg font-semibold text-primary mb-2">
-                {t("blogs.post2.aboutTitle")}
+                {t(`${pk}.aboutTitle`)}
               </h3>
-              <p className="text-foreground/90 leading-relaxed">{t("blogs.post2.about")}</p>
+              <p className="text-foreground/90 leading-relaxed">{t(`${pk}.about`)}</p>
             </div>
 
             <div className="mt-8 pt-4 border-t border-border">
-              <p className="text-xs text-muted-foreground">{t("blogs.post2.disclaimer")}</p>
+              <p className="text-xs text-muted-foreground">{t(`${pk}.disclaimer`)}</p>
             </div>
           </article>
         </main>

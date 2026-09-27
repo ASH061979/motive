@@ -200,6 +200,58 @@
       "aboutTitle": "About MotivWealth",
       "about": "MotivWealth is the brand name used by Meghna Prakash, an AMFI-registered Mutual Fund Distributor (ARN-330963 | EUIN-E628002). MotivWealth / Meghna Prakash is not presented as a SEBI-registered Investment Adviser.",
       "disclaimer": "Mutual Fund investments are subject to market risks. Read all scheme-related documents carefully."
+    },
+    "post3": {
+      "title": "What is an SIP and How Does It Work?",
+      "excerpt": "A simple way to understand regular investing — without the jargon.",
+      "intro": "SIP stands for Systematic Investment Plan. An SIP is a simple way to invest a fixed amount into a mutual fund scheme at regular intervals, usually every month.\n\nInstead of investing a large amount at one time, you invest smaller amounts regularly, which can help you build your investment over time.",
+      "sections": {
+        "s1": {
+          "title": "“I keep hearing about SIPs. What exactly am I signing up for?”",
+          "content": "If you are new to mutual funds, SIP is one of the first terms you are likely to hear. The good news is that the idea is much simpler than the name sounds.\n\nSIP stands for Systematic Investment Plan. It is a method of investing a chosen amount into a mutual fund scheme at regular intervals — commonly every month.",
+          "callout": "Meghna explains: An SIP is not a separate investment product. The mutual fund scheme is the investment; SIP is simply the way you invest in it regularly."
+        },
+        "s2": {
+          "title": "“Can you show me with a simple example?”",
+          "content": "Suppose you decide to invest ₹5,000 every month into a mutual fund scheme through an SIP. Instead of trying to find one “perfect” day to invest a large amount, you invest ₹5,000 at the chosen interval.\n\nEvery month ₹5,000 → Your money buys units of the scheme → The fund invests as per its stated objective → The value of your units can rise or fall.\n\nThe number of units you receive depends on the scheme's NAV at the time your investment is processed. When the NAV is lower, the same ₹5,000 generally buys more units; when the NAV is higher, it buys fewer units."
+        },
+        "s3": {
+          "title": "“Is that what people mean by rupee-cost averaging?”",
+          "content": "Yes. Because you invest the same amount at different market levels, you naturally buy more units when prices are lower and fewer units when prices are higher. This is commonly called rupee-cost averaging.\n\nIt can reduce the need to decide the “right” market level for every monthly investment. But it does not remove market risk, and it does not guarantee a profit."
+        },
+        "s4": {
+          "title": "“Why do people use SIPs?”",
+          "content": "• Regular investing — a fixed schedule can make investing easier to continue as a habit.\n• Start with a manageable amount — you do not necessarily need a large lumpsum before you begin. The minimum amount depends on the scheme and platform.\n• Work towards long-term goals — SIPs can be used while investing towards goals such as retirement, education or long-term wealth creation.\n• Flexibility — depending on the scheme and applicable terms, SIP amounts or instructions can generally be changed or stopped.\n• Less focus on market timing — regular investing can help you avoid making every contribution dependent on a prediction about where the market will move next."
+        },
+        "s5": {
+          "title": "“Does an SIP guarantee good returns?”",
+          "content": "No.\n\nAn SIP creates a regular investment process; it does not guarantee returns. Your investment remains exposed to the risks of the mutual fund scheme you choose. The value can rise or fall, and actual returns may differ significantly from illustrations or assumptions.",
+          "callout": "Meghna explains: Discipline can be useful, but discipline does not make an investment risk-free. Always understand the scheme you are investing in."
+        },
+        "s6": {
+          "title": "“How is SIP different from a lumpsum investment?”",
+          "content": "With an SIP, you invest periodically. With a lumpsum, you invest a larger amount at one time. Neither method is automatically better. The choice can depend on your available money, goal, time horizon and comfort with market fluctuations."
+        },
+        "s7": {
+          "title": "“How long should I continue an SIP?”",
+          "content": "There is no single period that is right for everyone. Start with the purpose of the investment. If the money is meant for a long-term goal, your time horizon may be very different from money you expect to need soon.\n\nAlso remember: a long SIP period does not make every mutual fund suitable for every goal. The nature and risk of the underlying scheme still matter."
+        },
+        "s8": {
+          "title": "“Can I increase my SIP later?”",
+          "content": "In many cases, investors choose to increase their regular investment as their income and ability to invest grow. This is often called a Step-Up SIP. Whether and how you can change an SIP depends on the applicable scheme and platform process.\n\nMotivWealth's Step-Up SIP Calculator can help you illustrate how increasing a monthly investment over time changes the numbers — based on assumptions you choose."
+        },
+        "s9": {
+          "title": "So what should I remember?",
+          "content": "• A mutual fund scheme is the investment; SIP is the method of investing regularly.\n• Your SIP buys units at the applicable NAV, so the number of units can vary from one instalment to another.\n• Regular investing can encourage discipline and reduce the need to time every contribution.\n• Rupee-cost averaging does not eliminate risk or guarantee profit.\n• Choose an SIP because it fits your goal and investment plan — not simply because “everyone is doing SIPs.”"
+        }
+      },
+      "conclusionTitle": "A simple thought from Meghna",
+      "conclusion": "“Starting small is perfectly fine. What matters is understanding why you are investing, choosing an appropriate investment, and building a habit you can sustain.”\n\nSmall steps, taken consistently, can make a big difference over time. An SIP is one of the simplest ways to begin your investment journey.",
+      "whatsNextTitle": "Want to explore the numbers?",
+      "whatsNext": "Try the MotivWealth SIP Calculator to see an illustration using a monthly investment, time period and assumed rate of return selected by you. You can also explore the Step-Up SIP Calculator if you want to see the effect of increasing the monthly amount over time.",
+      "aboutTitle": "About MotivWealth",
+      "about": "MotivWealth is the brand name used by Meghna Prakash, an AMFI-registered Mutual Fund Distributor (ARN-330963 | EUIN-E628002). MotivWealth / Meghna Prakash is not presented as a SEBI-registered Investment Adviser.",
+      "disclaimer": "Mutual Fund investments are subject to market risks. Read all scheme-related documents carefully."
     }
   },
   "hero": {
