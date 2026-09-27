@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { learningNotes, type NoteBlock } from "@/content/learningNotes";
 
 const renderContent = (content: string) => {
   return content.split("\n\n").map((block, idx) => {
@@ -29,39 +30,93 @@ const renderContent = (content: string) => {
   });
 };
 
-const post2Sections: { key: string; subs?: string[] }[] = [
-  { key: "s1" },
-  { key: "s2" },
-  { key: "s3" },
-  { key: "s4" },
-  { key: "s5" },
-  { key: "s6", subs: ["equity", "debt", "hybrid"] },
-  { key: "s7" },
-  { key: "s8" },
-  { key: "s9", subs: ["regular", "direct"] },
-  { key: "s10" },
-  { key: "s11" },
-  { key: "s12" },
-  { key: "s13", subs: ["q1", "q2", "q3", "q4", "q5"] },
-];
+const renderBlock = (block: NoteBlock, idx: number) => {
+  switch (block.type) {
+    case "h1":
+      return (
+        <h2 key={idx} className="text-xl font-semibold text-primary mb-3 mt-10">
+          {block.text}
+        </h2>
+      );
+    case "h2":
+      return (
+        <h3 key={idx} className="text-base font-semibold text-foreground mb-1 mt-4">
+          {block.text}
+        </h3>
+      );
+    case "p":
+      return (
+        <p key={idx} className="text-foreground/90 leading-relaxed my-3">
+          {block.text}
+        </p>
+      );
+    case "bullets":
+      return (
+        <ul key={idx} className="space-y-1 my-3">
+          {block.items.map((item, li) => (
+            <li key={li} className="flex items-start gap-2 text-foreground/90">
+              <span className="text-primary mt-1">•</span>
+              <span className="leading-relaxed">{item}</span>
+            </li>
+          ))}
+        </ul>
+      );
+    case "kv":
+      return (
+        <div key={idx} className="grid sm:grid-cols-2 gap-2 my-4">
+          {block.items.map((item, li) => (
+            <div
+              key={li}
+              className="border border-border bg-card rounded-lg px-4 py-3 text-sm font-medium text-foreground/90"
+            >
+              {item}
+            </div>
+          ))}
+        </div>
+      );
+    case "callout":
+      return (
+        <div
+          key={idx}
+          className="border-l-4 border-amber-400 bg-accent/40 rounded-r-lg px-4 py-3 my-4 text-foreground/90 italic leading-relaxed"
+        >
+          {block.text}
+        </div>
+      );
+    case "dialogue":
+      return (
+        <div key={idx} className="border border-border bg-card rounded-lg px-4 py-3 my-4 space-y-2">
+          {block.lines.map((line, li) => (
+            <p key={li} className="text-foreground/90 leading-relaxed">
+              {line}
+            </p>
+          ))}
+        </div>
+      );
+  }
+};
 
-const post3Sections: { key: string; subs?: string[] }[] = [
-  { key: "s1" },
-  { key: "s2" },
-  { key: "s3" },
-  { key: "s4" },
-  { key: "s5" },
-  { key: "s6" },
-  { key: "s7" },
-  { key: "s8" },
-  { key: "s9" },
+const sections = [
+  { titleKey: "blogs.post1.sections.evolution.title", contentKey: "blogs.post1.sections.evolution.content" },
+  { titleKey: "blogs.post1.sections.amcs.title", contentKey: "blogs.post1.sections.amcs.content" },
+  { titleKey: "blogs.post1.sections.clientele.title", contentKey: "blogs.post1.sections.clientele.content" },
+  { titleKey: "blogs.post1.sections.aum.title", contentKey: "blogs.post1.sections.aum.content" },
+  { titleKey: "blogs.post1.sections.distribution.title", contentKey: "blogs.post1.sections.distribution.content" },
+  { titleKey: "blogs.post1.sections.penetration.title", contentKey: "blogs.post1.sections.penetration.content" },
+  { titleKey: "blogs.post1.sections.gdp.title", contentKey: "blogs.post1.sections.gdp.content" },
+  { titleKey: "blogs.post1.sections.growth.title", contentKey: "blogs.post1.sections.growth.content" },
+  { titleKey: "blogs.post1.sections.regulatory.title", contentKey: "blogs.post1.sections.regulatory.content" },
+  { titleKey: "blogs.post1.sections.outlook.title", contentKey: "blogs.post1.sections.outlook.content" },
 ];
 
 const BlogPost = () => {
   const { t } = useTranslation();
   const { slug } = useParams();
 
-  if (slug !== "india-vs-world-mutual-funds" && slug !== "new-to-mutual-funds-start-here" && slug !== "what-is-an-sip-and-how-does-it-work") {
+  if (
+    slug !== "india-vs-world-mutual-funds" &&
+    !learningNotes[slug ?? ""]
+  ) {
     return (
       <div className="min-h-screen">
         <PageBackground variant="blog-post" />
@@ -76,9 +131,8 @@ const BlogPost = () => {
     );
   }
 
-  if (slug === "new-to-mutual-funds-start-here" || slug === "what-is-an-sip-and-how-does-it-work") {
-    const pk = slug === "what-is-an-sip-and-how-does-it-work" ? "blogs.post3" : "blogs.post2";
-    const sectionList = slug === "what-is-an-sip-and-how-does-it-work" ? post3Sections : post2Sections;
+  const note = slug ? learningNotes[slug] : undefined;
+  if (note) {
     return (
       <div className="min-h-screen">
         <PageBackground variant="blog-post" />
@@ -90,81 +144,27 @@ const BlogPost = () => {
             </Link>
           </Button>
           <article>
-            <h1 className="text-3xl md:text-4xl font-bold text-primary mb-3">
-              {t(`${pk}.title`)}
-            </h1>
-            <p className="text-muted-foreground text-lg mb-8">{t(`${pk}.excerpt`)}</p>
+            <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase mb-2">
+              {note.kicker}
+            </p>
+            <h1 className="text-3xl md:text-4xl font-bold text-primary mb-3">{note.title}</h1>
+            <p className="text-muted-foreground text-lg mb-8">{note.tagline}</p>
 
-            <div className="mb-10">{renderContent(t(`${pk}.intro`))}</div>
-
-            {sectionList.map((section) => (
-              <div key={section.key} className="mb-10">
-                <h2 className="text-xl font-semibold text-primary mb-3">
-                  {t(`${pk}.sections.${section.key}.title`)}
-                </h2>
-                {renderContent(t(`${pk}.sections.${section.key}.content`))}
-
-                {section.subs?.map((subKey) => (
-                  <div key={subKey} className="ml-4 my-3">
-                    <h3 className="text-base font-semibold text-foreground mb-1">
-                      {t(`${pk}.sections.${section.key}.subs.${subKey}.title`)}
-                    </h3>
-                    <p className="text-foreground/90 leading-relaxed">
-                      {t(`${pk}.sections.${section.key}.subs.${subKey}.content`)}
-                    </p>
-                  </div>
-                ))}
-
-                {t(`${pk}.sections.${section.key}.callout`, { defaultValue: "" }) && (
-                  <div className="border-l-4 border-amber-400 bg-accent/40 rounded-r-lg px-4 py-3 my-4 text-foreground/90 italic leading-relaxed whitespace-pre-line">
-                    {t(`${pk}.sections.${section.key}.callout`)}
-                  </div>
-                )}
-              </div>
-            ))}
-
-            <div className="mb-10">
-              <h2 className="text-xl font-semibold text-primary mb-3">
-                {t(`${pk}.conclusionTitle`)}
-              </h2>
-              {renderContent(t(`${pk}.conclusion`))}
-            </div>
-
-            <div className="mb-10">
-              <h2 className="text-xl font-semibold text-primary mb-3">
-                {t(`${pk}.whatsNextTitle`)}
-              </h2>
-              {renderContent(t(`${pk}.whatsNext`))}
-            </div>
+            {note.blocks.map(renderBlock)}
 
             <div className="border border-border bg-card rounded-lg p-5 my-8">
-              <h3 className="text-lg font-semibold text-primary mb-2">
-                {t(`${pk}.aboutTitle`)}
-              </h3>
-              <p className="text-foreground/90 leading-relaxed">{t(`${pk}.about`)}</p>
+              <h3 className="text-lg font-semibold text-primary mb-2">About MotivWealth</h3>
+              <p className="text-foreground/90 leading-relaxed">{note.about}</p>
             </div>
 
             <div className="mt-8 pt-4 border-t border-border">
-              <p className="text-xs text-muted-foreground">{t(`${pk}.disclaimer`)}</p>
+              <p className="text-xs text-muted-foreground">{note.disclaimer}</p>
             </div>
           </article>
         </main>
       </div>
     );
   }
-
-  const sections = [
-    { titleKey: "blogs.post1.sections.evolution.title", contentKey: "blogs.post1.sections.evolution.content" },
-    { titleKey: "blogs.post1.sections.amcs.title", contentKey: "blogs.post1.sections.amcs.content" },
-    { titleKey: "blogs.post1.sections.clientele.title", contentKey: "blogs.post1.sections.clientele.content" },
-    { titleKey: "blogs.post1.sections.aum.title", contentKey: "blogs.post1.sections.aum.content" },
-    { titleKey: "blogs.post1.sections.distribution.title", contentKey: "blogs.post1.sections.distribution.content" },
-    { titleKey: "blogs.post1.sections.penetration.title", contentKey: "blogs.post1.sections.penetration.content" },
-    { titleKey: "blogs.post1.sections.gdp.title", contentKey: "blogs.post1.sections.gdp.content" },
-    { titleKey: "blogs.post1.sections.growth.title", contentKey: "blogs.post1.sections.growth.content" },
-    { titleKey: "blogs.post1.sections.regulatory.title", contentKey: "blogs.post1.sections.regulatory.content" },
-    { titleKey: "blogs.post1.sections.outlook.title", contentKey: "blogs.post1.sections.outlook.content" },
-  ];
 
   return (
     <div className="min-h-screen">
