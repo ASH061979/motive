@@ -30,7 +30,6 @@ const calculatorLinks = [
   { title: "MotivWealth Goal Calculator", url: "/goal-calculator", internal: true },
   { title: "MotivWealth Lumpsum Calculator", url: "/lumpsum-calculator", internal: true },
   { title: "MotivWealth Retirement Calculator", url: "/retirement-calculator", internal: true },
-  { title: "SIP Calculator (Mutual Funds Sahi Hai)", url: "https://www.mutualfundssahihai.com/en/calculators/sip-calculator" },
 ];
 
 
