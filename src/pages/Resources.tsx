@@ -143,7 +143,7 @@ const Resources = () => {
                         href="/market-investor-notes"
                         className="block p-3 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary text-sm font-medium text-foreground"
                       >
-                        Market and Investor Notes
+                        Insights & Learnings
                       </a>
                     </div>
                   )}
