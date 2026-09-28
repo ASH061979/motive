@@ -167,7 +167,7 @@ const ResourcesSection = () => {
                   href="/market-investor-notes"
                   className="block p-3 rounded-lg bg-card hover:bg-accent transition-colors border border-border hover:border-primary"
                 >
-                  <p className="text-foreground text-sm font-medium">Market and Investor Notes</p>
+                  <p className="text-foreground text-sm font-medium">Insights & Learnings</p>
                 </a>
               </div>
             )}
