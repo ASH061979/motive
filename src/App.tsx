@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound";
 import EducationalVideos from "./pages/EducationalVideos";
 import MarketInvestorNotes from "./pages/MarketInvestorNotes";
 import Testimonials from "./pages/Testimonials";
+import MarketInsights from "./pages/MarketInsights";
 import BlogPost from "./pages/BlogPost";
 import Disclaimer from "./pages/Disclaimer";
 import CommissionDisclosure from "./pages/CommissionDisclosure";
@@ -48,6 +49,7 @@ const App = () => (
           <Route path="/educational-videos" element={<EducationalVideos />} />
           <Route path="/market-investor-notes" element={<MarketInvestorNotes />} />
           <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/market-insights" element={<MarketInsights />} />
           <Route path="/blogs/:slug" element={<BlogPost />} />
           <Route path="/disclaimer" element={<Disclaimer />} />
           <Route path="/commission-disclosure" element={<CommissionDisclosure />} />

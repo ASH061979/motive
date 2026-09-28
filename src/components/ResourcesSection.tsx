@@ -1,5 +1,6 @@
 import { FileText, GraduationCap, Calculator, Handshake, Newspaper, ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   Dialog,
@@ -64,6 +65,7 @@ const ResourcesSection = () => {
   const { t } = useTranslation();
   const [openDialog, setOpenDialog] = useState<string | null>(null);
   const [libraryOpen, setLibraryOpen] = useState(false);
+  const navigate = useNavigate();
 
   const resources = [
     { icon: FileText, titleKey: "resources.regulatory", dialogType: "regulatory" },
@@ -87,7 +89,7 @@ const ResourcesSection = () => {
             return (
               <div
                 key={index}
-                onClick={() => setOpenDialog(resource.dialogType)}
+                onClick={() => resource.dialogType === "insights" ? navigate("/market-insights") : setOpenDialog(resource.dialogType)}
                 className="text-center bg-white rounded-lg p-6 shadow-md transition-all duration-300 hover:shadow-[0_0_20px_rgba(251,191,36,0.4)] hover:border hover:border-emerald-600 cursor-pointer"
               >
                 <div className="mb-3 flex justify-center transition-transform duration-300 hover:scale-110">
